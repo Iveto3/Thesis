@@ -1,0 +1,48 @@
+[
+  {
+    "id": "summary_001",
+    "task_type": "summarization",
+    "input": {
+        "text": "... text for summarization ..."
+    },
+    "constraints": {
+        "COMMENT": "maybe we don't need this as task type already suggest summarization goal",
+        "goal": "summarize",
+        "max_words": 100
+    },
+    "reference_output": {
+        "summary": "... summary from online datasets ..."
+    }
+  },
+
+  {
+    "id": "code_001",
+    "task_type": "code_optimization",
+    "input": {
+        "code": "... code ..."
+    },
+    "constraints": {
+        "goal": "improve readability and performance"
+    },
+    "reference_output": {
+        "optimized_code": "... optimized code ..."
+    }
+  },
+
+  {
+    "id": "gen_001",
+    "task_type": "constrained_generation",
+    "input": {
+        "topic": "company annual report"
+    },
+    "constraints": {
+        "word_count": 200,
+        "tone": "professional",
+        "must_include": ["2026", "financial growth"]
+    },
+    "reference_output": {  
+       "COMMENT": "maybe we don't need reference",
+        "text": null
+    }
+  }
+]
