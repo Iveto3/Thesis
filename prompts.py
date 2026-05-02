@@ -1,127 +1,148 @@
 import json
 from typing import Any, Dict, List, Optional
 
-def build_initial_prompt(task: Dict[str, Any]) -> str:  # CHANGED (task-aware)
-    t = task.get("task_type")
-    inp = task.get("input", {})
+
+def build_initial_prompt(task: Dict[str, Any]) -> str:
+    task_type = task.get("task_type")
+    task_input = task.get("input", {})
     constraints = task.get("constraints", {})
 
-    if t == "summarization":
-        original_text = inp.get("text", "")
-        max_words = constraints.get("max_words", 100)
+    if task_type == "summarization":
+        text = task_input.get("text", "")
+        max_words = constraints.get("max_words", 150)
+        goal = constraints.get("goal", "summarize")
+
         return (
-            f"Summarize the following text in NO MORE THAN {max_words} words.\n"
-            f"Return ONLY the summary text. No quotes, no extra commentary.\n\n"
-            f"Text:\n{original_text}"
+            f"Task: {goal}.\n"
+            f"Maximum words: {max_words}.\n"
+            f"Return only the summary of the text with no unecessary details.\n\n"
+            f"Text:\n{text}"
         )
 
-    if t == "code_optimization":
-        code = inp.get("code", "")
-        lang = inp.get("language", "python")
-        goal = constraints.get("goal", "improve readability and performance")
-        preserve = constraints.get("preserve_behavior", True)
-        avoid_extra = constraints.get("avoid_extra_queries", False)
+    if task_type == "code_optimization":
+        code = task_input.get("code", "")
+        # language = task_input.get("language", "python")
+        goal = constraints.get("goal", "optimize readability and performance")
+
         return (
-            f"You are optimizing {lang} code.\n"
+            # f"Optimize this {language} code.\n"
             f"Goal: {goal}.\n"
-            f"Constraints:\n"
-            f"- Preserve behavior: {preserve}\n"
-            f"- Avoid extra queries: {avoid_extra}\n"
-            f"Return ONLY the improved code. No explanations.\n\n"
+            f"Rules:\n"
+            f"1. Preserve the original behavior of the code.\n"
+            f"2. Do not add extra complicated code.\n"
+            f"3. Return only the improved code with no explanations.\n\n"
             f"Code:\n{code}"
         )
 
-    if t == "constrained_code_generation":
-        lang = inp.get("language", "python")
-        prompt = inp.get("prompt", "")
+    if task_type == "constrained_code_generation":
+        language = task_input.get("language", "python")
+        prompt = task_input.get("prompt", "")
+
         return (
-            f"Write {lang} code that satisfies ALL constraints below.\n"
-            f"Return ONLY the code. No explanations.\n\n"
-            f"Task:\n{prompt}\n\n"
-            f"Constraints:\n{json.dumps(task.get('constraints', {}), ensure_ascii=False)}"
+            f"Write {language} code for this task:\n"
+            f"{prompt}\n\n"
+            f"Constraints:\n{json.dumps(constraints, ensure_ascii=False)}\n\n"
+            f"Return only the code and no explanations."
         )
 
     return "Unsupported task_type."
 
 
-def build_feedback_prompt(task: Dict[str, Any], current_answer: str, violations: Optional[List[str]] = None) -> str:  # NEW
-    t = task.get("task_type")
-    inp = task.get("input", {})
+def build_feedback_prompt(
+    task: Dict[str, Any],
+    current_answer: str,
+    violations: Optional[List[str]] = None,
+) -> str:
+    task_type = task.get("task_type")
+    task_input = task.get("input", {})
     constraints = task.get("constraints", {})
 
-    if t == "summarization":
-        original_text = inp.get("text", "")
-        max_words = constraints.get("max_words", 100)
+    if task_type == "summarization":
+        text = task_input.get("text", "")
+        max_words = constraints.get("max_words", 150)
+
         return (
-            f"Original text:\n{original_text}\n\n"
+            f"Original text:\n{text}\n\n"
             f"Current summary:\n{current_answer}\n\n"
-            f"Constraints: <= {max_words} words.\n"
-            f"Give short feedback to improve correctness and coverage while staying under the word limit.\n"
-            f"Do NOT rewrite the summary—feedback only."
+            f"Give short feedback to improve the summary.\n"
+            f"It must stay under {max_words} words.\n"
+            f"Do NOT rewrite the summary. Feedback only."
         )
 
-    if t == "code_optimization":
-        code = inp.get("code", "")
-        lang = inp.get("language", "python")
+    if task_type == "code_optimization":
+        code = task_input.get("code", "")
+        # language = task_input.get("language", "python")
+
         return (
-            f"Original {lang} code:\n{code}\n\n"
+            # f"Original {language} code:\n{code}\n\n"
+            f"Original code:\n{code}\n\n"
             f"Current improved code:\n{current_answer}\n\n"
-            f"Constraints:\n{json.dumps(constraints, ensure_ascii=False)}\n\n"
-            f"Give SHORT feedback to improve readability/performance while preserving behavior.\n"
-            f"Do NOT output code—feedback only."
+            f"Give short feedback to improve readability/performance.\n"
+            f"The code must preserve behavior and avoid extra elements added.\n"
+            f"Do NOT output code. Feedback only."
         )
 
-    if t == "constrained_code_generation":
-        # violations-driven feedback so it knows exactly what to fix
+    if task_type == "constrained_code_generation":
+        violation_text = "\n- ".join(violations or [])
+
         return (
             f"Current code:\n{current_answer}\n\n"
             f"Constraints:\n{json.dumps(constraints, ensure_ascii=False)}\n\n"
-            f"These constraints are currently violated:\n- " + "\n- ".join(violations or []) + "\n\n"
-            f"Give SHORT feedback describing exactly how to fix the violations.\n"
-            f"Do NOT output code—feedback only."
+            f"Violated constraints:\n- {violation_text}\n\n"
+            f"Give short feedback explaining how to fix the violations.\n"
+            f"Do NOT output code. Feedback only."
         )
 
     return "Give feedback."
 
 
-def build_refine_prompt(task: Dict[str, Any], current_answer: str, feedback: str) -> str:  # NEW
-    t = task.get("task_type")
-    inp = task.get("input", {})
+def build_refine_prompt(
+    task: Dict[str, Any],
+    current_answer: str,
+    feedback: str,
+) -> str:
+    task_type = task.get("task_type")
+    task_input = task.get("input", {})
     constraints = task.get("constraints", {})
 
-    if t == "summarization":
-        original_text = inp.get("text", "")
+    if task_type == "summarization":
+        text = task_input.get("text", "")
         max_words = constraints.get("max_words", 100)
+
         return (
-            f"Original text:\n{original_text}\n\n"
+            f"Original text:\n{text}\n\n"
             f"Current summary:\n{current_answer}\n\n"
             f"Feedback:\n{feedback}\n\n"
-            f"Rewrite the summary to address the feedback.\n"
-            f"Constraints: NO MORE THAN {max_words} words.\n"
-            f"Return ONLY the improved summary text."
+            f"Rewrite the summary using the feedback.\n"
+            f"Maximum words: {max_words}.\n"
+            f"Return ONLY the improved summary."
         )
 
-    if t == "code_optimization":
-        code = inp.get("code", "")
-        lang = inp.get("language", "python")
+    if task_type == "code_optimization":
+        code = task_input.get("code", "")
+        # language = task_input.get("language", "python")
+
         return (
-            f"Original {lang} code:\n{code}\n\n"
+            f"Original code:\n{code}\n\n"
             f"Current improved code:\n{current_answer}\n\n"
             f"Feedback:\n{feedback}\n\n"
-            f"Rewrite the improved code to address the feedback while preserving behavior.\n"
-            f"Constraints:\n{json.dumps(constraints, ensure_ascii=False)}\n\n"
-            f"Return ONLY the improved code."
+            f"Rewrite the code using the feedback.\n"
+            f"Rules:\n"
+            f"1. Preserve the original behavior.\n"
+            f"2. Do not add extra code elements.\n"
+            f"3. Return ONLY the improved code."
         )
 
-    if t == "constrained_code_generation":
-        lang = inp.get("language", "python")
-        prompt = inp.get("prompt", "")
+    if task_type == "constrained_code_generation":
+        language = task_input.get("language", "python")
+        prompt = task_input.get("prompt", "")
+
         return (
             f"Task:\n{prompt}\n\n"
-            f"Current {lang} code:\n{current_answer}\n\n"
+            f"Current {language} code:\n{current_answer}\n\n"
             f"Feedback:\n{feedback}\n\n"
             f"Constraints:\n{json.dumps(constraints, ensure_ascii=False)}\n\n"
-            f"Rewrite the code so ALL constraints pass.\n"
+            f"Rewrite the code so all constraints pass.\n"
             f"Return ONLY the code."
         )
 
