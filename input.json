@@ -15,6 +15,25 @@
   },
 
     {
+    "id": "constrained_summary_001",
+    "task_type": "constrained_summarization",
+    "input": {
+      "text": ".....custom text...."
+    },
+    "constraints": {
+      "goal": "summarize by keeping the main points and no extra details",
+      "max_words": 150,
+      "tone": "advertisement",
+      "style": "rhyming",
+      "must_include": ["main product benefit", "call to action"],
+      "must_avoid": ["unsupported claims", "extra details"]
+    },
+    "reference_output": {
+      "summary": "..."
+    }
+  },
+
+    {
     "id": "code_001",
     "task_type": "code_optimization",
     "input": {
@@ -26,24 +45,5 @@
     "reference_output": {
         "optimized_code": "def validate_email(self, email):\n    if email.data != current_user.email and User.query.filter_by(email=email.data).first():\n        raise ValidationError('Email already exists in database.')"
     }
-    },
-
-  {
-    "id": "gen_001",
-    "task_type": "constrained_code_generation",
-    "input": {
-    "language": "python",
-    "prompt": "Write a Python function add_even_numbers(numbers) that returns the sum of only the even numbers."
-  },
-  "constraints": {
-    "max_lines": 12,
-    "exact_variables": ["total", "num"],
-    "forbidden_functions": ["sum"],
-    "must_include": [
-      "type hints",
-      "one-line docstring"
-    ]
-  },
-  "reference_output": null
-  }
+    }
 ]
