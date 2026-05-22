@@ -1,8 +1,14 @@
-from sklearn.metrics.pairwise import cosine_similarity
-from sklearn.feature_extraction.text import TfidfVectorizer
+from sentence_transformers import SentenceTransformer, util
 
 
-def compute_similarity(response: str, summary: str) -> float:
-    vectorizer = TfidfVectorizer()
-    vectors = vectorizer.fit_transform([response, summary])
-    return cosine_similarity(vectors[0:1], vectors[1:2])[0][0]
+def compute_similarity(response: str, reference: str) -> float:
+    embeddings = SentenceTransformer(
+        "sentence-transformers/all-MiniLM-L6-v2"
+        ).encode(
+        [response, reference],
+        convert_to_tensor=True,
+        normalize_embeddings=True,
+    )
+
+    score = util.cos_sim(embeddings[0], embeddings[1]).item()
+    return float(score)
