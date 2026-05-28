@@ -1,0 +1,366 @@
+[
+  {
+    "id": "code_001",
+    "task_type": "code_optimization",
+    "input": {
+      "code": "def validate_email(self, email):\n    if email.data != current_user.email:\n        test_condition = User.query.filter_by(email=email.data).first()\n        if test_condition:\n            raise ValidationError('Email already exists in database.')"
+    },
+    "constraints": {
+      "goal": "optimize, improve readability and performance"
+    },
+    "reference_output": {
+      "optimized_code": "def validate_email(self, email):\n    if email.data != current_user.email and User.query.filter_by(email=email.data).first():\n        raise ValidationError('Email already exists in database.')"
+    }
+  },
+  {
+    "id": "code_002",
+    "task_type": "code_optimization",
+    "input": {
+      "code": "public Result isRePasswordCheck(String password) {\n    if (this.employerDao.findByPassword(password).getRePassword().equals(password)) {\n        return new SuccessResult();\n    } else {\n        return new ErrorResult(\"This password has been used is before\");\n    }\n}"
+    },
+    "constraints": {
+      "goal": "optimize, improve readability and performance"
+    },
+    "reference_output": {
+      "optimized_code": "public Result isRePasswordCheck(String password) {\n    Employer employer = this.employerDao.findByPassword(password);\n    if (employer != null && employer.getRePassword().equals(password)) {\n        return new SuccessResult();\n    } else {\n        return new ErrorResult(\"This password has been used is before\");\n    }\n}"
+    }
+  },
+  {
+    "id": "code_003",
+    "task_type": "code_optimization",
+    "input": {
+      "code": "def selectImage():\n    images = getImages()\n    if len(getImages()) > 0:\n        choice = random.choice(images)\n        print(choice)\n        return choice\n    return 0"
+    },
+    "constraints": {
+      "goal": "optimize, improve readability and performance"
+    },
+    "reference_output": {
+      "optimized_code": "def selectImage():\n    images = getImages()\n    if len(images) > 0:\n        choice = random.choice(images)\n        print(choice)\n        return choice\n    return 0"
+    }
+  },
+  {
+    "id": "code_004",
+    "task_type": "code_optimization",
+    "input": {
+      "code": "class AvatarChange(APIView):\n    permission_classes = (IsAuthenticated,)\n\n    def put(self, request):\n        email = request.user.email\n        user = models.User.objects.get(email=email)\n        prev_image = user.avatar\n        images = getImages()\n        new_avatar = random.choice([img for img in images if img != prev_image])\n        \n        user.avatar = new_avatar\n        user.save()\n        return Response({\"detail\": \"avatar changed\", \"new_avatar\": new_avatar})"
+    },
+    "constraints": {
+      "goal": "optimize, improve readability and performance"
+    },
+    "reference_output": {
+      "optimized_code": "class AvatarChange(APIView):\n    permission_classes = (IsAuthenticated,)\n\n    def put(self, request):\n        email = request.user.email\n        user = models.User.objects.get(email=email)\n        prev_image = user.avatar\n        new_avatar = selectImage()\n        while new_avatar == prev_image:\n            new_avatar = selectImage()\n\n        user.avatar = new_avatar\n        user.save()\n        return Response({\"detail\": \"avatar changed\", \"new_avatar\": new_avatar})"
+    }
+  },
+  {
+    "id": "code_005",
+    "task_type": "code_optimization",
+    "input": {
+      "code": "useEffect(() => {\n  var requestOptions = {\n    method: 'GET',\n    redirect: 'follow'\n  };\n\n  fetch(`${URL}/`, requestOptions)\n    .then(response => {\n      if (response.status !== 404) {\n        setIsError(true);\n      } else {\n        setIsError(false);\n      }\n      console.log(response);\n      return response;\n    })\n    .catch(error => {\n      console.log(!!error);\n      if (error) {\n        setIsError(true);\n      } else {\n        setIsError(false);\n      }\n    });\n}, []);"
+    },
+    "constraints": {
+      "goal": "optimize, improve readability and performance"
+    },
+    "reference_output": {
+      "optimized_code": "useEffect(() => {\n  var requestOptions = {\n    method: 'GET',\n    redirect: 'follow'\n  };\n\n  fetch(`${URL}/`, requestOptions)\n    .then(response => {\n      setIsError(response.status !== 404);\n      console.log(response);\n    })\n    .catch(error => {\n      console.log(!!error);\n      setIsError(!!error);\n    });\n}, []);"
+    }
+  },
+  {
+    "id": "code_006",
+    "task_type": "code_optimization",
+    "input": {
+      "code": "const changePasswordHandler = (e) => {\n  e.preventDefault();\n  setLoading(true);\n  setError({\n    status: false,\n    body: \"\"\n  });\n  setSuccess(false);\n\n  setLoading(true);\n\n  if (newPass == pass2) {\n    var myHeaders = new Headers();\n    myHeaders.append(\"Authorization\", \"Token \" + authCtx.token);\n    myHeaders.append(\"Content-Type\", \"application/json\");\n\n    var raw = JSON.stringify({\n      \"new_password\": newPass,\n      \"old_password\": oldPass\n    });\n\n    var requestOptions = {\n      method: 'POST',\n      headers: myHeaders,\n      body: raw,\n      redirect: 'follow'\n    };\n\n    fetch(`${URL}/api/users/reset_password/`, requestOptions)\n      .then(response => {\n        setLoading(false);\n\n        if (response.status == 200)\n          setSuccess(true);\n        else\n          setSuccess(false);\n\n        return response.json();\n      })\n      .then(result => {\n        console.log(result);\n\n        let firstkey = Object.keys(result)[0];\n\n        setError({\n          status: true,\n          body: result[firstkey]\n        });\n      })\n      .catch(error => console.log('error', error));\n  } else {\n    setLoading(false);\n    setError({\n      status: true,\n      body: \"The passwords dont match!\"\n    });\n  }\n};"
+    },
+    "constraints": {
+      "goal": "optimize, improve readability and performance"
+    },
+    "reference_output": {
+      "optimized_code": "const changePasswordHandler = (e) => {\n  e.preventDefault();\n  setLoading(true);\n  setError({\n    status: false,\n    body: \"\"\n  });\n  setSuccess(false);\n\n  if (newPass === pass2) {\n    var myHeaders = new Headers();\n    myHeaders.append(\"Authorization\", \"Token \" + authCtx.token);\n    myHeaders.append(\"Content-Type\", \"application/json\");\n\n    var raw = JSON.stringify({\n      new_password: newPass,\n      old_password: oldPass\n    });\n\n    var requestOptions = {\n      method: 'POST',\n      headers: myHeaders,\n      body: raw,\n      redirect: 'follow'\n    };\n\n    fetch(`${URL}/api/users/reset_password/`, requestOptions)\n      .then(response => response.json())\n      .then(result => {\n        setLoading(false);\n        setSuccess(response.status === 200);\n\n        let firstkey = Object.keys(result)[0];\n        setError({\n          status: true,\n          body: result[firstkey]\n        });\n      })\n      .catch(error => {\n        console.log('error', error);\n        setLoading(false);\n        setError({\n          status: true,\n          body: \"An error occurred\"\n        });\n      });\n  } else {\n    setLoading(false);\n    setError({\n      status: true,\n      body: \"The passwords don't match!\"\n    });\n  }\n};"
+    }
+  },
+  {
+    "id": "code_007",
+    "task_type": "code_optimization",
+    "input": {
+      "code": "class ToDoCategoryView(APIView):\n    def delete(self, request):\n        try:\n            category = ToDoCategory.objects.get(\n                author=request.user, id=request.data[\"cat_id\"]\n            )\n            if category is not None:\n                # delete all items of category\n                items = ToDoItem.objects.filter(category=category)\n                items.delete()\n                # delete category\n                category.delete()\n                print(\"here\")\n                return Response({\"message\": \"Successfully Deleted\"})\n            else:\n                return Response({\"message\": \"Category not found\"}, status=404)\n        except:\n            return Response({\"message\": \"Error\"})"
+    },
+    "constraints": {
+      "goal": "optimize, improve readability and performance"
+    },
+    "reference_output": {
+      "optimized_code": "class ToDoCategoryView(APIView):\n    def delete(self, request):\n        try:\n            category = ToDoCategory.objects.get(\n                author=request.user, id=request.data[\"cat_id\"]\n            )\n            # delete all items and category in a single step\n            ToDoItem.objects.filter(category=category).delete()\n            category.delete()\n            return Response({\"message\": \"Successfully Deleted\"})\n        except ToDoCategory.DoesNotExist:\n            return Response({\"message\": \"Category not found\"}, status=404)\n        except Exception as e:\n            return Response({\"message\": \"Error\"}, status=400)"
+    }
+  },
+  {
+    "id": "code_008",
+    "task_type": "code_optimization",
+    "input": {
+      "code": "def validate(self, data):\n    ctype = data.get(\"content_type\")\n    object_pk = data.get(\"object_pk\")\n    if ctype is None or object_pk is None:\n        return serializers.ValidationError(\n            \"Missing content_type or object_pk field.\")\n    try:\n        model = apps.get_model(*ctype.split(\".\", 1))\n        target = model._default_manager.get(pk=object_pk)\n        whocan = get_app_model_options(content_type=ctype)['who_can_post']\n    except (AttributeError, TypeError, LookupError, ValueError):\n        raise serializers.ValidationError(\n            \"Invalid content_type value: %r\" % escape(ctype))\n    except model.DoesNotExist:\n        raise serializers.ValidationError(\n            \"No object matching content-type %r and object PK %r exists.\"\n            % (escape(ctype), escape(object_pk)))\n    except (serializers.ValidationError) as e:\n        raise serializers.ValidationError(\n            \"Attempting to get content-type %r and object PK %r exists \"\n            \"raised %s\" % (escape(ctype), escape(object_pk),\n                           e.__class__.__name__))\n    else:\n        if whocan == \"users\" and not self.request.user.is_authenticated:\n            raise serializers.ValidationError(\"User not authenticated\")\n\n    # Signal that the request allows to be authorized.\n    responses = should_request_be_authorized.send(\n        sender=target.__class__,\n        comment=target,\n        request=self.request\n    )\n\n    for (receiver, response) in responses:\n        if response is True:\n            # A positive response indicates that the POST request\n            # must be trusted. So inject the CommentSecurityForm values\n            # to pass the form validation step.\n            secform = CommentSecurityForm(target)\n            data.update({\n                \"honeypot\": \"\",\n                \"timestamp\": secform['timestamp'].value(),\n                \"security_hash\": secform['security_hash'].value()\n            })\n            break\n    self.form = get_form()(target, data=data)\n\n    # Check security information.\n    if self.form.security_errors():\n        raise exceptions.PermissionDenied()\n    if self.form.errors:\n        raise serializers.ValidationError(self.form.errors)\n    return data"
+    },
+    "constraints": {
+      "goal": "optimize, improve readability and performance"
+    },
+    "reference_output": {
+      "optimized_code": "def validate(self, data):\n    ctype = data.get(\"content_type\")\n    object_pk = data.get(\"object_pk\")\n    if ctype is None or object_pk is None:\n        raise serializers.ValidationError(\n            \"Missing content_type or object_pk field.\"\n        )\n\n    try:\n        model = apps.get_model(*ctype.split(\".\", 1))\n        target = model._default_manager.get(pk=object_pk)\n        whocan = get_app_model_options(content_type=ctype)['who_can_post']\n\n        if whocan == \"users\" and not self.request.user.is_authenticated:\n            raise serializers.ValidationError(\"User not authenticated\")\n    except (AttributeError, TypeError, LookupError, ValueError) as e:\n        raise serializers.ValidationError(\n            f\"Invalid content_type value: {escape(ctype)}\"\n        )\n    except model.DoesNotExist:\n        raise serializers.ValidationError(\n            f\"No object matching content-type {escape(ctype)} and object PK {escape(object_pk)} exists.\"\n        )\n    except serializers.ValidationError as e:\n        raise serializers.ValidationError(\n            f\"Attempting to get content-type {escape(ctype)} and object PK {escape(object_pk)} raised {e.__class__.__name__}\"\n        )\n\n    # Signal that the request allows to be authorized.\n    responses = should_request_be_authorized.send(\n        sender=target.__class__,\n        comment=target,\n        request=self.request\n    )\n\n    for (receiver, response) in responses:\n        if response is True:\n            # A positive response indicates that the POST request\n            # must be trusted. So inject the CommentSecurityForm values\n            # to pass the form validation step.\n            secform = CommentSecurityForm(target)\n            data.update({\n                \"honeypot\": \"\",\n                \"timestamp\": secform['timestamp'].value(),\n                \"security_hash\": secform['security_hash'].value()\n            })\n            break\n\n    self.form = get_form()(target, data=data)\n\n    # Check security information.\n    if self.form.security_errors():\n        raise exceptions.PermissionDenied()\n    if self.form.errors:\n        raise serializers.ValidationError(self.form.errors)\n    \n    return data"
+    }
+  },
+  {
+    "id": "code_009",
+    "task_type": "code_optimization",
+    "input": {
+      "code": "class CommentCreate(DefaultsMixin, generics.CreateAPIView):\n    \"\"\"Create a comment.\"\"\"\n    serializer_class = serializers.WriteCommentSerializer\n\n    resp_dict = {}\n\n    def post(self, request, *args, **kwargs):\n        serializer = self.get_serializer(data=request.data)\n        if serializer.is_valid():\n            response = super(CommentCreate, self).post(request, *args, **kwargs)\n        else:\n            if 'non_field_errors' in serializer.errors:\n                response_msg = serializer.errors['non_field_errors'][0]\n            else:\n                response_msg = [k for k in six.iterkeys(serializer.errors)]\n            return Response(response_msg, status=400)\n        if self.resp_dict['code'] == 201:  # The comment has been created.\n            response.data.update({\n                'id': self.resp_dict['comment']['xtd_comment'].id\n            })\n            return response\n        elif self.resp_dict['code'] in [202, 204, 403]:\n            return Response({}, status=self.resp_dict['code'])"
+    },
+    "constraints": {
+      "goal": "optimize, improve readability and performance"
+    },
+    "reference_output": {
+      "optimized_code": "class CommentCreate(DefaultsMixin, generics.CreateAPIView):\n    \"\"\"Create a comment.\"\"\"\n    serializer_class = serializers.WriteCommentSerializer\n\n    resp_dict = {}\n\n    def post(self, request, *args, **kwargs):\n        serializer = self.get_serializer(data=request.data)\n        if not serializer.is_valid():\n            response_msg = serializer.errors.get('non_field_errors', [k for k in serializer.errors.keys()])\n            return Response(response_msg, status=400)\n        \n        response = super(CommentCreate, self).post(request, *args, **kwargs)\n        \n        if self.resp_dict['code'] == 201:  # The comment has been created.\n            response.data.update({\n                'id': self.resp_dict['comment']['xtd_comment'].id\n            })\n        return Response({}, status=self.resp_dict['code'])"
+    }
+  },
+  {
+    "id": "code_010",
+    "task_type": "code_optimization",
+    "input": {
+      "code": "//call an internal helper method\nprivate void exposeIds(RepositoryRestConfiguration config){\n    //expose entity ids\n\n    //get a list of all entity classes from the entity manager\n    Set<EntityType<?>> entities = entityManager.getMetamodel().getEntities();\n\n    //create an array of the entity type\n    List<Class> entityClasses = new ArrayList<>();\n\n    //get the entity types for the entities\n    for (EntityType tempEntityType : entities) {\n        entityClasses.add(tempEntityType.getJavaType());\n    }\n\n    //expose the entity ids for the array of entity/domain types\n    Class[] domainTypes = entityClasses.toArray(new Class[0]);\n    config.exposeIdsFor(domainTypes);\n}"
+    },
+    "constraints": {
+      "goal": "optimize, improve readability and performance"
+    },
+    "reference_output": {
+      "optimized_code": "//call an internal helper method\nprivate void exposeIds(RepositoryRestConfiguration config){\n    //expose entity ids\n\n    //get a list of all entity classes from the entity manager\n    Set<EntityType<?>> entities = entityManager.getMetamodel().getEntities();\n\n    //expose the entity ids for the array of entity/domain types\n    config.exposeIdsFor(\n        entities.stream()\n                .map(EntityType::getJavaType)\n                .toArray(Class[]::new)\n    );\n}"
+    }
+  },
+  {
+    "id": "code_011",
+    "task_type": "code_optimization",
+    "input": {
+      "code": "private void exposeIds(RepositoryRestConfiguration config){\n    //expose entity ids\n\n    //get a list of all entity classes from the entity manager\n    Set<EntityType<?>> entities = entityManager.getMetamodel().getEntities();\n\n    //expose the entity ids for the array of entity/domain types\n    config.exposeIdsFor(\n        entities.stream()\n                .map(EntityType::getJavaType)\n                .toArray(Class[]::new)\n    );\n}"
+    },
+    "constraints": {
+      "goal": "optimize, improve readability and performance"
+    },
+    "reference_output": {
+      "optimized_code": "private void exposeIds(RepositoryRestConfiguration config){\n    //expose entity ids\n\n    //get a list of all entity classes from the entity manager\n    Set<EntityType<?>> entities = entityManager.getMetamodel().getEntities();\n\n    //create an array of the entity type\n    List<Class> entityClasses = new ArrayList<>();\n\n    //get the entity types for the entities\n    for (EntityType tempEntityType : entities) {\n        entityClasses.add(tempEntityType.getJavaType());\n    }\n\n    //expose the entity ids for the array of entity/domain types\n    Class[] domainTypes = entityClasses.toArray(new Class[0]);\n    config.exposeIdsFor(domainTypes);\n}"
+    }
+  },
+  {
+    "id": "code_012",
+    "task_type": "code_optimization",
+    "input": {
+      "code": "@RequestMapping(value = \"/create\", method = RequestMethod.POST)\n@ApiMethod(description = \"Create a hotel booking and save it to the database\")\npublic List<HotelBooking> create(@RequestBody HotelBooking hotelBooking){\n    bookingRepository.save(hotelBooking);\n\n    return bookingRepository.findAll();\n}"
+    },
+    "constraints": {
+      "goal": "optimize, improve readability and performance"
+    },
+    "reference_output": {
+      "optimized_code": "@PostMapping(value = \"/create\")\n@ApiMethod(description = \"Create a hotel booking and save it to the database\")\npublic ResponseEntity<HotelBooking> create(@RequestBody HotelBooking hotelBooking){\n    HotelBooking savedBooking = bookingRepository.save(hotelBooking);\n\n    return ResponseEntity.status(HttpStatus.CREATED).body(savedBooking);\n}"
+    }
+  },
+  {
+    "id": "code_013",
+    "task_type": "code_optimization",
+    "input": {
+      "code": "public void ensureFxmlLoaderInitialized() {\n\n    if (fxmlLoader != null) {\n        return;\n    }\n\n    try {\n        Thread.sleep(100);\n    } catch (InterruptedException e) {\n        Thread.currentThread().interrupt();\n    }\n\n    fxmlLoader = loadSynchronously(resource, bundle);\n    presenterProperty.set(fxmlLoader.getController());\n}"
+    },
+    "constraints": {
+      "goal": "optimize, improve readability and performance"
+    },
+    "reference_output": {
+      "optimized_code": "public void ensureFxmlLoaderInitialized() {\n\n    if (fxmlLoader != null) {\n        return;\n    }\n\n    fxmlLoader = loadSynchronously(resource, bundle);\n    presenterProperty.set(fxmlLoader.getController());\n}"
+    }
+  },
+  {
+    "id": "code_014",
+    "task_type": "code_optimization",
+    "input": {
+      "code": "public ResourceBundle newBundle(\n    final String baseName,\n    final Locale locale,\n    final String format,\n    final ClassLoader loader,\n    final boolean reload)\nthrows IllegalAccessException, InstantiationException, IOException {\n\n    final String bundleName = toBundleName(baseName, locale);\n    final String resourceName = toResourceName(bundleName, \"properties\");\n\n    ResourceBundle bundle = null;\n    InputStream stream = null;\n    if (reload) {\n        URL url = loader.getResource(resourceName);\n        if (url != null) {\n            URLConnection connection = url.openConnection();\n            if (connection != null) {\n                connection.setUseCaches(false);\n                stream = connection.getInputStream();\n            }\n        }\n    } else {\n        stream = loader.getResourceAsStream(resourceName);\n    }\n\n    if (stream != null) {\n        try {\n            bundle = new PropertyResourceBundle(new InputStreamReader(stream, charset));\n        } finally {\n            stream.close();\n        }\n    }\n\n    return bundle;\n}"
+    },
+    "constraints": {
+      "goal": "optimize, improve readability and performance"
+    },
+    "reference_output": {
+      "optimized_code": "public ResourceBundle newBundle(\n    final String baseName,\n    final Locale locale,\n    final String format,\n    final ClassLoader loader,\n    final boolean reload)\nthrows IllegalAccessException, InstantiationException, IOException {\n\n    final String bundleName = toBundleName(baseName, locale);\n    final String resourceName = toResourceName(bundleName, \"properties\");\n\n    ResourceBundle bundle = null;\n    InputStream stream = null;\n    if (reload) {\n        URL url = loader.getResource(resourceName);\n        if (url != null) {\n            URLConnection connection = url.openConnection();\n            if (connection != null) {\n                connection.setUseCaches(false);\n                try (InputStream is = connection.getInputStream()) {\n                    bundle = new PropertyResourceBundle(new InputStreamReader(is, charset));\n                }\n            }\n        }\n    } else {\n        stream = loader.getResourceAsStream(resourceName);\n        if (stream != null) {\n            try (InputStream is = stream) {\n                bundle = new PropertyResourceBundle(new InputStreamReader(is, charset));\n            }\n        }\n    }\n\n    return bundle;\n}"
+    }
+  },
+  {
+    "id": "code_015",
+    "task_type": "code_optimization",
+    "input": {
+      "code": "public class SplashScreen {\n\n    private static String DEFAULT_IMAGE = \"/splash/javafx.png\";\n\n    /**\n     * Override this to create your own splash pane parent node.\n     *\n     * @return A standard image\n     */\n    public Parent getParent() {\n        final ImageView imageView = new ImageView(getClass().getResource(getImagePath()).toExternalForm());\n        final ProgressBar splashProgressBar = new ProgressBar();\n        splashProgressBar.setPrefWidth(imageView.getImage().getWidth());\n\n        final VBox vbox = new VBox();\n        vbox.getChildren().addAll(imageView, splashProgressBar);\n\n        return vbox;\n    }\n\n    /**\n     * Customize if the splash screen should be visible at all.\n     *\n     * @return true by default\n     */\n    public boolean visible() {\n        return true;\n    }\n\n    /**\n     * Use your own splash image instead of the default one.\n     *\n     * @return \"/splash/javafx.png\"\n     */\n    public String getImagePath() {\n        return DEFAULT_IMAGE;\n    }\n\n}"
+    },
+    "constraints": {
+      "goal": "optimize, improve readability and performance"
+    },
+    "reference_output": {
+      "optimized_code": "public class SplashScreen {\n\n    private static final String DEFAULT_IMAGE = \"/splash/javafx.png\";\n    private final String imagePath;\n\n    public SplashScreen() {\n        this(DEFAULT_IMAGE);\n    }\n\n    public SplashScreen(String imagePath) {\n        this.imagePath = imagePath;\n    }\n\n    /**\n     * Override this to create your own splash pane parent node.\n     *\n     * @return A standard image\n     */\n    public Parent getParent() {\n        ImageView imageView = new ImageView(getClass().getResource(getImagePath()).toExternalForm());\n        ProgressBar splashProgressBar = new ProgressBar();\n        splashProgressBar.setPrefWidth(imageView.getImage().getWidth());\n\n        VBox vbox = new VBox();\n        vbox.getChildren().addAll(imageView, splashProgressBar);\n\n        return vbox;\n    }\n\n    /**\n     * Customize if the splash screen should be visible at all.\n     *\n     * @return true by default\n     */\n    public boolean visible() {\n        return true;\n    }\n\n    /**\n     * Use your own splash image instead of the default one.\n     *\n     * @return the image path\n     */\n    public String getImagePath() {\n        return imagePath;\n    }\n}"
+    }
+  },
+  {
+    "id": "code_016",
+    "task_type": "code_optimization",
+    "input": {
+      "code": "private List<String> languages(Product product) {\n    List<String> languages = new ArrayList<>();\n    List<ProductDescription> descriptions = product.getDescriptions();\n    for (ProductDescription description : descriptions) {\n        String language = description.getLanguage().getCode();\n        for (int i = 0; i < descriptions.size(); i++) {\n            if (!languages.contains(language)) {\n                languages.add(language);\n            }\n        }\n    }\n    return languages;\n}"
+    },
+    "constraints": {
+      "goal": "optimize, improve readability and performance"
+    },
+    "reference_output": {
+      "optimized_code": "private List<String> languages(Product product) {\n    return product.getDescriptions().stream().map(d -> d.getLanguage().getCode()).collect(Collectors.toList());\n}"
+    }
+  },
+  {
+    "id": "code_017",
+    "task_type": "code_optimization",
+    "input": {
+      "code": "private Map<String, String> variants(ProductVariant variant) {\n    if (variant == null) return null;\n\n    Map<String, String> variantMap = new HashMap<>();\n    List<String> tempCodes = new ArrayList<>();\n    if (variant.getVariation() != null) {\n        String variantCode = variant.getVariation().getProductOption().getCode();\n        String variantValueCode = variant.getVariation().getProductOptionValue().getCode();\n        tempCodes.add(variantCode + variantValueCode);\n    }\n\n    if (variant.getVariationValue() != null) {\n        String variantCode = variant.getVariationValue().getProductOption().getCode();\n        String variantValueCode = variant.getVariationValue().getProductOptionValue().getCode();\n        tempCodes.add(variantCode + variantValueCode);\n    }\n\n    for (String code : tempCodes) {\n        for (String innerCode : tempCodes) {\n            variantMap.put(innerCode, code);\n        }\n    }\n\n    if (!StringUtils.isBlank(variant.getSku())) {\n        for (int i = 0; i < tempCodes.size(); i++) {\n            variantMap.put(VSKU, variant.getSku());\n        }\n    }\n\n    return variantMap;\n}"
+    },
+    "constraints": {
+      "goal": "optimize, improve readability and performance"
+    },
+    "reference_output": {
+      "optimized_code": "private Map<String, String> variants(ProductVariant variant) {\n    if (variant == null) return null;\n\n    Map<String, String> variantMap = new HashMap<>();\n    if (variant.getVariation() != null) {\n        String variantCode = variant.getVariation().getProductOption().getCode();\n        String variantValueCode = variant.getVariation().getProductOptionValue().getCode();\n        variantMap.put(variantCode, variantValueCode);\n    }\n\n    if (variant.getVariationValue() != null) {\n        String variantCode = variant.getVariationValue().getProductOption().getCode();\n        String variantValueCode = variant.getVariationValue().getProductOptionValue().getCode();\n        variantMap.put(variantCode, variantValueCode);\n    }\n\n    if (!StringUtils.isBlank(variant.getSku())) {\n        variantMap.put(VSKU, variant.getSku());\n    }\n\n    return variantMap;\n}"
+    }
+  },
+  {
+    "id": "code_018",
+    "task_type": "code_optimization",
+    "input": {
+      "code": "private BigDecimal calculateOrderTotal(List<ShippingProduct> products, MerchantStore store) throws Exception {\n    BigDecimal total = new BigDecimal(0);\n    for(ShippingProduct shippingProduct : products) {\n        for(int i = 0; i < shippingProduct.getQuantity(); i++) {\n            total = total.add(shippingProduct.getFinalPrice().getFinalPrice());\n        }\n    }\n    return total;\n}"
+    },
+    "constraints": {
+      "goal": "optimize, improve readability and performance"
+    },
+    "reference_output": {
+      "optimized_code": "private BigDecimal calculateOrderTotal(List<ShippingProduct> products, MerchantStore store) throws Exception {\n    BigDecimal total = new BigDecimal(0);\n    for(ShippingProduct shippingProduct : products) {\n        BigDecimal currentPrice = shippingProduct.getFinalPrice().getFinalPrice();\n        currentPrice = currentPrice.multiply(new BigDecimal(shippingProduct.getQuantity()));\n        total = total.add(currentPrice);\n    }\n    return total;\n}"
+    }
+  },
+  {
+    "id": "code_019",
+    "task_type": "code_optimization",
+    "input": {
+      "code": "@Override\npublic List<IntegrationModule> getShippingMethods(MerchantStore store) throws ServiceException {\n    List<IntegrationModule> modules = moduleConfigurationService.getIntegrationModules(SHIPPING_MODULES);\n    List<IntegrationModule> returnModules = new ArrayList<>();\n\n    for (IntegrationModule module : modules) {\n        boolean supported = false;\n        for (String region : module.getRegionsSet()) {\n            if (region.equals(store.getCountry().getIsoCode()) || region.equals(\"*\")) {\n                supported = true;\n                break;\n            }\n        }\n        if (supported) {\n            returnModules.add(module);\n        }\n    }\n\n    return returnModules;\n}"
+    },
+    "constraints": {
+      "goal": "optimize, improve readability and performance"
+    },
+    "reference_output": {
+      "optimized_code": "@Override\npublic List<IntegrationModule> getShippingMethods(MerchantStore store) throws ServiceException {\n    List<IntegrationModule> modules = moduleConfigurationService.getIntegrationModules(SHIPPING_MODULES);\n    List<IntegrationModule> returnModules = new ArrayList<>();\n\n    for (IntegrationModule module : modules) {\n        if (module.getRegionsSet().contains(store.getCountry().getIsoCode())\n                || module.getRegionsSet().contains(\"*\")) {\n            returnModules.add(module);\n        }\n    }\n\n    return returnModules;\n}"
+    }
+  },
+  {
+    "id": "code_020",
+    "task_type": "code_optimization",
+    "input": {
+      "code": "@Override\npublic ShoppingCart mergeShoppingCarts(final ShoppingCart userShoppingModel, final ShoppingCart sessionCart,\n        final MerchantStore store) throws Exception {\n    if (sessionCart.getCustomerId() != null\n            && sessionCart.getCustomerId().equals(userShoppingModel.getCustomerId())) {\n        LOGGER.info(\"Session Shopping cart belongs to same logged in user\");\n        if (CollectionUtils.isNotEmpty(userShoppingModel.getLineItems())\n                && CollectionUtils.isNotEmpty(sessionCart.getLineItems())) {\n            return userShoppingModel;\n        }\n    }\n\n    LOGGER.info(\"Starting merging shopping carts\");\n    if (CollectionUtils.isNotEmpty(sessionCart.getLineItems())) {\n        Set<ShoppingCartItem> shoppingCartItemsSet = getShoppingCartItems(sessionCart, store, userShoppingModel);\n        boolean duplicateFound = false;\n        if (CollectionUtils.isNotEmpty(shoppingCartItemsSet)) {\n            for (ShoppingCartItem sessionShoppingCartItem : shoppingCartItemsSet) {\n                for (ShoppingCartItem cartItem : userShoppingModel.getLineItems()) {\n                    if (cartItem.getProduct().getId().longValue() == sessionShoppingCartItem.getProduct()\n                            .getId().longValue()) {\n                        if (!duplicateFound) {\n                            LOGGER.info(\"Duplicate item found..updating existing product quantity\");\n                            cartItem.setQuantity(\n                                    cartItem.getQuantity() + sessionShoppingCartItem.getQuantity());\n                            duplicateFound = true;\n                        }\n                    }\n                }\n                if (!duplicateFound) {\n                    LOGGER.info(\"New item found..adding item to Shopping cart\");\n                    userShoppingModel.getLineItems().add(sessionShoppingCartItem);\n                }\n                duplicateFound = false; // Reset for next session item\n            }\n        }\n    }\n    LOGGER.info(\"Shopping Cart merged successfully.....\");\n    saveOrUpdate(userShoppingModel);\n    removeShoppingCart(sessionCart);\n\n    return userShoppingModel;\n}"
+    },
+    "constraints": {
+      "goal": "optimize, improve readability and performance"
+    },
+    "reference_output": {
+      "optimized_code": "@Override\npublic ShoppingCart mergeShoppingCarts(final ShoppingCart userShoppingModel, final ShoppingCart sessionCart,\n        final MerchantStore store) throws Exception {\n    if (sessionCart.getCustomerId() != null\n            && sessionCart.getCustomerId().equals(userShoppingModel.getCustomerId())) {\n        LOGGER.info(\"Session Shopping cart belongs to same logged in user\");\n        if (CollectionUtils.isNotEmpty(userShoppingModel.getLineItems())\n                && CollectionUtils.isNotEmpty(sessionCart.getLineItems())) {\n            return userShoppingModel;\n        }\n    }\n\n    LOGGER.info(\"Starting merging shopping carts\");\n    if (CollectionUtils.isNotEmpty(sessionCart.getLineItems())) {\n        Set<ShoppingCartItem> shoppingCartItemsSet = getShoppingCartItems(sessionCart, store, userShoppingModel);\n        Map<Long, ShoppingCartItem> userCartItemMap = userShoppingModel.getLineItems().stream()\n                .collect(Collectors.toMap(item -> item.getProduct().getId(), item -> item));\n\n        for (ShoppingCartItem sessionShoppingCartItem : shoppingCartItemsSet) {\n            ShoppingCartItem userCartItem = userCartItemMap.get(sessionShoppingCartItem.getProduct().getId());\n            if (userCartItem != null) {\n                LOGGER.info(\"Duplicate item found..updating existing product quantity\");\n                userCartItem.setQuantity(userCartItem.getQuantity() + sessionShoppingCartItem.getQuantity());\n            } else {\n                LOGGER.info(\"New item found..adding item to Shopping cart\");\n                userShoppingModel.getLineItems().add(sessionShoppingCartItem);\n            }\n        }\n    }\n    LOGGER.info(\"Shopping Cart merged successfully.....\");\n    saveOrUpdate(userShoppingModel);\n    removeShoppingCart(sessionCart);\n\n    return userShoppingModel;\n}"
+    }
+  },
+  {
+    "id": "code_021",
+    "task_type": "code_optimization",
+    "input": {
+      "code": "private String authRedirectUri(String redirectUri, String code) throws UnsupportedEncodingException {\n    StringBuilder sbf = new StringBuilder(redirectUri);\n    if (redirectUri.indexOf(\"?\") > -1) {\n        sbf.append(\"&\");\n    } else {\n        sbf.append(\"?\");\n    }\n    sbf.append(Oauth2Constant.AUTH_CODE).append(\"=\").append(code);\n    return URLDecoder.decode(sbf.toString(), \"utf-8\");\n}"
+    },
+    "constraints": {
+      "goal": "optimize, improve readability and performance"
+    },
+    "reference_output": {
+      "optimized_code": ""
+    }
+  },
+  {
+    "id": "code_022",
+    "task_type": "code_optimization",
+    "input": {
+      "code": "public void changeTheme(boolean dark) {\n    stageManager = SpringUtils.getBean(StageManager.class);\n    String theme;\n    String path = \"/styles/theme/\";\n    if (dark) {\n        stageManager.getDecorator().initTheme(GNDecorator.Theme.DARKULA);\n        theme = \"dark.css\";\n    } else {\n        stageManager.getDecorator().initTheme(GNDecorator.Theme.DEFAULT);\n        theme = \"light.css\";\n    }\n\n    ObservableList<String> stylesheets = stageManager.getDecorator().getStage().getScene().getStylesheets();\n    stylesheets.clear();\n    stylesheets.addAll(\n        getClass().getResource(path + \"fonts.css\").toExternalForm(),\n        getClass().getResource(path + \"material-color.css\").toExternalForm(),\n        getClass().getResource(path + \"skeleton.css\").toExternalForm(),\n        getClass().getResource(path + \"\" + theme).toExternalForm(),\n        getClass().getResource(path + \"bootstrap.css\").toExternalForm(),\n        getClass().getResource(path + \"simple-green.css\").toExternalForm(),\n        getClass().getResource(path + \"shape.css\").toExternalForm(),\n        getClass().getResource(path + \"typographic.css\").toExternalForm(),\n        getClass().getResource(path + \"helpers.css\").toExternalForm(),\n        getClass().getResource(path + \"master.css\").toExternalForm()\n    );\n}\n\npublic void invertTheme(boolean dark) {\n    stageManager = SpringUtils.getBean(StageManager.class);\n    String theme;\n    String path = \"/styles/theme/\";\n    if (dark) {\n        stageManager.getDecorator().initTheme(GNDecorator.Theme.DARKULA);\n        theme = \"dark.css\";\n        btn_theme.setText(\"Theme dark : activated\");\n        invert = true;\n    } else {\n        stageManager.getDecorator().initTheme(GNDecorator.Theme.DEFAULT);\n        theme = \"light.css\";\n        btn_theme.setText(\"Theme dark : deactivated\");\n        invert = false;\n    }\n\n    ObservableList<String> stylesheets = stageManager.getDecorator().getStage().getScene().getStylesheets();\n    stylesheets.clear();\n    stylesheets.addAll(\n        getClass().getResource(path + \"fonts.css\").toExternalForm(),\n        getClass().getResource(path + \"material-color.css\").toExternalForm(),\n        getClass().getResource(path + \"skeleton.css\").toExternalForm(),\n        getClass().getResource(path + \"\" + theme).toExternalForm(),\n        getClass().getResource(path + \"bootstrap.css\").toExternalForm(),\n        getClass().getResource(path + \"simple-green.css\").toExternalForm(),\n        getClass().getResource(path + \"shape.css\").toExternalForm(),\n        getClass().getResource(path + \"typographic.css\").toExternalForm(),\n        getClass().getResource(path + \"helpers.css\").toExternalForm(),\n        getClass().getResource(path + \"master.css\").toExternalForm()\n    );\n\n    MainController.popConfig.hide();\n\n    Platform.runLater(() -> {\n        // Force pop's transition\n        MainController.popup.getRoot().getStylesheets().remove(MainController.popup.getRoot().getStylesheets().size() - 1);\n        MainController.popConfig.getRoot().getStylesheets().remove(MainController.popConfig.getRoot().getStylesheets().size() - 1);\n\n        MainController.popup.getRoot().getStylesheets().add(path + \"pop\" + theme);\n        MainController.popConfig.getRoot().getStylesheets().add(path + \"pop\" + theme);\n    });\n}"
+    },
+    "constraints": {
+      "goal": "optimize, improve readability and performance"
+    },
+    "reference_output": {
+      "optimized_code": "public void changeTheme(boolean dark) {\n    stageManager = SpringUtils.getBean(StageManager.class);\n    String theme = dark ? \"dark.css\" : \"light.css\";\n    initTheme(dark);\n    updateStylesheets(theme);\n}\n\npublic void invertTheme(boolean dark) {\n    stageManager = SpringUtils.getBean(StageManager.class);\n    String theme = dark ? \"dark.css\" : \"light.css\";\n    btn_theme.setText(dark ? \"Theme dark : activated\" : \"Theme dark : deactivated\");\n    invert = dark;\n    initTheme(dark);\n    updateStylesheets(theme);\n\n    MainController.popConfig.hide();\n\n    Platform.runLater(() -> {\n        // Force pop's transition\n        MainController.popup.getRoot().getStylesheets().remove(MainController.popup.getRoot().getStylesheets().size() - 1);\n        MainController.popConfig.getRoot().getStylesheets().remove(MainController.popConfig.getRoot().getStylesheets().size() - 1);\n\n        MainController.popup.getRoot().getStylesheets().add(\"/styles/theme/pop\" + theme);\n        MainController.popConfig.getRoot().getStylesheets().add(\"/styles/theme/pop\" + theme);\n    });\n}\n\nprivate void initTheme(boolean dark) {\n    if (dark) {\n        stageManager.getDecorator().initTheme(GNDecorator.Theme.DARKULA);\n    } else {\n        stageManager.getDecorator().initTheme(GNDecorator.Theme.DEFAULT);\n    }\n}\n\nprivate void updateStylesheets(String theme) {\n    String path = \"/styles/theme/\";\n    ObservableList<String> stylesheets = stageManager.getDecorator().getStage().getScene().getStylesheets();\n    stylesheets.clear();\n    stylesheets.addAll(\n        getClass().getResource(path + \"fonts.css\").toExternalForm(),\n        getClass().getResource(path + \"material-color.css\").toExternalForm(),\n        getClass().getResource(path + \"skeleton.css\").toExternalForm(),\n        getClass().getResource(path + theme).toExternalForm(),\n        getClass().getResource(path + \"bootstrap.css\").toExternalForm(),\n        getClass().getResource(path + \"simple-green.css\").toExternalForm(),\n        getClass().getResource(path + \"shape.css\").toExternalForm(),\n        getClass().getResource(path + \"typographic.css\").toExternalForm(),\n        getClass().getResource(path + \"helpers.css\").toExternalForm(),\n        getClass().getResource(path + \"master.css\").toExternalForm()\n    );\n}"
+    }
+  },
+  {
+    "id": "code_023",
+    "task_type": "code_optimization",
+    "input": {
+      "code": "@FXML\nprivate void openMessages() {\n    if (!pop.isShowing()) {\n        Separator top = new Separator();\n        Separator bottom = new Separator();\n\n        Label message = new Label(\"Messages\");\n        Label count = new Label(\"4 News\");\n        count.getStyleClass().add(\"text-success\");\n        GridPane title = new GridPane();\n        title.setMinHeight(40D);\n\n        title.setAlignment(Pos.CENTER);\n        title.add(message, 0, 0);\n        title.add(count, 1, 0);\n        GridPane.setHalignment(count, HPos.RIGHT);\n\n        ListView<Node> listView = new ListView<>();\n        listView.getStyleClass().add(\"border-0\");\n\n        Button btn = new Button(\"Read all messages\");\n        btn.getStyleClass().add(\"btn-flat\");\n\n        VBox root = new VBox(title, top, listView, bottom, btn);\n        root.setAlignment(Pos.CENTER);\n        root.setPrefSize(300, 300);\n        title.setPrefWidth(root.getPrefWidth());\n        count.setPrefWidth(root.getPrefWidth());\n        message.setPrefWidth(root.getPrefWidth());\n        count.setAlignment(Pos.CENTER_RIGHT);\n        title.setPadding(new Insets(0, 25, 0, 25));\n        btn.setPrefWidth(root.getPrefWidth());\n\n        pop.getRoot().getStylesheets().add(getClass().getResource(\"/styles/theme/poplight.css\").toExternalForm());\n        pop.setContentNode(root);\n        pop.setArrowLocation(PopOver.ArrowLocation.TOP_RIGHT);\n        pop.setArrowIndent(0);\n        pop.setArrowSize(0);\n        pop.setCloseButtonEnabled(false);\n        pop.setHeaderAlwaysVisible(false);\n        pop.setCornerRadius(0);\n        pop.setAutoFix(true);\n        pop.show(messages);\n\n    } else {\n        pop.hide();\n    }\n}\n\n@FXML\nprivate void openNotification() {\n    if (!pop.isShowing()) {\n        Separator top = new Separator();\n        Separator bottom = new Separator();\n\n        Label message = new Label(\"Messages\");\n        Label count = new Label(\"4 News\");\n        count.getStyleClass().add(\"text-success\");\n        GridPane title = new GridPane();\n        title.setMinHeight(40D);\n\n        title.setAlignment(Pos.CENTER);\n        title.add(message, 0, 0);\n        title.add(count, 1, 0);\n        GridPane.setHalignment(count, HPos.RIGHT);\n\n        ListView<Node> listView = new ListView<>();\n        listView.getStyleClass().add(\"border-0\");\n\n        Button btn = new Button(\"Read all messages\");\n        btn.getStyleClass().add(\"btn-flat\");\n\n        VBox root = new VBox(title, top, listView, bottom, btn);\n        root.setAlignment(Pos.CENTER);\n        root.setPrefSize(300, 300);\n        title.setPrefWidth(root.getPrefWidth());\n        count.setPrefWidth(root.getPrefWidth());\n        message.setPrefWidth(root.getPrefWidth());\n        count.setAlignment(Pos.CENTER_RIGHT);\n        title.setPadding(new Insets(0, 25, 0, 25));\n        btn.setPrefWidth(root.getPrefWidth());\n\n        listView.getStylesheets().add(getClass().getResource(\"/styles/theme/custom-scroll.css\").toExternalForm());\n\n        pop.getRoot().getStylesheets().add(getClass().getResource(\"/styles/theme/poplight.css\").toExternalForm());\n        pop.setContentNode(root);\n        pop.setArrowLocation(PopOver.ArrowLocation.TOP_RIGHT);\n        pop.setArrowIndent(0);\n        pop.setArrowSize(0);\n        pop.setCloseButtonEnabled(false);\n        pop.setHeaderAlwaysVisible(false);\n        pop.setCornerRadius(0);\n        pop.show(notifications);\n\n    } else {\n        pop.hide();\n    }\n}"
+    },
+    "constraints": {
+      "goal": "optimize, improve readability and performance"
+    },
+    "reference_output": {
+      "optimized_code": "private void setupPopover(PopOver pop, JFXBadge targetBadge, String messageText, String countText) {\n    Separator top = new Separator();\n    Separator bottom = new Separator();\n\n    Label message = new Label(messageText);\n    Label count = new Label(countText);\n    count.getStyleClass().add(\"text-success\");\n    GridPane title = new GridPane();\n    title.setMinHeight(40D);\n\n    title.setAlignment(Pos.CENTER);\n    title.add(message, 0, 0);\n    title.add(count, 1, 0);\n    GridPane.setHalignment(count, HPos.RIGHT);\n\n    ListView<Node> listView = new ListView<>();\n    listView.getStyleClass().add(\"border-0\");\n\n    Button btn = new Button(\"Read all messages\");\n    btn.getStyleClass().add(\"btn-flat\");\n\n    VBox root = new VBox(title, top, listView, bottom, btn);\n    root.setAlignment(Pos.CENTER);\n    root.setPrefSize(300, 300);\n    title.setPrefWidth(root.getPrefWidth());\n    count.setPrefWidth(root.getPrefWidth());\n    message.setPrefWidth(root.getPrefWidth());\n    count.setAlignment(Pos.CENTER_RIGHT);\n    title.setPadding(new Insets(0, 25, 0, 25));\n    btn.setPrefWidth(root.getPrefWidth());\n\n    pop.getRoot().getStylesheets().add(getClass().getResource(\"/styles/theme/poplight.css\").toExternalForm());\n    pop.setContentNode(root);\n    pop.setArrowLocation(PopOver.ArrowLocation.TOP_RIGHT);\n    pop.setArrowIndent(0);\n    pop.setArrowSize(0);\n    pop.setCloseButtonEnabled(false);\n    pop.setHeaderAlwaysVisible(false);\n    pop.setCornerRadius(0);\n    pop.setAutoFix(true);\n    pop.show(targetBadge);\n}\n\n@FXML\nprivate void openMessages() {\n    if (!pop.isShowing()) {\n        setupPopover(pop, messages, \"Messages\", \"4 News\");\n    } else {\n        pop.hide();\n    }\n}\n\n@FXML\nprivate void openNotification() {\n    if (!pop.isShowing()) {\n        setupPopover(pop, notifications, \"Messages\", \"4 News\");\n    } else {\n        pop.hide();\n    }\n}"
+    }
+  },
+  {
+    "id": "code_024",
+    "task_type": "code_optimization",
+    "input": {
+      "code": "@Test\nvoid findExamenByName() {\n    when(repository.findAll()).thenReturn(Datos.EXAMENES);\n    Optional<Examen> examen = service.findByName(\"Matematicas\");\n    assertTrue(examen.isPresent());\n    assertEquals(5L, examen.orElseThrow().getId());\n    assertEquals(\"Matematicas\", examen.orElseThrow().getNombre());\n}\n\n@Test\nvoid findExamenByNameEmptyList() {\n    List<Examen> datos = Collections.emptyList();\n    when(repository.findAll()).thenReturn(datos);\n    Optional<Examen> examen = service.findByName(\"Matematicas\");\n    assertFalse(examen.isPresent());\n}\n\n@Test\nvoid testPreguntasExamen() {\n    when(repository.findAll()).thenReturn(Datos.EXAMENES);\n    when(preguntaRepository.findByExamId(anyLong())).thenReturn(Datos.PREGUNTAS);\n    Examen examen = service.findByNameWithQuestion(\"Matematicas\");\n    assertEquals(5, examen.getPreguntas().size());\n}\n\n@Test\nvoid testPreguntasExamenVerify() {\n    when(repository.findAll()).thenReturn(Datos.EXAMENES);\n    when(preguntaRepository.findByExamId(anyLong())).thenReturn(Datos.PREGUNTAS);\n    Examen examen = service.findByNameWithQuestion(\"Matematicas\");\n    verify(repository).findAll();\n    verify(preguntaRepository).findByExamId(anyLong());\n}\n\n@Test\nvoid testGuardarExamen() {\n    Examen newExamen = Datos.EXAMEN;\n    newExamen.setPreguntas(Datos.PREGUNTAS);\n    when(repository.save(any(Examen.class))).then(new Answer<Examen>() {\n        Long secuencia = 8L;\n        @Override\n        public Examen answer(InvocationOnMock invocation) throws Throwable {\n            Examen examen = invocation.getArgument(0);\n            examen.setId(secuencia++);\n            return examen;\n        }\n    });\n    Examen examen = service.save(newExamen);\n    assertNotNull(examen.getId());\n    assertEquals(8L, examen.getId());\n    assertEquals(\"Fisica\", examen.getNombre());\n    verify(repository).save(any(Examen.class));\n    verify(preguntaRepository).saveAll(anyList());\n}"
+    },
+    "constraints": {
+      "goal": "optimize, improve readability and performance"
+    },
+    "reference_output": {
+      "optimized_code": "@BeforeEach\nvoid setUp() {\n    initMocks();\n}\n\nprivate void initMocks() {\n    when(repository.findAll()).thenReturn(Datos.EXAMENES);\n    when(preguntaRepository.findByExamId(anyLong())).thenReturn(Datos.PREGUNTAS);\n}\n\n@Test\nvoid findExamenByName() {\n    Optional<Examen> examen = service.findByName(\"Matematicas\");\n    assertTrue(examen.isPresent());\n    assertEquals(5L, examen.orElseThrow().getId());\n    assertEquals(\"Matematicas\", examen.orElseThrow().getNombre());\n}\n\n@Test\nvoid findExamenByNameEmptyList() {\n    List<Examen> datos = Collections.emptyList();\n    when(repository.findAll()).thenReturn(datos);\n    Optional<Examen> examen = service.findByName(\"Matematicas\");\n    assertFalse(examen.isPresent());\n}\n\n@Test\nvoid testPreguntasExamen() {\n    Examen examen = service.findByNameWithQuestion(\"Matematicas\");\n    assertEquals(5, examen.getPreguntas().size());\n}\n\n@Test\nvoid testPreguntasExamenVerify() {\n    Examen examen = service.findByNameWithQuestion(\"Matematicas\");\n    verify(repository).findAll();\n    verify(preguntaRepository).findByExamId(anyLong());\n}\n\n@Test\nvoid testGuardarExamen() {\n    Examen newExamen = Datos.EXAMEN;\n    newExamen.setPreguntas(Datos.PREGUNTAS);\n    when(repository.save(any(Examen.class))).then(new Answer<Examen>() {\n        Long secuencia = 8L;\n        @Override\n        public Examen answer(InvocationOnMock invocation) throws Throwable {\n            Examen examen = invocation.getArgument(0);\n            examen.setId(secuencia++);\n            return examen;\n        }\n    });\n    Examen examen = service.save(newExamen);\n    assertNotNull(examen.getId());\n    assertEquals(8L, examen.getId());\n    assertEquals(\"Fisica\", examen.getNombre());\n    verify(repository).save(any(Examen.class));\n    verify(preguntaRepository).saveAll(anyList());\n}"
+    }
+  },
+  {
+    "id": "code_025",
+    "task_type": "code_optimization",
+    "input": {
+      "code": "public List<Product> getAllProducts() {\n    List<Product> products = (List<Product>) this.productRepository.findAll();\n    List<Product> productsList = new ArrayList<>();\n    for (Product product : products) {\n        productsList.add(product);\n    }\n    return productsList;\n}"
+    },
+    "constraints": {
+      "goal": "optimize, improve readability and performance"
+    },
+    "reference_output": {
+      "optimized_code": "public List<Product> getAllProducts() {\n    return (List<Product>) this.productRepository.findAll();\n}"
+    }
+  },
+  {
+    "id": "code_026",
+    "task_type": "code_optimization",
+    "input": {
+      "code": "public Product getProduct(int id) {\n    Optional<Product> optional = this.productRepository.findById(id);\n    if (optional.isPresent()) {\n        Product product = optional.get();\n        if (product != null) {\n            return product;\n        }\n    }\n    return null;\n}"
+    },
+    "constraints": {
+      "goal": "optimize, improve readability and performance"
+    },
+    "reference_output": {
+      "optimized_code": "public Product getProduct(int id) {\n    return this.productRepository.findById(id).orElse(null);\n}"
+    }
+  },
+  {
+    "id": "code_027",
+    "task_type": "code_optimization",
+    "input": {
+      "code": "// UserServices.java\n@Component\npublic class UserServices {\n    @Autowired\n    private UserRepository userRepository;\n\n    // Get All Users\n    public List<User> getAllUser() {\n        List<User> users = (List<User>) this.userRepository.findAll();\n        return users;\n    }\n\n    // Get Single User\n    public User getUser(int id) {\n        Optional<User> optional = this.userRepository.findById(id);\n        User user = optional.get();\n        return user;\n    }\n\n    // Get Single User By Email\n    public User getUserByEmail(String email) {\n        User user = this.userRepository.findUserByUemail(email);\n        return user;\n    }\n\n    // Update\n    public void updateUser(User user, int id) {\n        user.setU_id(id);\n        this.userRepository.save(user);\n    }\n\n    // Delete Single User\n    public void deleteUser(int id) {\n        this.userRepository.deleteById(id);\n    }\n\n    // Add User\n    public void addUser(User user) {\n        this.userRepository.save(user);\n    }\n\n    // Validate Login Credentials\n    public boolean validateLoginCredentials(String email, String password) {\n        List<User> users = (List<User>) this.userRepository.findAll();\n        for (User u : users) {\n            if (u != null && u.getUpassword().equals(password) && u.getUemail().equals(email)) {\n                return true;\n            }\n        }\n        return false;\n    }\n}\n\n// UserRepository.java\nimport org.springframework.data.jpa.repository.JpaRepository;\nimport com.business.entities.User;\n\npublic interface UserRepository extends JpaRepository<User, Integer> {\n    User findUserByUemail(String email);\n}"
+    },
+    "constraints": {
+      "goal": "optimize, improve readability and performance"
+    },
+    "reference_output": {
+      "optimized_code": "// UserServices.java\n@Component\npublic class UserServices {\n    @Autowired\n    private UserRepository userRepository;\n\n    // Get All Users\n    public List<User> getAllUser() {\n        return (List<User>) this.userRepository.findAll();\n    }\n\n    // Get Single User\n    public User getUser(int id) {\n        Optional<User> optional = this.userRepository.findById(id);\n        return optional.orElse(null);\n    }\n\n    // Get Single User By Email\n    public User getUserByEmail(String email) {\n        return this.userRepository.findUserByUemail(email);\n    }\n\n    // Update\n    public void updateUser(User user, int id) {\n        user.setU_id(id);\n        this.userRepository.save(user);\n    }\n\n    // Delete Single User\n    public void deleteUser(int id) {\n        this.userRepository.deleteById(id);\n    }\n\n    // Add User\n    public void addUser(User user) {\n        this.userRepository.save(user);\n    }\n\n    // Validate Login Credentials\n    public boolean validateLoginCredentials(String email, String password) {\n        User user = this.userRepository.findUserByUemailAndUpassword(email, password);\n        return user != null;\n    }\n}\n\n// UserRepository.java\nimport org.springframework.data.jpa.repository.JpaRepository;\nimport com.business.entities.User;\n\npublic interface UserRepository extends JpaRepository<User, Integer> {\n    User findUserByUemail(String email);\n    User findUserByUemailAndUpassword(String email, String password);\n}"
+    }
+  },
+  {
+    "id": "code_028",
+    "task_type": "code_optimization",
+    "input": {
+      "code": "@PostMapping(\"/product/search\")\npublic String seachHandler(@RequestParam(\"productName\") String name, Model model) {\n    Product product = this.productServices.getProductByName(name);\n    List<Orders> orders = this.orderServices.getOrdersForUser(user);\n    if (product == null) {\n        model.addAttribute(\"message\", \"SORRY...!  Product Unavailable\");\n        model.addAttribute(\"product\", product);\n        model.addAttribute(\"orders\", orders);\n        return \"BuyProduct\";\n    }\n    model.addAttribute(\"orders\", orders);\n    model.addAttribute(\"product\", product);\n    return \"BuyProduct\";\n}"
+    },
+    "constraints": {
+      "goal": "optimize, improve readability and performance"
+    },
+    "reference_output": {
+      "optimized_code": "@PostMapping(\"/product/search\")\npublic String seachHandler(@RequestParam(\"productName\") String name, Model model) {\n    Product product = this.productServices.getProductByName(name);\n    List<Orders> orders = this.orderServices.getOrdersForUser(user);\n    model.addAttribute(\"orders\", orders);\n    \n    if (product == null) {\n        model.addAttribute(\"message\", \"SORRY...!  Product Unavailable\");\n    } else {\n        model.addAttribute(\"product\", product);\n    }\n    \n    return \"BuyProduct\";\n}"
+    }
+  }
+]
