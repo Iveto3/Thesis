@@ -288,3 +288,7 @@ def main() -> None:
 
     print("\nAll experiments finished. Computing result statistics...", flush=True)
     compute_stats_main()
+
+
+if __name__ == "__main__":
+    main()
