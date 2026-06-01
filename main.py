@@ -1,5 +1,6 @@
 import json
 from typing import Any, Dict
+from compute_results_stats import main as compute_stats_main
 
 from json_loader import load_input_json, save_results_json
 from llm_call import call_llm
@@ -67,6 +68,7 @@ def run_task_iterative(
     generation_model: str = "gemma3:4b",
     judge_model: str = "gemma3:4b",
 ) -> Dict[str, Any]:
+    task_id = task.get("id", "unknown_id")
     task_type = task.get("task_type")
     constraints = task.get("constraints", {})
     reference = get_task_reference(task)
@@ -82,7 +84,11 @@ def run_task_iterative(
     if reference is not None:
         single_shot_similarity = compute_similarity(single_shot_answer, reference)
 
-        print(f"[{task_type} single-shot] similarity={single_shot_similarity:.4f}")
+        print(
+            f"[{task_type} | {task_id} | single-shot] "
+            f"similarity={single_shot_similarity:.4f}",
+            flush=True,
+        )
 
         best_answer = single_shot_answer
         best_similarity = single_shot_similarity
@@ -105,8 +111,9 @@ def run_task_iterative(
             similarity = compute_similarity(current, reference)
 
             print(
-                f"[{task_type} round {round_num}] "
-                f"similarity={similarity:.4f}"
+                f"[{task_type} | {task_id} | round {round_num}] "
+                f"similarity={similarity:.4f}",
+                flush=True,
             )
 
             final_answer = current
@@ -143,7 +150,10 @@ def run_task_iterative(
         }
 
     if task_type == "constrained_summarization":
-        print(f"[{task_type} single-shot] generated initial answer")
+        print(
+            f"[{task_type} | {task_id} | single-shot] generated initial answer",
+            flush=True,
+        )
 
         single_shot_constraint_evaluation = evaluate_constraints(
             task,
@@ -166,7 +176,10 @@ def run_task_iterative(
 
             final_answer = current
 
-            print(f"[{task_type} round {round_num}] completed")
+            print(
+                f"[{task_type} | {task_id} | round {round_num}] completed",
+                flush=True,
+            )
 
             if round_num in CHECKPOINT_ROUNDS:
                 constraint_evaluation = evaluate_constraints(
@@ -213,9 +226,10 @@ def run_experiment(
     judge_model: str,
 ) -> None:
     tasks = load_input_json(input_file)
+    tasks = tasks[:5]
     results = []
 
-    print(f"\nRunning experiment:")
+    print("\nRunning experiment:")
     print(f"Input: {input_file}")
     print(f"Output: {output_file}")
     print(f"Rounds: {rounds}\n")
@@ -251,25 +265,19 @@ def main() -> None:
     experiments = [
         {
             "input_file": "summarization_dataset_input.json",
-            "output_file": "summarization_results_50.json",
-            "enabled": True,
+            "output_file": "summarization_results.json",
         },
         {
             "input_file": "constrained_summary_input.json",
-            "output_file": "constrained_summary_results_50.json",
-            "enabled": True,
+            "output_file": "constrained_summary_results.json",
         },
         {
             "input_file": "code_optimization_input.json",
-            "output_file": "code_optimization_results_50.json",
-            "enabled": False,
+            "output_file": "code_optimization_results.json",
         },
     ]
 
     for experiment in experiments:
-        if not experiment["enabled"]:
-            continue
-
         run_experiment(
             input_file=experiment["input_file"],
             output_file=experiment["output_file"],
@@ -278,6 +286,5 @@ def main() -> None:
             judge_model=judge_model,
         )
 
-
-if __name__ == "__main__":
-    main()
+    print("\nAll experiments finished. Computing result statistics...", flush=True)
+    compute_stats_main()
