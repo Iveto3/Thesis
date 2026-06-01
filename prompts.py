@@ -275,6 +275,115 @@ def build_refine_prompt(
 #         f"}}"
 #     )
 
+# def build_constraint_evaluation_prompt(
+#     task: Dict[str, Any],
+#     candidate_answer: str,
+# ) -> str:
+#     task_input = task.get("input", {})
+#     constraints = task.get("constraints", {})
+
+#     text = task_input.get("text", "")
+#     max_words = constraints.get("max_words", 150)
+#     goal = constraints.get("goal", "summarize")
+#     tone = constraints.get("tone", "not specified")
+#     style = constraints.get("style", "not specified")
+#     must_include = constraints.get("must_include", [])
+#     must_avoid = constraints.get("must_avoid", [])
+
+#     num_general_dimensions = 7
+#     max_possible_score = 2 * (
+#         num_general_dimensions + len(must_include) + len(must_avoid)
+#     )
+
+#     return (
+#         f"You are an independent evaluator of a constrained news summary.\n"
+#         f"Your job is to judge whether the candidate summary satisfies the task "
+#         f"and constraints. Do not rewrite the summary.\n\n"
+
+#         f"Source article:\n{text}\n\n"
+#         f"Candidate summary:\n{candidate_answer}\n\n"
+
+#         f"Task constraints:\n"
+#         f"- Goal: {goal}\n"
+#         f"- Maximum words: {max_words}\n"
+#         f"- Tone: {tone}\n"
+#         f"- Style: {style}\n"
+#         f"- Must include: {json.dumps(must_include, ensure_ascii=False)}\n"
+#         f"- Must avoid: {json.dumps(must_avoid, ensure_ascii=False)}\n\n"
+
+#         f"Evaluate strictly based only on the source article and the listed constraints.\n\n"
+
+#         f"Scoring rules:\n"
+#         f"- Use score 2 when the criterion is fully satisfied.\n"
+#         f"- Use score 1 when the criterion is partially satisfied.\n"
+#         f"- Use score 0 when the criterion is not satisfied.\n"
+#         f"- Use satisfied=true only when score is 2.\n"
+#         f"- Use satisfied=false when score is 0 or 1.\n\n"
+
+#         f"Counting rules:\n"
+#         f"- Evaluate EACH must_include item separately.\n"
+#         f"- Evaluate EACH must_avoid item separately.\n"
+#         f"- must_include_items must contain exactly one object per must_include item.\n"
+#         f"- must_avoid_items must contain exactly one object per must_avoid item.\n"
+#         f"- must_include_satisfied_count must equal the number of must_include_items "
+#         f"where satisfied is true.\n"
+#         f"- must_avoid_satisfied_count must equal the number of must_avoid_items "
+#         f"where satisfied is true.\n"
+#         f"- total_score must be the sum of all general dimension scores plus all "
+#         f"must_include item scores plus all must_avoid item scores.\n"
+#         f"- max_possible_score must be {max_possible_score}.\n"
+#         f"- constraint_completion_ratio must be total_score divided by max_possible_score.\n"
+#         f"- overall_pass must be true only if every general dimension is satisfied "
+#         f"and every must_include and must_avoid item is satisfied.\n\n"
+
+#         f"General dimensions to evaluate:\n"
+#         f"1. goal: Does the answer satisfy the summary goal?\n"
+#         f"2. faithfulness: Are all claims supported by the source article?\n"
+#         f"3. coverage: Does it include the main event, key people or organizations, "
+#         f"and main outcome?\n"
+#         f"4. tone: Does it follow the requested tone?\n"
+#         f"5. style: Does it follow the requested style while remaining factual?\n"
+#         f"6. length: Is it under {max_words} words?\n"
+#         f"7. entities: Are names, numbers, places, and dates accurate?\n\n"
+
+#         f"Return ONLY valid JSON. Do not wrap it in markdown. "
+#         f"Do not include any explanation outside the JSON.\n"
+#         f"The schema below contains placeholders. Replace every placeholder with "
+#         f"your actual evaluation values.\n\n"
+
+#         f"JSON schema to follow:\n"
+#         f"{{\n"
+#         f'  "goal": {{"score": <0_or_1_or_2>, "satisfied": <true_or_false>, "issue": "<brief issue or empty string>"}},\n'
+#         f'  "faithfulness": {{"score": <0_or_1_or_2>, "satisfied": <true_or_false>, "issue": "<brief issue or empty string>"}},\n'
+#         f'  "coverage": {{"score": <0_or_1_or_2>, "satisfied": <true_or_false>, "issue": "<brief issue or empty string>"}},\n'
+#         f'  "tone": {{"score": <0_or_1_or_2>, "satisfied": <true_or_false>, "issue": "<brief issue or empty string>"}},\n'
+#         f'  "style": {{"score": <0_or_1_or_2>, "satisfied": <true_or_false>, "issue": "<brief issue or empty string>"}},\n'
+#         f'  "length": {{"score": <0_or_1_or_2>, "satisfied": <true_or_false>, "word_count": <integer>, "issue": "<brief issue or empty string>"}},\n'
+#         f'  "entities": {{"score": <0_or_1_or_2>, "satisfied": <true_or_false>, "issue": "<brief issue or empty string>"}},\n'
+#         f'  "must_include_items": [\n'
+#         f'    {{"item": "<must_include item>", "score": <0_or_1_or_2>, "satisfied": <true_or_false>, "evidence": "<short evidence or empty string>", "issue": "<brief issue or empty string>"}}\n'
+#         f'  ],\n'
+#         f'  "must_include_satisfied_count": <integer>,\n'
+#         f'  "must_include_total": {len(must_include)},\n'
+#         f'  "must_avoid_items": [\n'
+#         f'    {{"item": "<must_avoid item>", "score": <0_or_1_or_2>, "satisfied": <true_or_false>, "evidence": "<short evidence or empty string>", "issue": "<brief issue or empty string>"}}\n'
+#         f'  ],\n'
+#         f'  "must_avoid_satisfied_count": <integer>,\n'
+#         f'  "must_avoid_total": {len(must_avoid)},\n'
+#         f'  "total_score": <integer>,\n'
+#         f'  "max_possible_score": {max_possible_score},\n'
+#         f'  "constraint_completion_ratio": <number_between_0_and_1>,\n'
+#         f'  "overall_pass": <true_or_false>,\n'
+#         f'  "brief_reason": "<one short sentence>"\n'
+#         f"}}\n\n"
+
+#         f"The must_include_items array must contain exactly these items, in this order:\n"
+#         f"{json.dumps(must_include, ensure_ascii=False)}\n\n"
+
+#         f"The must_avoid_items array must contain exactly these items, in this order:\n"
+#         f"{json.dumps(must_avoid, ensure_ascii=False)}"
+#     )
+
 def build_constraint_evaluation_prompt(
     task: Dict[str, Any],
     candidate_answer: str,
@@ -290,15 +399,24 @@ def build_constraint_evaluation_prompt(
     must_include = constraints.get("must_include", [])
     must_avoid = constraints.get("must_avoid", [])
 
-    num_general_dimensions = 7
+    general_dimensions = [
+        "goal",
+        "faithfulness",
+        "coverage",
+        "tone",
+        "style",
+        "length",
+        "entities",
+    ]
+
     max_possible_score = 2 * (
-        num_general_dimensions + len(must_include) + len(must_avoid)
+        len(general_dimensions) + len(must_include) + len(must_avoid)
     )
 
     return (
         f"You are an independent evaluator of a constrained news summary.\n"
-        f"Your job is to judge whether the candidate summary satisfies the task "
-        f"and constraints. Do not rewrite the summary.\n\n"
+        f"Evaluate whether the candidate summary satisfies the source article "
+        f"and the task constraints. Do not rewrite the summary.\n\n"
 
         f"Source article:\n{text}\n\n"
         f"Candidate summary:\n{candidate_answer}\n\n"
@@ -311,75 +429,73 @@ def build_constraint_evaluation_prompt(
         f"- Must include: {json.dumps(must_include, ensure_ascii=False)}\n"
         f"- Must avoid: {json.dumps(must_avoid, ensure_ascii=False)}\n\n"
 
-        f"Evaluate strictly based only on the source article and the listed constraints.\n\n"
+        f"Scoring:\n"
+        f"- 2 = fully satisfied\n"
+        f"- 1 = partially satisfied\n"
+        f"- 0 = not satisfied\n"
+        f"- satisfied must be true only when score is 2.\n"
+        f"- satisfied must be false when score is 0 or 1.\n\n"
 
-        f"Scoring rules:\n"
-        f"- Use score 2 when the criterion is fully satisfied.\n"
-        f"- Use score 1 when the criterion is partially satisfied.\n"
-        f"- Use score 0 when the criterion is not satisfied.\n"
-        f"- Use satisfied=true only when score is 2.\n"
-        f"- Use satisfied=false when score is 0 or 1.\n\n"
+        f"Evaluate these general dimensions:\n"
+        f"- goal: Does the answer satisfy the task goal?\n"
+        f"- faithfulness: Are all claims supported by the source article?\n"
+        f"- coverage: Does it include the main event, key people/organizations, "
+        f"and main outcome?\n"
+        f"- tone: Does it follow the requested tone?\n"
+        f"- style: Does it follow the requested style while staying factual?\n"
+        f"- length: Is it under {max_words} words?\n"
+        f"- entities: Are names, numbers, places, and dates accurate?\n\n"
 
         f"Counting rules:\n"
-        f"- Evaluate EACH must_include item separately.\n"
-        f"- Evaluate EACH must_avoid item separately.\n"
-        f"- must_include_items must contain exactly one object per must_include item.\n"
-        f"- must_avoid_items must contain exactly one object per must_avoid item.\n"
-        f"- must_include_satisfied_count must equal the number of must_include_items "
-        f"where satisfied is true.\n"
-        f"- must_avoid_satisfied_count must equal the number of must_avoid_items "
-        f"where satisfied is true.\n"
-        f"- total_score must be the sum of all general dimension scores plus all "
-        f"must_include item scores plus all must_avoid item scores.\n"
+        f"- Evaluate each must_include item separately.\n"
+        f"- Evaluate each must_avoid item separately.\n"
+        f"- must_include_items must contain exactly {len(must_include)} items.\n"
+        f"- must_avoid_items must contain exactly {len(must_avoid)} items.\n"
+        f"- must_include_satisfied_count is the number of must_include items "
+        f"with satisfied=true.\n"
+        f"- must_avoid_satisfied_count is the number of must_avoid items "
+        f"with satisfied=true.\n"
+        f"- total_score is the sum of all general dimension scores, "
+        f"all must_include item scores, and all must_avoid item scores.\n"
         f"- max_possible_score must be {max_possible_score}.\n"
-        f"- constraint_completion_ratio must be total_score divided by max_possible_score.\n"
-        f"- overall_pass must be true only if every general dimension is satisfied "
-        f"and every must_include and must_avoid item is satisfied.\n\n"
+        f"- constraint_completion_ratio = total_score / max_possible_score.\n"
+        f"- overall_pass is true only if every general dimension and every "
+        f"must_include/must_avoid item has satisfied=true.\n\n"
 
-        f"General dimensions to evaluate:\n"
-        f"1. goal: Does the answer satisfy the summary goal?\n"
-        f"2. faithfulness: Are all claims supported by the source article?\n"
-        f"3. coverage: Does it include the main event, key people or organizations, "
-        f"and main outcome?\n"
-        f"4. tone: Does it follow the requested tone?\n"
-        f"5. style: Does it follow the requested style while remaining factual?\n"
-        f"6. length: Is it under {max_words} words?\n"
-        f"7. entities: Are names, numbers, places, and dates accurate?\n\n"
+        f"Return ONLY valid compact JSON. Do not use markdown. "
+        f"Do not include explanations outside the JSON.\n\n"
 
-        f"Return ONLY valid JSON. Do not wrap it in markdown. "
-        f"Do not include any explanation outside the JSON.\n"
-        f"The schema below contains placeholders. Replace every placeholder with "
-        f"your actual evaluation values.\n\n"
-
-        f"JSON schema to follow:\n"
+        f"Required JSON structure:\n"
         f"{{\n"
-        f'  "goal": {{"score": <0_or_1_or_2>, "satisfied": <true_or_false>, "issue": "<brief issue or empty string>"}},\n'
-        f'  "faithfulness": {{"score": <0_or_1_or_2>, "satisfied": <true_or_false>, "issue": "<brief issue or empty string>"}},\n'
-        f'  "coverage": {{"score": <0_or_1_or_2>, "satisfied": <true_or_false>, "issue": "<brief issue or empty string>"}},\n'
-        f'  "tone": {{"score": <0_or_1_or_2>, "satisfied": <true_or_false>, "issue": "<brief issue or empty string>"}},\n'
-        f'  "style": {{"score": <0_or_1_or_2>, "satisfied": <true_or_false>, "issue": "<brief issue or empty string>"}},\n'
-        f'  "length": {{"score": <0_or_1_or_2>, "satisfied": <true_or_false>, "word_count": <integer>, "issue": "<brief issue or empty string>"}},\n'
-        f'  "entities": {{"score": <0_or_1_or_2>, "satisfied": <true_or_false>, "issue": "<brief issue or empty string>"}},\n'
+        f'  "goal": {{"score": 0, "satisfied": false}},\n'
+        f'  "faithfulness": {{"score": 0, "satisfied": false}},\n'
+        f'  "coverage": {{"score": 0, "satisfied": false}},\n'
+        f'  "tone": {{"score": 0, "satisfied": false}},\n'
+        f'  "style": {{"score": 0, "satisfied": false}},\n'
+        f'  "length": {{"score": 0, "satisfied": false, "word_count": 0}},\n'
+        f'  "entities": {{"score": 0, "satisfied": false}},\n'
         f'  "must_include_items": [\n'
-        f'    {{"item": "<must_include item>", "score": <0_or_1_or_2>, "satisfied": <true_or_false>, "evidence": "<short evidence or empty string>", "issue": "<brief issue or empty string>"}}\n'
+        f'    {{"item": "main event", "score": 0, "satisfied": false}}\n'
         f'  ],\n'
-        f'  "must_include_satisfied_count": <integer>,\n'
+        f'  "must_include_satisfied_count": 0,\n'
         f'  "must_include_total": {len(must_include)},\n'
         f'  "must_avoid_items": [\n'
-        f'    {{"item": "<must_avoid item>", "score": <0_or_1_or_2>, "satisfied": <true_or_false>, "evidence": "<short evidence or empty string>", "issue": "<brief issue or empty string>"}}\n'
+        f'    {{"item": "unsupported claims", "score": 0, "satisfied": false}}\n'
         f'  ],\n'
-        f'  "must_avoid_satisfied_count": <integer>,\n'
+        f'  "must_avoid_satisfied_count": 0,\n'
         f'  "must_avoid_total": {len(must_avoid)},\n'
-        f'  "total_score": <integer>,\n'
+        f'  "total_score": 0,\n'
         f'  "max_possible_score": {max_possible_score},\n'
-        f'  "constraint_completion_ratio": <number_between_0_and_1>,\n'
-        f'  "overall_pass": <true_or_false>,\n'
-        f'  "brief_reason": "<one short sentence>"\n'
+        f'  "constraint_completion_ratio": 0.0,\n'
+        f'  "overall_pass": false\n'
         f"}}\n\n"
 
-        f"The must_include_items array must contain exactly these items, in this order:\n"
+        f"Important: The JSON above is only the required structure. "
+        f"Replace all scores, satisfied values, counts, and ratios with your actual evaluation.\n\n"
+
+        f"The must_include_items array must use exactly these item names, in this order:\n"
         f"{json.dumps(must_include, ensure_ascii=False)}\n\n"
 
-        f"The must_avoid_items array must contain exactly these items, in this order:\n"
+        f"The must_avoid_items array must use exactly these item names, in this order:\n"
         f"{json.dumps(must_avoid, ensure_ascii=False)}"
     )
