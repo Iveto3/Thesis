@@ -264,15 +264,15 @@ def main() -> None:
 
     experiments = [
         {
-            "input_file": "summarization_dataset_input.json",
+            "input_file": "input/summarization_dataset_input.json",
             "output_file": "summarization_results.json",
         },
         {
-            "input_file": "constrained_summary_input.json",
+            "input_file": "input/constrained_summary_input.json",
             "output_file": "constrained_summary_results.json",
         },
         {
-            "input_file": "code_optimization_input.json",
+            "input_file": "input/code_optimization_input.json",
             "output_file": "code_optimization_results.json",
         },
     ]
