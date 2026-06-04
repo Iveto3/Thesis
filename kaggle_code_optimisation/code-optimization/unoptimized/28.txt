@@ -1,0 +1,10 @@
+private String authRedirectUri(String redirectUri, String code) throws UnsupportedEncodingException {
+    StringBuilder sbf = new StringBuilder(redirectUri);
+    if (redirectUri.indexOf("?") > -1) {
+        sbf.append("&");
+    } else {
+        sbf.append("?");
+    }
+    sbf.append(Oauth2Constant.AUTH_CODE).append("=").append(code);
+    return URLDecoder.decode(sbf.toString(), "utf-8");
+}

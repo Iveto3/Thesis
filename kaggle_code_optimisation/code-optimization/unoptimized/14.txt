@@ -1,0 +1,58 @@
+const changePasswordHandler = (e) => {
+  e.preventDefault();
+  setLoading(true);
+  setError({
+    status: false,
+    body: ""
+  });
+  setSuccess(false);
+
+  setLoading(true);
+
+  if (newPass == pass2) {
+    var myHeaders = new Headers();
+    myHeaders.append("Authorization", "Token " + authCtx.token);
+    myHeaders.append("Content-Type", "application/json");
+
+    var raw = JSON.stringify({
+      "new_password": newPass,
+      "old_password": oldPass
+    });
+
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: raw,
+      redirect: 'follow'
+    };
+
+    fetch(`${URL}/api/users/reset_password/`, requestOptions)
+      .then(response => {
+        setLoading(false);
+
+        if (response.status == 200)
+          setSuccess(true);
+        else
+          setSuccess(false);
+
+        return response.json();
+      })
+      .then(result => {
+        console.log(result);
+
+        let firstkey = Object.keys(result)[0];
+
+        setError({
+          status: true,
+          body: result[firstkey]
+        });
+      })
+      .catch(error => console.log('error', error));
+  } else {
+    setLoading(false);
+    setError({
+      status: true,
+      body: "The passwords dont match!"
+    });
+  }
+};

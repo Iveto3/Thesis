@@ -1,0 +1,18 @@
+class ToDoCategoryView(APIView):
+    def delete(self, request):
+        try:
+            category = ToDoCategory.objects.get(
+                author=request.user, id=request.data["cat_id"]
+            )
+            if category is not None:
+                # delete all items of category
+                items = ToDoItem.objects.filter(category=category)
+                items.delete()
+                # delete category
+                category.delete()
+                print("here")
+                return Response({"message": "Successfully Deleted"})
+            else:
+                return Response({"message": "Category not found"}, status=404)
+        except:
+            return Response({"message": "Error"})

@@ -1,0 +1,3 @@
+private List<String> languages(Product product) {
+    return product.getDescriptions().stream().map(d -> d.getLanguage().getCode()).collect(Collectors.toList());
+}

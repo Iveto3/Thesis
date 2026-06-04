@@ -1,0 +1,60 @@
+private void setupPopover(PopOver pop, JFXBadge targetBadge, String messageText, String countText) {
+    Separator top = new Separator();
+    Separator bottom = new Separator();
+
+    Label message = new Label(messageText);
+    Label count = new Label(countText);
+    count.getStyleClass().add("text-success");
+    GridPane title = new GridPane();
+    title.setMinHeight(40D);
+
+    title.setAlignment(Pos.CENTER);
+    title.add(message, 0, 0);
+    title.add(count, 1, 0);
+    GridPane.setHalignment(count, HPos.RIGHT);
+
+    ListView<Node> listView = new ListView<>();
+    listView.getStyleClass().add("border-0");
+
+    Button btn = new Button("Read all messages");
+    btn.getStyleClass().add("btn-flat");
+
+    VBox root = new VBox(title, top, listView, bottom, btn);
+    root.setAlignment(Pos.CENTER);
+    root.setPrefSize(300, 300);
+    title.setPrefWidth(root.getPrefWidth());
+    count.setPrefWidth(root.getPrefWidth());
+    message.setPrefWidth(root.getPrefWidth());
+    count.setAlignment(Pos.CENTER_RIGHT);
+    title.setPadding(new Insets(0, 25, 0, 25));
+    btn.setPrefWidth(root.getPrefWidth());
+
+    pop.getRoot().getStylesheets().add(getClass().getResource("/styles/theme/poplight.css").toExternalForm());
+    pop.setContentNode(root);
+    pop.setArrowLocation(PopOver.ArrowLocation.TOP_RIGHT);
+    pop.setArrowIndent(0);
+    pop.setArrowSize(0);
+    pop.setCloseButtonEnabled(false);
+    pop.setHeaderAlwaysVisible(false);
+    pop.setCornerRadius(0);
+    pop.setAutoFix(true);
+    pop.show(targetBadge);
+}
+
+@FXML
+private void openMessages() {
+    if (!pop.isShowing()) {
+        setupPopover(pop, messages, "Messages", "4 News");
+    } else {
+        pop.hide();
+    }
+}
+
+@FXML
+private void openNotification() {
+    if (!pop.isShowing()) {
+        setupPopover(pop, notifications, "Messages", "4 News");
+    } else {
+        pop.hide();
+    }
+}

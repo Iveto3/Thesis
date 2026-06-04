@@ -1,0 +1,47 @@
+public class SplashScreen {
+
+    private static final String DEFAULT_IMAGE = "/splash/javafx.png";
+    private final String imagePath;
+
+    public SplashScreen() {
+        this(DEFAULT_IMAGE);
+    }
+
+    public SplashScreen(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
+    /**
+     * Override this to create your own splash pane parent node.
+     *
+     * @return A standard image
+     */
+    public Parent getParent() {
+        ImageView imageView = new ImageView(getClass().getResource(getImagePath()).toExternalForm());
+        ProgressBar splashProgressBar = new ProgressBar();
+        splashProgressBar.setPrefWidth(imageView.getImage().getWidth());
+
+        VBox vbox = new VBox();
+        vbox.getChildren().addAll(imageView, splashProgressBar);
+
+        return vbox;
+    }
+
+    /**
+     * Customize if the splash screen should be visible at all.
+     *
+     * @return true by default
+     */
+    public boolean visible() {
+        return true;
+    }
+
+    /**
+     * Use your own splash image instead of the default one.
+     *
+     * @return the image path
+     */
+    public String getImagePath() {
+        return imagePath;
+    }
+}

@@ -1,0 +1,8 @@
+public Result isRePasswordCheck(String password) {
+    Employer employer = this.employerDao.findByPassword(password);
+    if (employer != null && employer.getRePassword().equals(password)) {
+        return new SuccessResult();
+    } else {
+        return new ErrorResult("This password has been used is before");
+    }
+}

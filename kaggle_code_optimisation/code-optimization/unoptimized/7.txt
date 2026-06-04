@@ -1,0 +1,10 @@
+public Product getProduct(int id) {
+    Optional<Product> optional = this.productRepository.findById(id);
+    if (optional.isPresent()) {
+        Product product = optional.get();
+        if (product != null) {
+            return product;
+        }
+    }
+    return null;
+}

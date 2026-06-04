@@ -1,0 +1,14 @@
+@PostMapping("/product/search")
+public String seachHandler(@RequestParam("productName") String name, Model model) {
+    Product product = this.productServices.getProductByName(name);
+    List<Orders> orders = this.orderServices.getOrdersForUser(user);
+    if (product == null) {
+        model.addAttribute("message", "SORRY...!  Product Unavailable");
+        model.addAttribute("product", product);
+        model.addAttribute("orders", orders);
+        return "BuyProduct";
+    }
+    model.addAttribute("orders", orders);
+    model.addAttribute("product", product);
+    return "BuyProduct";
+}

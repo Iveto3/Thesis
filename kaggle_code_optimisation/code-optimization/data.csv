@@ -1,0 +1,29 @@
+﻿Unoptimized code ,Optimized code ,Time complexity (unoptimized),Time complexity (optimized),Language ,Description
+unoptimized\1.txt,optimized\1.txt,O(1),O(1),python,Combined conditions to streamline logic.
+unoptimized\2.txt,optimized\2.txt,O(n),O(1),java,Used @PostMapping and returned the created entity instead of fetching all records.
+unoptimized\3.txt,optimized\3.txt,O(n),O(n),java,Extracted the repeated logic for initializing themes and updating stylesheets into separate methods.
+unoptimized\4.txt,optimized\4.txt,O(1),O(1),java,Created a helper method setupPopover to avoid code duplication in the openMessages and openNotification methods.
+unoptimized\5.txt,optimized\5.txt,O(1),O(1),java,Introduced a helper method initMocks to avoid redundant setup of mock behavior in each test.
+unoptimized\6.txt,optimized\6.txt,O(n),O(n),java,Removed unnecessary operations and redundant checks.
+unoptimized\7.txt,optimized\7.txt,O(1),O(1),java,Removed unnecessary operations and redundant checks.
+unoptimized\8.txt,optimized\8.txt,O(n),O(1),java,Improved the validateLoginCredentials method by using a direct repository query to validate login credentials
+unoptimized\9.txt,optimized\9.txt,O(n),O(n),java,Reduced redundant database call by ensuring orderServices.getOrdersForUser(user) is called only once.
+unoptimized\10.txt,optimized\10.txt,O(n),O(1),java,Reduced unnecessary database retrieval by directly comparing the password and checking for null values first.
+unoptimized\11.txt,optimized\11.txt,O(n),O(n),python,Reduced redundant HTTP requests by calling getImages() only once.
+unoptimized\12.txt,optimized\12.txt,O(n^2),O(n),python,"Reduced the complexity by fetching the images once and then choosing a new avatar from the filtered list, avoiding the need for repeated calls to selectImage()."
+unoptimized\13.txt,optimized\13.txt,O(1),O(1),js,"Simplified the if-else logic to a single line for setting isError, improving readability and reducing redundant code."
+unoptimized\14.txt,optimized\14.txt,O(n),O(1),js,"Removed redundant setLoading(true) and consolidated if-else blocks for setting success state, improving readability and reducing redundant code."
+unoptimized\15.txt,optimized\15.txt,O(n),O(n),python,Simplified the deletion logic by directly handling exceptions and removing unnecessary null checks.
+unoptimized\16.txt,optimized\16.txt,O(n),O(n),python,Simplified nested try-except blocks and removed redundant error handling to improve readability and maintainability.
+unoptimized\17.txt,optimized\17.txt,O(n),O(n),python,"Simplified error handling and removed redundant if-else blocks, improving readability and reducing redundant code."
+unoptimized\18.txt,optimized\18.txt,O(n),O(n),java,"Optimized the method by using a stream to directly convert the set of entities to an array, reducing the need for an intermediate list and improving readability."
+unoptimized\19.txt,optimized\19.txt,O(n),O(n),java,"Optimized the method by using a stream to directly convert the set of entities to an array, reducing the need for an intermediate list and improving readability."
+unoptimized\20.txt,optimized\20.txt,O(1),O(1),java,"Removed the unnecessary delay to restore the optimized version, ensuring the FXMLLoader is initialized efficiently."
+unoptimized\21.txt,optimized\21.txt,O(n),O(n),java,"Optimized by using try-with-resources to ensure the InputStream is closed automatically, improving readability and resource management."
+unoptimized\22.txt,optimized\22.txt,O(1),O(1),java,Added constructors to allow customization of the splash screen image and made DEFAULT_IMAGE a constant for better readability and flexibility.
+unoptimized\23.txt,optimized\23.txt,O(n^2),O(n),java,The optimized version uses a stream to collect language codes directly from the product descriptions.
+unoptimized\24.txt,optimized\24.txt,O(n^2),O(n),java,The optimized version eliminates the unnecessary nested loops and directly adds the variant codes to the map.
+unoptimized\25.txt,optimized\25.txt,O(n),O(n),java,"Optimized code multiplies the price by the quantity directly, reducing the number of operations significantly."
+unoptimized\26.txt,optimized\26.txt,O(n^2),O(n),java,The optimized version uses a single loop with a set containment check.
+unoptimized\27.txt,optimized\27.txt,O(n^2),O(n),java,The optimized version simplifies this to O(n) by using a single loop and a map to efficiently check for duplicates and update quantities.
+unoptimized\28.txt,optimized\28.txt,O(n),O(n),java,Optimized version retains a clear and concise check for the ? character and constructs the string efficiently using a StringBuilder.

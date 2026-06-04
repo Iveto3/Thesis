@@ -1,0 +1,52 @@
+public void changeTheme(boolean dark) {
+    stageManager = SpringUtils.getBean(StageManager.class);
+    String theme = dark ? "dark.css" : "light.css";
+    initTheme(dark);
+    updateStylesheets(theme);
+}
+
+public void invertTheme(boolean dark) {
+    stageManager = SpringUtils.getBean(StageManager.class);
+    String theme = dark ? "dark.css" : "light.css";
+    btn_theme.setText(dark ? "Theme dark : activated" : "Theme dark : deactivated");
+    invert = dark;
+    initTheme(dark);
+    updateStylesheets(theme);
+
+    MainController.popConfig.hide();
+
+    Platform.runLater(() -> {
+        // Force pop's transition
+        MainController.popup.getRoot().getStylesheets().remove(MainController.popup.getRoot().getStylesheets().size() - 1);
+        MainController.popConfig.getRoot().getStylesheets().remove(MainController.popConfig.getRoot().getStylesheets().size() - 1);
+
+        MainController.popup.getRoot().getStylesheets().add("/styles/theme/pop" + theme);
+        MainController.popConfig.getRoot().getStylesheets().add("/styles/theme/pop" + theme);
+    });
+}
+
+private void initTheme(boolean dark) {
+    if (dark) {
+        stageManager.getDecorator().initTheme(GNDecorator.Theme.DARKULA);
+    } else {
+        stageManager.getDecorator().initTheme(GNDecorator.Theme.DEFAULT);
+    }
+}
+
+private void updateStylesheets(String theme) {
+    String path = "/styles/theme/";
+    ObservableList<String> stylesheets = stageManager.getDecorator().getStage().getScene().getStylesheets();
+    stylesheets.clear();
+    stylesheets.addAll(
+        getClass().getResource(path + "fonts.css").toExternalForm(),
+        getClass().getResource(path + "material-color.css").toExternalForm(),
+        getClass().getResource(path + "skeleton.css").toExternalForm(),
+        getClass().getResource(path + theme).toExternalForm(),
+        getClass().getResource(path + "bootstrap.css").toExternalForm(),
+        getClass().getResource(path + "simple-green.css").toExternalForm(),
+        getClass().getResource(path + "shape.css").toExternalForm(),
+        getClass().getResource(path + "typographic.css").toExternalForm(),
+        getClass().getResource(path + "helpers.css").toExternalForm(),
+        getClass().getResource(path + "master.css").toExternalForm()
+    );
+}

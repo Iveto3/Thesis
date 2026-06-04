@@ -1,0 +1,13 @@
+private void exposeIds(RepositoryRestConfiguration config){
+    //expose entity ids
+
+    //get a list of all entity classes from the entity manager
+    Set<EntityType<?>> entities = entityManager.getMetamodel().getEntities();
+
+    //expose the entity ids for the array of entity/domain types
+    config.exposeIdsFor(
+        entities.stream()
+                .map(EntityType::getJavaType)
+                .toArray(Class[]::new)
+    );
+}

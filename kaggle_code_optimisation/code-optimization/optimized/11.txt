@@ -1,0 +1,7 @@
+def selectImage():
+    images = getImages()
+    if len(images) > 0:
+        choice = random.choice(images)
+        print(choice)
+        return choice
+    return 0

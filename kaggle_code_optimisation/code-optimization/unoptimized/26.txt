@@ -1,0 +1,20 @@
+@Override
+public List<IntegrationModule> getShippingMethods(MerchantStore store) throws ServiceException {
+    List<IntegrationModule> modules = moduleConfigurationService.getIntegrationModules(SHIPPING_MODULES);
+    List<IntegrationModule> returnModules = new ArrayList<>();
+
+    for (IntegrationModule module : modules) {
+        boolean supported = false;
+        for (String region : module.getRegionsSet()) {
+            if (region.equals(store.getCountry().getIsoCode()) || region.equals("*")) {
+                supported = true;
+                break;
+            }
+        }
+        if (supported) {
+            returnModules.add(module);
+        }
+    }
+
+    return returnModules;
+}

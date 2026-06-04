@@ -1,0 +1,22 @@
+private Map<String, String> variants(ProductVariant variant) {
+    if (variant == null) return null;
+
+    Map<String, String> variantMap = new HashMap<>();
+    if (variant.getVariation() != null) {
+        String variantCode = variant.getVariation().getProductOption().getCode();
+        String variantValueCode = variant.getVariation().getProductOptionValue().getCode();
+        variantMap.put(variantCode, variantValueCode);
+    }
+
+    if (variant.getVariationValue() != null) {
+        String variantCode = variant.getVariationValue().getProductOption().getCode();
+        String variantValueCode = variant.getVariationValue().getProductOptionValue().getCode();
+        variantMap.put(variantCode, variantValueCode);
+    }
+
+    if (!StringUtils.isBlank(variant.getSku())) {
+        variantMap.put(VSKU, variant.getSku());
+    }
+
+    return variantMap;
+}

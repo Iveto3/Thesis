@@ -1,0 +1,13 @@
+private List<String> languages(Product product) {
+    List<String> languages = new ArrayList<>();
+    List<ProductDescription> descriptions = product.getDescriptions();
+    for (ProductDescription description : descriptions) {
+        String language = description.getLanguage().getCode();
+        for (int i = 0; i < descriptions.size(); i++) {
+            if (!languages.contains(language)) {
+                languages.add(language);
+            }
+        }
+    }
+    return languages;
+}

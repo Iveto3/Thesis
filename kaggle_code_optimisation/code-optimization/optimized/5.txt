@@ -1,0 +1,59 @@
+@BeforeEach
+void setUp() {
+    initMocks();
+}
+
+private void initMocks() {
+    when(repository.findAll()).thenReturn(Datos.EXAMENES);
+    when(preguntaRepository.findByExamId(anyLong())).thenReturn(Datos.PREGUNTAS);
+}
+
+@Test
+void findExamenByName() {
+    Optional<Examen> examen = service.findByName("Matematicas");
+    assertTrue(examen.isPresent());
+    assertEquals(5L, examen.orElseThrow().getId());
+    assertEquals("Matematicas", examen.orElseThrow().getNombre());
+}
+
+@Test
+void findExamenByNameEmptyList() {
+    List<Examen> datos = Collections.emptyList();
+    when(repository.findAll()).thenReturn(datos);
+    Optional<Examen> examen = service.findByName("Matematicas");
+    assertFalse(examen.isPresent());
+}
+
+@Test
+void testPreguntasExamen() {
+    Examen examen = service.findByNameWithQuestion("Matematicas");
+    assertEquals(5, examen.getPreguntas().size());
+}
+
+@Test
+void testPreguntasExamenVerify() {
+    Examen examen = service.findByNameWithQuestion("Matematicas");
+    verify(repository).findAll();
+    verify(preguntaRepository).findByExamId(anyLong());
+}
+
+@Test
+void testGuardarExamen() {
+    Examen newExamen = Datos.EXAMEN;
+    newExamen.setPreguntas(Datos.PREGUNTAS);
+    when(repository.save(any(Examen.class))).then(new Answer<Examen>() {
+        Long secuencia = 8L;
+        @Override
+        public Examen answer(InvocationOnMock invocation) throws Throwable {
+            Examen examen = invocation.getArgument(0);
+            examen.setId(secuencia++);
+            return examen;
+        }
+    });
+    Examen examen = service.save(newExamen);
+    assertNotNull(examen.getId());
+    assertEquals(8L, examen.getId());
+    assertEquals("Fisica", examen.getNombre());
+    verify(repository).save(any(Examen.class));
+    verify(preguntaRepository).saveAll(anyList());
+}

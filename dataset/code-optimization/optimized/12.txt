@@ -1,0 +1,14 @@
+class AvatarChange(APIView):
+    permission_classes = (IsAuthenticated,)
+
+    def put(self, request):
+        email = request.user.email
+        user = models.User.objects.get(email=email)
+        prev_image = user.avatar
+        new_avatar = selectImage()
+        while new_avatar == prev_image:
+            new_avatar = selectImage()
+
+        user.avatar = new_avatar
+        user.save()
+        return Response({"detail": "avatar changed", "new_avatar": new_avatar})

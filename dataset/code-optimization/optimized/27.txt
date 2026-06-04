@@ -1,0 +1,35 @@
+@Override
+public ShoppingCart mergeShoppingCarts(final ShoppingCart userShoppingModel, final ShoppingCart sessionCart,
+        final MerchantStore store) throws Exception {
+    if (sessionCart.getCustomerId() != null
+            && sessionCart.getCustomerId().equals(userShoppingModel.getCustomerId())) {
+        LOGGER.info("Session Shopping cart belongs to same logged in user");
+        if (CollectionUtils.isNotEmpty(userShoppingModel.getLineItems())
+                && CollectionUtils.isNotEmpty(sessionCart.getLineItems())) {
+            return userShoppingModel;
+        }
+    }
+
+    LOGGER.info("Starting merging shopping carts");
+    if (CollectionUtils.isNotEmpty(sessionCart.getLineItems())) {
+        Set<ShoppingCartItem> shoppingCartItemsSet = getShoppingCartItems(sessionCart, store, userShoppingModel);
+        Map<Long, ShoppingCartItem> userCartItemMap = userShoppingModel.getLineItems().stream()
+                .collect(Collectors.toMap(item -> item.getProduct().getId(), item -> item));
+
+        for (ShoppingCartItem sessionShoppingCartItem : shoppingCartItemsSet) {
+            ShoppingCartItem userCartItem = userCartItemMap.get(sessionShoppingCartItem.getProduct().getId());
+            if (userCartItem != null) {
+                LOGGER.info("Duplicate item found..updating existing product quantity");
+                userCartItem.setQuantity(userCartItem.getQuantity() + sessionShoppingCartItem.getQuantity());
+            } else {
+                LOGGER.info("New item found..adding item to Shopping cart");
+                userShoppingModel.getLineItems().add(sessionShoppingCartItem);
+            }
+        }
+    }
+    LOGGER.info("Shopping Cart merged successfully.....");
+    saveOrUpdate(userShoppingModel);
+    removeShoppingCart(sessionCart);
+
+    return userShoppingModel;
+}

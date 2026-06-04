@@ -1,0 +1,9 @@
+public void ensureFxmlLoaderInitialized() {
+
+    if (fxmlLoader != null) {
+        return;
+    }
+
+    fxmlLoader = loadSynchronously(resource, bundle);
+    presenterProperty.set(fxmlLoader.getController());
+}

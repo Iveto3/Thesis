@@ -1,0 +1,60 @@
+// UserServices.java
+@Component
+public class UserServices {
+    @Autowired
+    private UserRepository userRepository;
+
+    // Get All Users
+    public List<User> getAllUser() {
+        List<User> users = (List<User>) this.userRepository.findAll();
+        return users;
+    }
+
+    // Get Single User
+    public User getUser(int id) {
+        Optional<User> optional = this.userRepository.findById(id);
+        User user = optional.get();
+        return user;
+    }
+
+    // Get Single User By Email
+    public User getUserByEmail(String email) {
+        User user = this.userRepository.findUserByUemail(email);
+        return user;
+    }
+
+    // Update
+    public void updateUser(User user, int id) {
+        user.setU_id(id);
+        this.userRepository.save(user);
+    }
+
+    // Delete Single User
+    public void deleteUser(int id) {
+        this.userRepository.deleteById(id);
+    }
+
+    // Add User
+    public void addUser(User user) {
+        this.userRepository.save(user);
+    }
+
+    // Validate Login Credentials
+    public boolean validateLoginCredentials(String email, String password) {
+        List<User> users = (List<User>) this.userRepository.findAll();
+        for (User u : users) {
+            if (u != null && u.getUpassword().equals(password) && u.getUemail().equals(email)) {
+                return true;
+            }
+        }
+        return false;
+    }
+}
+
+// UserRepository.java
+import org.springframework.data.jpa.repository.JpaRepository;
+import com.business.entities.User;
+
+public interface UserRepository extends JpaRepository<User, Integer> {
+    User findUserByUemail(String email);
+}

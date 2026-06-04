@@ -1,0 +1,8 @@
+public List<Product> getAllProducts() {
+    List<Product> products = (List<Product>) this.productRepository.findAll();
+    List<Product> productsList = new ArrayList<>();
+    for (Product product : products) {
+        productsList.add(product);
+    }
+    return productsList;
+}

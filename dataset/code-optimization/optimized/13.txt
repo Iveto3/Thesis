@@ -1,0 +1,16 @@
+useEffect(() => {
+  var requestOptions = {
+    method: 'GET',
+    redirect: 'follow'
+  };
+
+  fetch(`${URL}/`, requestOptions)
+    .then(response => {
+      setIsError(response.status !== 404);
+      console.log(response);
+    })
+    .catch(error => {
+      console.log(!!error);
+      setIsError(!!error);
+    });
+}, []);

@@ -1,0 +1,15 @@
+public void ensureFxmlLoaderInitialized() {
+
+    if (fxmlLoader != null) {
+        return;
+    }
+
+    try {
+        Thread.sleep(100);
+    } catch (InterruptedException e) {
+        Thread.currentThread().interrupt();
+    }
+
+    fxmlLoader = loadSynchronously(resource, bundle);
+    presenterProperty.set(fxmlLoader.getController());
+}

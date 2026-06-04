@@ -1,0 +1,9 @@
+private BigDecimal calculateOrderTotal(List<ShippingProduct> products, MerchantStore store) throws Exception {
+    BigDecimal total = new BigDecimal(0);
+    for(ShippingProduct shippingProduct : products) {
+        for(int i = 0; i < shippingProduct.getQuantity(); i++) {
+            total = total.add(shippingProduct.getFinalPrice().getFinalPrice());
+        }
+    }
+    return total;
+}

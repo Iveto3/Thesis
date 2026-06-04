@@ -1,0 +1,3 @@
+public List<Product> getAllProducts() {
+    return (List<Product>) this.productRepository.findAll();
+}

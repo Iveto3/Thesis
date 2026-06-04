@@ -1,0 +1,7 @@
+@PostMapping(value = "/create")
+@ApiMethod(description = "Create a hotel booking and save it to the database")
+public ResponseEntity<HotelBooking> create(@RequestBody HotelBooking hotelBooking){
+    HotelBooking savedBooking = bookingRepository.save(hotelBooking);
+
+    return ResponseEntity.status(HttpStatus.CREATED).body(savedBooking);
+}

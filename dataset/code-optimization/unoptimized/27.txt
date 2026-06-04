@@ -1,0 +1,43 @@
+@Override
+public ShoppingCart mergeShoppingCarts(final ShoppingCart userShoppingModel, final ShoppingCart sessionCart,
+        final MerchantStore store) throws Exception {
+    if (sessionCart.getCustomerId() != null
+            && sessionCart.getCustomerId().equals(userShoppingModel.getCustomerId())) {
+        LOGGER.info("Session Shopping cart belongs to same logged in user");
+        if (CollectionUtils.isNotEmpty(userShoppingModel.getLineItems())
+                && CollectionUtils.isNotEmpty(sessionCart.getLineItems())) {
+            return userShoppingModel;
+        }
+    }
+
+    LOGGER.info("Starting merging shopping carts");
+    if (CollectionUtils.isNotEmpty(sessionCart.getLineItems())) {
+        Set<ShoppingCartItem> shoppingCartItemsSet = getShoppingCartItems(sessionCart, store, userShoppingModel);
+        boolean duplicateFound = false;
+        if (CollectionUtils.isNotEmpty(shoppingCartItemsSet)) {
+            for (ShoppingCartItem sessionShoppingCartItem : shoppingCartItemsSet) {
+                for (ShoppingCartItem cartItem : userShoppingModel.getLineItems()) {
+                    if (cartItem.getProduct().getId().longValue() == sessionShoppingCartItem.getProduct()
+                            .getId().longValue()) {
+                        if (!duplicateFound) {
+                            LOGGER.info("Duplicate item found..updating existing product quantity");
+                            cartItem.setQuantity(
+                                    cartItem.getQuantity() + sessionShoppingCartItem.getQuantity());
+                            duplicateFound = true;
+                        }
+                    }
+                }
+                if (!duplicateFound) {
+                    LOGGER.info("New item found..adding item to Shopping cart");
+                    userShoppingModel.getLineItems().add(sessionShoppingCartItem);
+                }
+                duplicateFound = false; // Reset for next session item
+            }
+        }
+    }
+    LOGGER.info("Shopping Cart merged successfully.....");
+    saveOrUpdate(userShoppingModel);
+    removeShoppingCart(sessionCart);
+
+    return userShoppingModel;
+}
