@@ -1,0 +1,19 @@
+item,item_type,num_examples,round,satisfaction_rate
+unsupported claims,must_avoid,3,0,0.0
+extra details,must_avoid,3,0,0.0
+jokes,must_avoid,3,0,0.0
+unsupported claims,must_avoid,3,1,0.0
+extra details,must_avoid,3,1,0.0
+jokes,must_avoid,3,1,0.0
+unsupported claims,must_avoid,3,3,0.0
+extra details,must_avoid,3,3,0.0
+jokes,must_avoid,3,3,0.0
+unsupported claims,must_avoid,3,5,0.0
+extra details,must_avoid,3,5,0.0
+jokes,must_avoid,3,5,0.0
+unsupported claims,must_avoid,3,10,0.0
+extra details,must_avoid,3,10,0.0
+jokes,must_avoid,3,10,0.0
+unsupported claims,must_avoid,3,50,0.0
+extra details,must_avoid,3,50,0.0
+jokes,must_avoid,3,50,0.0

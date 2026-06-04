@@ -1,0 +1,7 @@
+average_constraint_completion_ratio,average_must_avoid_ratio,average_must_avoid_satisfied_count,average_must_include_ratio,average_must_include_satisfied_count,num_examples,overall_pass_rate,round
+0.0,0.0,0.0,0.0,0.0,3,0.0,0
+0.0,0.0,0.0,0.0,0.0,3,0.0,1
+0.0,0.0,0.0,0.0,0.0,3,0.0,3
+0.0,0.0,0.0,0.0,0.0,3,0.0,5
+0.0,0.0,0.0,0.0,0.0,3,0.0,10
+0.0,0.0,0.0,0.0,0.0,3,0.0,50

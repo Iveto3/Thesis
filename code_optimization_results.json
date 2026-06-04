@@ -1,0 +1,131 @@
+[
+  {
+    "id": "code_001",
+    "task_type": "code_optimization",
+    "constraints": {
+      "goal": "optimize, improve readability and performance"
+    },
+    "single_shot_answer": "def validate_email(self, email):\n    test_condition = User.query.filter_by(email=email).first()\n    if test_condition:\n        raise ValidationError('Email already exists in database.')",
+    "single_shot_similarity": 0.9771276116371155,
+    "final_round": 50,
+    "final_answer": "def validate_email(self, email):\n    test_condition = User.query.filter_by(email=email).first()\n    if test_condition:\n    raise ValidationError('Email already exists in database.')",
+    "final_similarity": 0.9771276116371155,
+    "best_round": 0,
+    "best_answer": "def validate_email(self, email):\n    test_condition = User.query.filter_by(email=email).first()\n    if test_condition:\n        raise ValidationError('Email already exists in database.')",
+    "best_similarity": 0.9771276116371155,
+    "checkpoint_results": [
+      {
+        "round": 1,
+        "answer": "def validate_email(self, email):\n    test_condition = User.query.filter_by(email=email).first()\n    if test_condition:\n       raise ValidationError('Email already exists in database.')",
+        "similarity": 0.9771276116371155
+      },
+      {
+        "round": 3,
+        "answer": "def validate_email(self, email):\n    test_condition = User.query.filter_by(email=email).first()\n    if test_condition:\n     raise ValidationError('Email already exists in database.')",
+        "similarity": 0.9771276116371155
+      },
+      {
+        "round": 5,
+        "answer": "def validate_email(self, email):\n    test_condition = User.query.filter_by(email=email).first()\n    if test_condition:\n       raise ValidationError('Email already exists in database.')",
+        "similarity": 0.9771276116371155
+      },
+      {
+        "round": 10,
+        "answer": "def validate_email(self, email):\n    test_condition = User.query.filter_by(email=email).first()\n    if test_condition:\n       raise ValidationError('Email already exists in database.')",
+        "similarity": 0.9771276116371155
+      },
+      {
+        "round": 50,
+        "answer": "def validate_email(self, email):\n    test_condition = User.query.filter_by(email=email).first()\n    if test_condition:\n    raise ValidationError('Email already exists in database.')",
+        "similarity": 0.9771276116371155
+      }
+    ],
+    "stopped_reason": "fixed_rounds_completed"
+  },
+  {
+    "id": "code_002",
+    "task_type": "code_optimization",
+    "constraints": {
+      "goal": "optimize, improve readability and performance"
+    },
+    "single_shot_answer": "public Result isRePasswordCheck(String password) {\n  Result rePasswordResult = this.employerDao.findByPassword(password);\n  if (rePasswordResult.getRePassword() != null && rePasswordResult.getRePassword().equals(password)) {\n    return new SuccessResult();\n  } else {\n    return new ErrorResult(\"This password has been used is before\");\n  }\n}",
+    "single_shot_similarity": 0.9760036468505859,
+    "final_round": 50,
+    "final_answer": "public Result isRePasswordCheck(String password) {\n    Result rePasswordResult = this.employerDao.findByPassword(password);\n    if (rePasswordResult != null && rePasswordResult.getRePassword() != null && rePasswordResult.getRePassword().equals(password)) {\n        return new SuccessResult();\n    } else {\n        return new ErrorResult(\"This password has been used is before\");\n   }\n}",
+    "final_similarity": 0.9721782803535461,
+    "best_round": 0,
+    "best_answer": "public Result isRePasswordCheck(String password) {\n  Result rePasswordResult = this.employerDao.findByPassword(password);\n  if (rePasswordResult.getRePassword() != null && rePasswordResult.getRePassword().equals(password)) {\n    return new SuccessResult();\n  } else {\n    return new ErrorResult(\"This password has been used is before\");\n  }\n}",
+    "best_similarity": 0.9760036468505859,
+    "checkpoint_results": [
+      {
+        "round": 1,
+        "answer": "public Result isRePasswordCheck(String password) {\n Result rePasswordResult = this.employerDao.findByPassword(password);\n if (rePasswordResult.getRePassword() != null && rePasswordResult.getRePassword().equals(password)) {\n    return new SuccessResult();\n } else {\n    return new ErrorResult(\"This password has been used is before\");\n }\n}",
+        "similarity": 0.9760036468505859
+      },
+      {
+        "round": 3,
+        "answer": "public Result isRePasswordCheck(String password) {\n Result rePasswordResult = this.employerDao.findByPassword(password);\n if (rePasswordResult.getRePassword() != null && rePasswordResult.getRePassword().equals(password)) {\n    return new SuccessResult();\n } else {\n    return new ErrorResult(\"This password has been used is before\");\n }\n}",
+        "similarity": 0.9760036468505859
+      },
+      {
+        "round": 5,
+        "answer": "public Result isRePasswordCheck(String password) {\n Result rePasswordResult = this.employerDao.findByPassword(password);\n if (rePasswordResult.getRePassword() != null && rePasswordResult.getRePassword().equals(password)) {\n    return new SuccessResult();\n } else {\n    return new ErrorResult(\"This password has been used is before\");\n }\n}",
+        "similarity": 0.9760036468505859
+      },
+      {
+        "round": 10,
+        "answer": "public Result isRePasswordCheck(String password) {\n    Result rePasswordResult = this.employerDao.findByPassword(password);\n    if (rePasswordResult.getRePassword() != null && rePasswordResult.getRePassword().equals(password)) {\n        return new SuccessResult();\n    } else {\n        return new ErrorResult(\"This password has been used is before\");\n    }\n}",
+        "similarity": 0.9760036468505859
+      },
+      {
+        "round": 50,
+        "answer": "public Result isRePasswordCheck(String password) {\n    Result rePasswordResult = this.employerDao.findByPassword(password);\n    if (rePasswordResult != null && rePasswordResult.getRePassword() != null && rePasswordResult.getRePassword().equals(password)) {\n        return new SuccessResult();\n    } else {\n        return new ErrorResult(\"This password has been used is before\");\n   }\n}",
+        "similarity": 0.9721782803535461
+      }
+    ],
+    "stopped_reason": "fixed_rounds_completed"
+  },
+  {
+    "id": "code_003",
+    "task_type": "code_optimization",
+    "constraints": {
+      "goal": "optimize, improve readability and performance"
+    },
+    "single_shot_answer": "import random\n\ndef selectImage():\n   images = getImages()\n   if images:\n        choice = random.choice(images)\n        print(choice)\n        return choice\n   return 0",
+    "single_shot_similarity": 0.9750096797943115,
+    "final_round": 50,
+    "final_answer": "```python\nimport random\n\ndef selectImage():\n images = getImages()\n if images:\n    choice = random.choice(images)\n    print(choice)\n    return choice\n return 0\n```",
+    "final_similarity": 0.9500483274459839,
+    "best_round": 0,
+    "best_answer": "import random\n\ndef selectImage():\n   images = getImages()\n   if images:\n        choice = random.choice(images)\n        print(choice)\n        return choice\n   return 0",
+    "best_similarity": 0.9750096797943115,
+    "checkpoint_results": [
+      {
+        "round": 1,
+        "answer": "```python\nimport random\n\ndef selectImage():\n   images = getImages()\n   if images:\n       choice = random.choice(images)\n       print(choice)\n       return choice\n   return 0\n```",
+        "similarity": 0.9500483274459839
+      },
+      {
+        "round": 3,
+        "answer": "```python\nimport random\n\ndef selectImage():\n   images = getImages()\n   if images:\n      choice = random.choice(images)\n      print(choice)\n      return choice\n   return 0\n```",
+        "similarity": 0.9500483274459839
+      },
+      {
+        "round": 5,
+        "answer": "```python\nimport random\n\ndef selectImage():\n   images = getImages()\n   if images:\n      choice = random.choice(images)\n      print(choice)\n      return choice\n   return 0\n```",
+        "similarity": 0.9500483274459839
+      },
+      {
+        "round": 10,
+        "answer": "```python\nimport random\n\ndef selectImage():\n   images = getImages()\n   if images:\n      choice = random.choice(images)\n      print(choice)\n      return choice\n   return 0\n```",
+        "similarity": 0.9500483274459839
+      },
+      {
+        "round": 50,
+        "answer": "```python\nimport random\n\ndef selectImage():\n images = getImages()\n if images:\n    choice = random.choice(images)\n    print(choice)\n    return choice\n return 0\n```",
+        "similarity": 0.9500483274459839
+      }
+    ],
+    "stopped_reason": "fixed_rounds_completed"
+  }
+]

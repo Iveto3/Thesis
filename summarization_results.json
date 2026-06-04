@@ -1,0 +1,134 @@
+[
+  {
+    "id": "summary_00000",
+    "task_type": "summarization",
+    "constraints": {
+      "goal": "summarize by keeping the main points and no extra details",
+      "max_words": 150
+    },
+    "single_shot_answer": "At age 18, Daniel Radcliffe, star of the \"Harry Potter\" films, is expected to gain access to a £20 million fortune held in a trust fund. He has stated he intends to spend the money on relatively inexpensive items like books and CDs. Upon reaching adulthood, he will have access to activities such as gambling and seeing films like \"Hostel: Part II.\" He is preparing for increased media attention and is pursuing other projects, including a TV movie “My Boy Jack” and a stage debut.",
+    "single_shot_similarity": 0.8092501759529114,
+    "final_round": 50,
+    "final_answer": "At 18, Daniel Radcliffe, star of the “Harry Potter” films, is expected to gain access to a reported £20 million ($41.1 million) fortune. He insists the money won't cast a spell on him, stating he intends to spend it on relatively inexpensive items like books and CDs. Upon reaching adulthood, he will have access to activities such as gambling in a casino, buying a drink in a pub, or seeing films like “Hostel: Part II,” currently six places below his number one movie on the UK box office chart. Details of how he’ll mark his landmark birthday are under wraps. Radcliffe’s earnings from the first five Potter films have been held in a trust fund. He is also set to film a TV movie called “My Boy Jack” and appear in “December Boys,” an Australian film about four boys who escape an orphanage. Radcliffe recently made his stage debut playing a tortured teenager in Peter Shaffer’s “Equus.” He is braced for even closer media scrutiny now that he’s legally an adult and will reprise his role in the last two “Harry Potter” films.",
+    "final_similarity": 0.779612123966217,
+    "best_round": 0,
+    "best_answer": "At age 18, Daniel Radcliffe, star of the \"Harry Potter\" films, is expected to gain access to a £20 million fortune held in a trust fund. He has stated he intends to spend the money on relatively inexpensive items like books and CDs. Upon reaching adulthood, he will have access to activities such as gambling and seeing films like \"Hostel: Part II.\" He is preparing for increased media attention and is pursuing other projects, including a TV movie “My Boy Jack” and a stage debut.",
+    "best_similarity": 0.8092501759529114,
+    "checkpoint_results": [
+      {
+        "round": 1,
+        "answer": "At age 18, Daniel Radcliffe, star of the “Harry Potter” films, is expected to gain access to a £20 million fortune held in a trust fund. He has stated he intends to spend the money on relatively inexpensive items like books and CDs. Upon reaching adulthood, he will have access to activities such as gambling and seeing films like “Hostel: Part II.” He is preparing for increased media scrutiny now that he’s legally an adult. Radcliffe’s earnings from the first five Potter films have been held in a trust fund which he has not been able to touch. Radcliffe’s latest outing as the boy wizard in “Harry Potter and the Order of the Phoenix” is breaking records on both sides of the Atlantic and he will reprise the role in the last two films. Earlier this year, he made his stage debut playing a tortured teenager in Peter Shaffe’s “Equus.” The Londoner has filmed a TV movie called “My Boy Jack,” about author Rudyard Kipling and his son, due for release later this year. He will also appear in “December Boys,” an Australian film about four boys who escape an orphanage.",
+        "similarity": 0.7264372110366821
+      },
+      {
+        "round": 3,
+        "answer": "At age 18, Daniel Radcliffe, star of the “Harry Potter” films, is expected to gain access to a £20 million fortune held in a trust fund. He has stated he intends to spend the money on relatively inexpensive items like books and CDs. Upon reaching adulthood, he will have access to activities such as gambling and seeing films like “Hostel: Part II.” Radcliffe’s earnings from the first five Potter films have been held in a trust fund which he has not been able to touch. Radcliffe’s latest outing as the boy wizard in “Harry Potter and the Order of the Phoenix” is breaking records on both sides of the Atlantic and he will reprise the role in the last two films. Earlier this year, he made his stage debut playing a tortured teenager in Peter Shaffer’s “Equus.” The Londoner has filmed a TV movie called “My Boy Jack,” about author Rudyard Kipling and his son, due for release later this year. He will also appear in “December Boys,” an Australian film about four boys who escape an orphanage. Radcliffe is preparing for increased media scrutiny now that he’s legally an adult.",
+        "similarity": 0.7414436936378479
+      },
+      {
+        "round": 5,
+        "answer": "At age 18, Daniel Radcliffe, star of the “Harry Potter” films, is expected to gain access to a £20 million fortune held in a trust fund. He has stated he intends to spend the money on relatively inexpensive items like books and CDs. Upon reaching adulthood, he will have access to activities such as gambling and seeing films like “Hostel: Part II.” Radcliffe’s earnings from the first five Potter films have been held in a trust fund which he has not been able to touch. Radcliffe’s latest outing as the boy wizard in “Harry Potter and the Order of the Phoenix” is breaking records on both sides of the Atlantic and he will reprise the role in the last two films. The Londoner has filmed a TV movie called “My Boy Jack,” about author Rudyard Kipling and his son, due for release later this year. He will also appear in “December Boys,” an Australian film about four boys who escape an orphanage. Radcliffe is preparing for increased media scrutiny now that he’s legally an adult. He made his stage debut playing a tortured teenager in Peter Shaffer’s “Equus.”",
+        "similarity": 0.7068588733673096
+      },
+      {
+        "round": 10,
+        "answer": "At age 18, Daniel Radcliffe, star of the “Harry Potter” films, is expected to gain access to a reported £20 million ($41.1million) fortune as he turns Monday, but he insists the money won’t cast a spell on him. Radcliffe has stated he intends to spend the money on relatively inexpensive items like books and CDs. Upon reaching adulthood, he will have access to activities such as gambling in a casino, buying a drink in a pub, or seeing films like “Hostel: Part II,” currently six places below his number one movie on the UK box office chart. Radcliffe’s earnings from the first five Potter films have been held in a trust fund which he has not been able to touch. Radcliffe’s latest outing as the boy wizard in “Harry Potter and the Order of the Phoenix” is breaking records on both sides of the Atlantic and he will reprise the role in the last two films. The Londoner has filmed a TV movie called “My Boy Jack,” about author Rudyard Kipling and his son, due for release later this year. He will also appear in “December Boys,” an Australian film about four boys who escape an orphanage. Radcliffe made his stage debut playing a tortured teenager in Peter Shaffer’s “Equus.” He is braced for even closer media scrutiny now that he’s legally an adult.",
+        "similarity": 0.7597364187240601
+      },
+      {
+        "round": 50,
+        "answer": "At 18, Daniel Radcliffe, star of the “Harry Potter” films, is expected to gain access to a reported £20 million ($41.1 million) fortune. He insists the money won't cast a spell on him, stating he intends to spend it on relatively inexpensive items like books and CDs. Upon reaching adulthood, he will have access to activities such as gambling in a casino, buying a drink in a pub, or seeing films like “Hostel: Part II,” currently six places below his number one movie on the UK box office chart. Details of how he’ll mark his landmark birthday are under wraps. Radcliffe’s earnings from the first five Potter films have been held in a trust fund. He is also set to film a TV movie called “My Boy Jack” and appear in “December Boys,” an Australian film about four boys who escape an orphanage. Radcliffe recently made his stage debut playing a tortured teenager in Peter Shaffer’s “Equus.” He is braced for even closer media scrutiny now that he’s legally an adult and will reprise his role in the last two “Harry Potter” films.",
+        "similarity": 0.779612123966217
+      }
+    ],
+    "stopped_reason": "fixed_rounds_completed"
+  },
+  {
+    "id": "summary_00001",
+    "task_type": "summarization",
+    "constraints": {
+      "goal": "summarize by keeping the main points and no extra details",
+      "max_words": 150
+    },
+    "single_shot_answer": "The “forgotted floor” of the Miami-Dade pretrial detention facility houses severely mentally ill inmates, primarily facing drug or assault charges. Approximately one-third of Miami-Dade county’s jailed population is mentally ill. Judge Steven Leifman notes that many arrests result from confrontations with police, exacerbated by inmate paranoia and delusion. Roughly 40,000 to 50,000 people are currently in mental hospitals, a decrease from 500,000 in 1955. Starting in 2008, inmates will be directed to a new mental health facility for long-term treatment instead of the “forgotted floor.” Judge Leifman advocates for this change to improve justice and treatment outcomes.",
+    "single_shot_similarity": 0.7298902273178101,
+    "final_round": 50,
+    "final_answer": "The “forgotted floor” of the Miami-Dade pretrial detention facility houses approximately one-thirds of Miami-Dade county’s jailed population, who are severely mentally ill and primarily face drug or assault charges. As Judge Steven Leifmen states, “these prisoner-patients will often circulate through the system, occasionally stabilizing in a mental hospital, only to return to jail to face their charges.” Roughly 40,000 to 50,000 people are currently in mental hospitals, a decrease from 500,000 in 1955. The situation reflects a historical trend: mental patients were once imprisoned without charges, and subsequent closures of mental hospitals led to increased homelessness among this population. Starting in 2008, inmates will be directed to a new mental health facility for long-term treatment instead of the “forgotted floor.” Approximately one-thirds of Miami-Dade county’s jailed population is mentally ill. Judge Leifmen advocates for this change, recognizing the cyclical nature of the problem and the need for a more effective solution. He highlights the dramatic reduction in the number of people in mental hospitals and emphasizes the importance of providing appropriate treatment rather than relying on incarceration.",
+    "final_similarity": 0.6793743968009949,
+    "best_round": 0,
+    "best_answer": "The “forgotted floor” of the Miami-Dade pretrial detention facility houses severely mentally ill inmates, primarily facing drug or assault charges. Approximately one-third of Miami-Dade county’s jailed population is mentally ill. Judge Steven Leifman notes that many arrests result from confrontations with police, exacerbated by inmate paranoia and delusion. Roughly 40,000 to 50,000 people are currently in mental hospitals, a decrease from 500,000 in 1955. Starting in 2008, inmates will be directed to a new mental health facility for long-term treatment instead of the “forgotted floor.” Judge Leifman advocates for this change to improve justice and treatment outcomes.",
+    "best_similarity": 0.7298902273178101,
+    "checkpoint_results": [
+      {
+        "round": 1,
+        "answer": "The “forgotted floor” of the Miami-Dade pretrial detention facility houses approximately one-third of Miami-Dade county’s jailed population, who are severely mentally ill and primarily face drug or assault charges. Judge Steven Leifman notes that many arrests result from confrontations with police, exacerbated by inmate paranoia and delusion. Roughly 40,000 to 50,000 people are currently in mental hospitals, a decrease from 500,000 in 1955. Starting in 2008, inmates will be directed to a new mental health facility for long-term treatment instead of the “forgotted floor.” Judge Leifman advocates for this change to improve justice and treatment outcomes. He emphasizes that approximately one-third of Miami-Dade county’s jailed population is mentally ill. The shift aims to reduce unnecessary arrests stemming from inmate distress and provide a path towards sustained care.",
+        "similarity": 0.724501371383667
+      },
+      {
+        "round": 3,
+        "answer": "The “forgotted floor” of the Miami-Dade pretrial detention facility houses approximately one-third of Miami-Dade county’s jailed population, who are severely mentally ill and primarily face drug or assault charges. Judge Steven Leifman notes that many arrests result from confrontations with police, exacerbated by inmate paranoia and delusion. Roughly 40,000 to 50,000 people are currently in mental hospitals, a decrease from 500,000 in 1955. Starting in 2008, inmates will be directed to a new mental health facility for long-term treatment instead of the “forgotted floor.” Judge Leifman notes that approximately one-third of Miami-Dade county’s jailed population is mentally ill. The shift aims to reduce unnecessary arrests stemming from inmate distress and provide a path towards sustained care. He emphasizes that 200 years ago people were considered “lunatics” and they were locked up in jails even if they had no charges against them. Roughly 40,000 to 50,000 people are currently in mental hospitals.",
+        "similarity": 0.7195432782173157
+      },
+      {
+        "round": 5,
+        "answer": "The “forgotted floor” of the Miami-Dade pretrial detention facility houses approximately one-third of Miami-Dade county’s jailed population, who are severely mentally ill and primarily face drug or assault charges. Judge Steven Leifman notes that many arrests result from confrontations with police, exacerbated by inmate paranoia and delusion. Roughly 40,000 to 50,000 people are currently in mental hospitals, a decrease from 500,000 in 1955. Starting in 2008, inmates will be directed to a new mental health facility for long-term treatment instead of the “forgotted floor.” Judge Leifman notes that approximately one-third of Miami-Dade county’s jailed population is mentally ill. The shift aims to reduce unnecessary arrests stemming from inmate distress and provide a path toward sustained care. He emphasizes that 200 years ago people were considered “lunatics” and they were locked up in jails even if they had no charges against them. Roughly 40,000 to 50,000 people are currently in mental hospitals. The situation reflects a historical trend: mental patients were once imprisoned without charges, and subsequent closures of mental hospitals led to increased homelessness among this population.",
+        "similarity": 0.69852215051651
+      },
+      {
+        "round": 10,
+        "answer": "The “forgorned floor” of the Miami-Dade pretrial detention facility houses approximately one-third of Miami-Dade county’s jailed population, who are severely mentally ill and primarily face drug or assault charges. Judge Steven Leifman notes that many arrests result from confrontations with police, exacerbated by inmate paranoia and delusion. Roughly 40,000 to 50,000 people are currently in mental hospitals, a decrease from 500,000 in 1955. The situation reflects a historical trend: mental patients were once imprisoned without charges, and subsequent closures of mental hospitals led to increased homelessness among this population. Starting in 2008, inmates will be directed to a new mental health facility for long-term treatment instead of the “forgorned floor.” Judge Leifman notes that many arrests result from confrontations with police, exacerbated by inmate paranoia and delusion.",
+        "similarity": 0.6747952103614807
+      },
+      {
+        "round": 50,
+        "answer": "The “forgotted floor” of the Miami-Dade pretrial detention facility houses approximately one-thirds of Miami-Dade county’s jailed population, who are severely mentally ill and primarily face drug or assault charges. As Judge Steven Leifmen states, “these prisoner-patients will often circulate through the system, occasionally stabilizing in a mental hospital, only to return to jail to face their charges.” Roughly 40,000 to 50,000 people are currently in mental hospitals, a decrease from 500,000 in 1955. The situation reflects a historical trend: mental patients were once imprisoned without charges, and subsequent closures of mental hospitals led to increased homelessness among this population. Starting in 2008, inmates will be directed to a new mental health facility for long-term treatment instead of the “forgotted floor.” Approximately one-thirds of Miami-Dade county’s jailed population is mentally ill. Judge Leifmen advocates for this change, recognizing the cyclical nature of the problem and the need for a more effective solution. He highlights the dramatic reduction in the number of people in mental hospitals and emphasizes the importance of providing appropriate treatment rather than relying on incarceration.",
+        "similarity": 0.6793743968009949
+      }
+    ],
+    "stopped_reason": "fixed_rounds_completed"
+  },
+  {
+    "id": "summary_00002",
+    "task_type": "summarization",
+    "constraints": {
+      "goal": "summarize by keeping the main points and no extra details",
+      "max_words": 150
+    },
+    "single_shot_answer": "On July 13, 2001, the Minneapolis Higgins Avenue Bridge collapsed after a rumble, causing vehicles to fall into the Mississippi River. Gary Babineau, a driver, described a 35-foot fall and aided in rescuing children from a school bus, while also helping a woman off the bridge. Dr. John Hink arrived within 15 minutes and witnessed dozens of people lying on the deck. Fifty-five individuals were rescued, with some carried to safety by pickup trucks. Several vehicles, including Babineau’s truck and Bernie Toivonen’s, experienced significant damage.",
+    "single_shot_similarity": 0.6823292374610901,
+    "final_round": 50,
+    "final_answer": "On July 13, 2001, the Minneapolis Higgins Avenue Bridge collapsed after a rumble, causing vehicles to fall into the Mississippi River. Gary Babineau, a driver, described a 35-foot fall and aided in rescuing children from a school bus, while also helping a woman off the bridge. His truck was completely face down, pointed toward the ground, and ripped in half. Dr. John Hink arrived within 15 minutes and witnessed dozens of people lying on the deck. Fifty-five individuals were rescued, with some carried to safety by pickup trucks. Babineau’s truck was completely face down, pointed toward the ground, and ripped in half. Toivonen’s vehicle was on a part of the bridge that ended up tilted at a 45-degree angle. Multiple eyewitness accounts detailed a 35-foot fall and vehicles dangling over the edge. The rescue effort was controlled and organized, the opposite of the lightning-fast collapse. The collapse was described as “out of the movies.”",
+    "final_similarity": 0.7079133987426758,
+    "best_round": 11,
+    "best_answer": "On July 13, 2001, the Minneapolis Higgins Avenue Bridge collapsed after a rumble, causing vehicles to fall into the Mississippi River. Gary Babineau, a driver, described a 35-foot fall and aided in rescuing children from a school bus, while also helping a woman off the bridge. His truck was completely face down, pointed toward the ground, and ripped in half. Dr. John Hink arrived within 15 minutes and witnessed dozens of people lying on the deck. Fifty-five individuals were rescued, with some carried to safety by pickup trucks. Babineau’s truck was completely face down, pointed toward the ground, and ripped in half. Toivonen’s vehicle was on a part of the bridge that ended up tilted at a 45-degree angle. Multiple eyewitness accounts detailed a 35-foot fall and vehicles dangling over the edge. The rescue effort was controlled and organized, the opposite of the lightning-quick collapse. The collapse was described as “out of the movies.”",
+    "best_similarity": 0.7107195854187012,
+    "checkpoint_results": [
+      {
+        "round": 1,
+        "answer": "On July 13, 2001, the Minneapolis Higgins Avenue Bridge collapsed after a rumble, causing vehicles to fall into the Mississippi River. Gary Babineau, a driver, described a 35-foot fall and aided in rescuing children from a school bus, while also helping a woman off the bridge. Dr. John Hink arrived within 15 minutes and witnessed dozens of people lying on the deck. Fifty-five individuals were rescued, with some carried to safety by pickup trucks. Gary Babineau’s truck was completely face down, pointed toward the ground, and ripped in half. Bernie Toivonen’s vehicle was on a part of the bridge that ended up tilted at a 45-degree angle. Several vehicles, including Babineau’s truck and Toivonen’s, experienced significant damage.",
+        "similarity": 0.7034705877304077
+      },
+      {
+        "round": 3,
+        "answer": "On July 13, 2001, the Minneapolis Higgins Avenue Bridge collapsed after a rumble, causing vehicles to fall into the Mississippi River. Gary Babineau, a driver, described a 35-foot fall and aided in rescuing children from a school bus, while also helping a woman off the bridge. Dr. John Hink arrived within 15 minutes and witnessed dozens of people lying on the deck. Fifty-five individuals were rescued, with some carried to safety by pickup trucks. Babineau’s truck was completely face down, pointed toward the ground, and ripped in half. Toivonen’s vehicle was on a part of the bridge that ended up tilted at a 45-degree angle. Several vehicles, including Babineau’s truck and Toivonen’s, experienced significant damage. The collapse was described as “out of the movies.”",
+        "similarity": 0.6967393159866333
+      },
+      {
+        "round": 5,
+        "answer": "On July 13, 2001, the Minneapolis Higgins Avenue Bridge collapsed after a rumble, causing vehicles to fall into the Mississippi River. Gary Babineau, a driver, described a 35-foot fall and aided in rescuing children from a school bus, while also helping a woman off the bridge. Dr. John Hink arrived within 15 minutes and witnessed dozens of people lying on the deck. Fifty-five individuals were rescued, with some carried to safety by pickup trucks. Babineau’s truck was completely face down, pointed toward the ground, and ripped in half. Toivonen’s vehicle was on a part of the bridge that ended up tilted at a 45-degree angle. Several vehicles, including Babineau’s truck and Toivonen’s, experienced significant damage. The collapse was described as “out of the movies.” The rescue effort was controlled and organized, the opposite of the lightning-quick collapse. Babineau said he had no rescue training.",
+        "similarity": 0.697731077671051
+      },
+      {
+        "round": 10,
+        "answer": "On July 13, 2001, the Minneapolis Higgins Avenue Bridge collapsed after a rumble, causing vehicles to fall into the Mississippi River. Gary Babineau, a driver, described a 35-foot fall and aided in rescuing children from a school bus, while also helping a woman off the bridge. Dr. John Hink arrived within 15 minutes and witnessed dozens of people lying on the deck. Fifty-five individuals were rescued, with some carried to safety by pickup trucks. Babineau’s truck was completely face down, pointed toward the ground, and ripped in half. Toivonen’s vehicle was on a part of the bridge that ended up tilted at a 45-degree angle. Multiple eyewitness accounts detailed a 35-foot fall and vehicles dangling over the edge. The rescue effort was controlled and organized, the opposite of the lightning-quick collapse. Several vehicles, including Babineau’s truck and Toivonen’s, experienced significant damage. The collapse was described as “out of the movies.”",
+        "similarity": 0.696399450302124
+      },
+      {
+        "round": 50,
+        "answer": "On July 13, 2001, the Minneapolis Higgins Avenue Bridge collapsed after a rumble, causing vehicles to fall into the Mississippi River. Gary Babineau, a driver, described a 35-foot fall and aided in rescuing children from a school bus, while also helping a woman off the bridge. His truck was completely face down, pointed toward the ground, and ripped in half. Dr. John Hink arrived within 15 minutes and witnessed dozens of people lying on the deck. Fifty-five individuals were rescued, with some carried to safety by pickup trucks. Babineau’s truck was completely face down, pointed toward the ground, and ripped in half. Toivonen’s vehicle was on a part of the bridge that ended up tilted at a 45-degree angle. Multiple eyewitness accounts detailed a 35-foot fall and vehicles dangling over the edge. The rescue effort was controlled and organized, the opposite of the lightning-fast collapse. The collapse was described as “out of the movies.”",
+        "similarity": 0.7079133987426758
+      }
+    ],
+    "stopped_reason": "fixed_rounds_completed"
+  }
+]
