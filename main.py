@@ -226,7 +226,7 @@ def run_experiment(
     judge_model: str,
 ) -> None:
     tasks = load_input_json(input_file)
-    tasks = tasks[:3]
+    #tasks = tasks[:3]
     results = []
 
     print("\nRunning experiment:")
