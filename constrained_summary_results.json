@@ -1,0 +1,1428 @@
+[
+  {
+    "id": "constrained_summary_00000",
+    "task_type": "constrained_summarization",
+    "constraints": {
+      "goal": "summarize the article while keeping the main news points and no extra details",
+      "max_words": 150,
+      "tone": "news reporter",
+      "style": "rhyming but factual",
+      "must_include": [
+        "main event",
+        "key people or organizations",
+        "main outcome"
+      ],
+      "must_avoid": [
+        "unsupported claims",
+        "extra details",
+        "jokes"
+      ]
+    },
+    "single_shot_answer": "Celtic completed a £2.2million [main event] swoop for Serbian international Stefan Scepovic, but a deal for Manchester City’s John Guidetti collapsed at the eleventh hour. [key people or organizations] Celtic manager Ronny Deila, Sporting Gijon, Manchester City, and the SFA were involved. The [main outcome] was Scepovic’s permanent transfer, while Guidetti’s move failed due to registration issues. Several other players, including Amidou Balde, Tiemu Pukki, and Jackson Irvine, also transferred on loan deals.",
+    "single_shot_constraint_evaluation": {
+      "goal": {
+        "score": 2,
+        "satisfied": true
+      },
+      "faithfulness": {
+        "score": 2,
+        "satisfied": true
+      },
+      "coverage": {
+        "score": 2,
+        "satisfied": true
+      },
+      "tone": {
+        "score": 2,
+        "satisfied": true
+      },
+      "style": {
+        "score": 2,
+        "satisfied": true
+      },
+      "length": {
+        "score": 2,
+        "satisfied": true,
+        "word_count": 139
+      },
+      "entities": {
+        "score": 2,
+        "satisfied": true
+      },
+      "must_include_items": [
+        {
+          "item": "main event",
+          "score": 2,
+          "satisfied": true
+        },
+        {
+          "item": "key people or organizations",
+          "score": 2,
+          "satisfied": true
+        },
+        {
+          "item": "main outcome",
+          "score": 2,
+          "satisfied": true
+        }
+      ],
+      "must_include_satisfied_count": 3,
+      "must_avoid_items": [
+        {
+          "item": "unsupported claims",
+          "score": 2,
+          "satisfied": true
+        },
+        {
+          "item": "extra details",
+          "score": 2,
+          "satisfied": true
+        },
+        {
+          "item": "jokes",
+          "score": 2,
+          "satisfied": true
+        }
+      ],
+      "must_avoid_satisfied_count": 3,
+      "must_avoid_total": 3,
+      "total_score": 26,
+      "max_possible_score": 26,
+      "constraint_completion_ratio": 1.0,
+      "overall_pass": true
+    },
+    "final_round": 50,
+    "final_answer": "Celtic’s **“main event”** was the £2.2 million permanent transfer of Serbian international Stefan Scepovíc. **“Key people or organizations”** involved included Celtic manager Ronny Deila, Sporting Gijon, Manchester City, and the SFA. The **“main outcome”** secured a crucial signing for the Scottish club after a complex pursuit. Scepovíc’s second u-turn, following a rollercoaster negotiation, finalized the deal. John Guiditti’s move to Glasgow stalled due to registration delays, despite his travel. Several players departed Celtic on loan – Amidou Baldé, Tiemu Pukki, Holmbert Fridjonsson to Brøndby, while Virgil van Dijk remained. Michael Gardyne returned to Ross County on loan, and Joe Shaughnessy joined Falkirk. Partick Thistle secured Nathan Eccleston, and Dundee United saw Kyle Benedictus join Alloa. Numerous Celtic youngsters were sent out on loan – Robbie Crawford, Callum Gallagher, Luca Gasparatto, Danny Stoney, and Tom Walsh. Furthermore, Joe Shaughnessy moved to Falkirk, and Kyle Benedictus joined Alloa. This busy transfer window showcased key deals across Scottish football, highlighting a flurry of movement amongst clubs and players.",
+    "checkpoint_results": [
+      {
+        "round": 1,
+        "answer": "Celtic completed a £2.2million [main event] swoop for Serbian international Stefan Scepovic, but a deal for Manchester City’s John Guidetti collapsed at the eleventh hour. [key people or organizations] Celtic manager Ronny Deila, Sporting Gijon, Manchester City, and the SFA were involved. The [main outcome] was Scepovic’s permanent transfer, following a rollercoaster pursuit. Initially, a second u-turn in 24 hours secured the deal. However, registration issues prevented John Guidetti from joining, despite travelling to Glasgow. Amidou Balde, Tiemu Pukki, and Jackson Irvine also transferred on loan deals. Virgil van Dijk remained at Celtic, while Amidou Balde joined Belgium’s Beveren. Several other transfers occurred, including Michael Gardyne’s return to Ross County and Joe Shaughnessy’s move to Falkirk. Partick Thistle secured Nathan Eccleston, and Dundee United saw Kyle Benedictus join Alloa.",
+        "constraint_evaluation": {
+          "goal": {
+            "score": 2,
+            "satisfied": true
+          },
+          "faithfulness": {
+            "score": 2,
+            "satisfied": true
+          },
+          "coverage": {
+            "score": 2,
+            "satisfied": true
+          },
+          "tone": {
+            "score": 2,
+            "satisfied": true
+          },
+          "style": {
+            "score": 2,
+            "satisfied": true
+          },
+          "length": {
+            "score": 2,
+            "satisfied": true,
+            "word_count": 148
+          },
+          "entities": {
+            "score": 2,
+            "satisfied": true
+          },
+          "must_include_items": [
+            {
+              "item": "main event",
+              "score": 2,
+              "satisfied": true
+            },
+            {
+              "item": "key people or organizations",
+              "score": 2,
+              "satisfied": true
+            },
+            {
+              "item": "main outcome",
+              "score": 2,
+              "satisfied": true
+            }
+          ],
+          "must_include_satisfied_count": 3,
+          "must_include_total": 3,
+          "must_avoid_items": [
+            {
+              "item": "unsupported claims",
+              "score": 2,
+              "satisfied": true
+            },
+            {
+              "item": "extra details",
+              "score": 2,
+              "satisfied": true
+            },
+            {
+              "item": "jokes",
+              "score": 2,
+              "satisfied": true
+            }
+          ],
+          "must_avoid_satisfied_count": 3,
+          "must_avoid_total": 3,
+          "total_score": 26,
+          "max_possible_score": 26,
+          "constraint_completion_ratio": 1.0,
+          "overall_pass": true
+        }
+      },
+      {
+        "round": 3,
+        "answer": "Celtic completed a £2.2million [main event] swoop for Serbian international Stefan Scepovic, but a deal for Manchester City’s John Guidetti collapsed at the eleventh hour. [key people or organizations] Celtic manager Ronny Deila, Sporting Gijon, Manchester City, and the SFA were involved. The [main outcome] was Scepovic’s permanent transfer, following a rollercoaster pursuit. Initially, a second u-turn in 24 hours secured the deal. However, registration issues prevented John Guidetti from joining, despite travelling to Glasgow. Amidou Balde, Tiemu Pukki, and Jackson Irvine also transferred on loan deals. Virgil van Dijk remained at Celtic. Several other transfers occurred – Amidou Balde joined Belgium’s Beveren, Tiemu Pukki joined Danish club Brondby, and Jackson Irvine joined Falkirk on loan. Michael Gardyne returned to Ross County on loan, while Joe Shaughnessy moved to Falkirk. Partick Thistle secured Nathan Eccleston, and Dundee United saw Kyle Benedictus join Alloa. Loan moves also saw Jackson Irvine join Falkirk and Gary Oliver go to Stenhousemuir. This busy transfer window involved numerous Scottish clubs, showcasing a flurry of activity across the league.",
+        "constraint_evaluation": {
+          "goal": {
+            "score": 2,
+            "satisfied": true
+          },
+          "faithfulness": {
+            "score": 2,
+            "satisfied": true
+          },
+          "coverage": {
+            "score": 2,
+            "satisfied": true
+          },
+          "tone": {
+            "score": 2,
+            "satisfied": true
+          },
+          "style": {
+            "score": 2,
+            "satisfied": true
+          },
+          "length": {
+            "score": 2,
+            "satisfied": true,
+            "word_count": 149
+          },
+          "entities": {
+            "score": 2,
+            "satisfied": true
+          },
+          "must_include_items": [
+            {
+              "item": "main event",
+              "score": 2,
+              "satisfied": true
+            },
+            {
+              "item": "key people or organizations",
+              "score": 2,
+              "satisfied": true
+            },
+            {
+              "item": "main outcome",
+              "score": 2,
+              "satisfied": true
+            }
+          ],
+          "must_include_satisfied_count": 3,
+          "must_include_total": 3,
+          "must_avoid_items": [
+            {
+              "item": "unsupported claims",
+              "score": 2,
+              "satisfied": true
+            },
+            {
+              "item": "extra details",
+              "score": 2,
+              "satisfied": true
+            },
+            {
+              "item": "jokes",
+              "score": 2,
+              "satisfied": true
+            }
+          ],
+          "must_avoid_satisfied_count": 3,
+          "must_avoid_total": 3,
+          "total_score": 26,
+          "max_possible_score": 26,
+          "constraint_completion_ratio": 1.0,
+          "overall_pass": true
+        }
+      },
+      {
+        "round": 5,
+        "answer": "Celtic launched a [main event] swoop for Serbian international Stefan Scepovic, but a key deal collapsed. [key people or organizations] Celtic manager Ronny Deila, Sporting Gijon, Manchester City, and the SFA were involved. The [main outcome] was Scepovic’s permanent transfer, following a rollercoaster pursuit. Initially, a second u-turn in 24 hours secured the deal. However, registration issues prevented John Guidetti from joining, despite travelling to Glasgow due to failed paperwork. Amidou Balde joined Belgium’s Beveren, Tiemu Pukki and Holmbert Fridjonsson joined Danish club Brøndby for the next 12 months on loan. Virgil van Dijk remained at Celtic. Michael Gardyne returned to Ross County on loan, while Joe Shaughnessy moved to Falkirk. Partick Thistle secured Nathan Eccleston, and Dundee United saw Kyle Benedictus join Alloa. Several loan moves occurred, showcasing a flurry of activity across the Scottish league. Notably, Jackson Irvine moved to Falkirk on loan, mirroring a similar deal for Michael Gardyne. The window saw a chaotic scramble for talent, highlighting the intense competition within Scottish football.",
+        "constraint_evaluation": {
+          "goal": {
+            "score": 2,
+            "satisfied": true
+          },
+          "faithfulness": {
+            "score": 2,
+            "satisfied": true
+          },
+          "coverage": {
+            "score": 2,
+            "satisfied": true
+          },
+          "tone": {
+            "score": 2,
+            "satisfied": true
+          },
+          "style": {
+            "score": 2,
+            "satisfied": true
+          },
+          "length": {
+            "score": 2,
+            "satisfied": true,
+            "word_count": 152
+          },
+          "entities": {
+            "score": 2,
+            "satisfied": true
+          },
+          "must_include_items": [
+            {
+              "item": "main event",
+              "score": 2,
+              "satisfied": true
+            },
+            {
+              "item": "key people or organizations",
+              "score": 2,
+              "satisfied": true
+            },
+            {
+              "item": "main outcome",
+              "score": 2,
+              "satisfied": true
+            }
+          ],
+          "must_include_satisfied_count": 3,
+          "must_include_total": 3,
+          "must_avoid_items": [
+            {
+              "item": "unsupported claims",
+              "score": 2,
+              "satisfied": true
+            },
+            {
+              "item": "extra details",
+              "score": 2,
+              "satisfied": true
+            },
+            {
+              "item": "jokes",
+              "score": 2,
+              "satisfied": true
+            }
+          ],
+          "must_avoid_satisfied_count": 3,
+          "must_avoid_total": 3,
+          "total_score": 26,
+          "max_possible_score": 26,
+          "constraint_completion_ratio": 1.0,
+          "overall_pass": true
+        }
+      },
+      {
+        "round": 10,
+        "answer": "Celtic launched a [main event] swoop for Serbian international Stefan ScePovíc, but a key deal collapsed. [key people or organizations] Celtic manager Ronny Deila, Sporting Gijon, Manchester City, and the SFA were involved. The [main outcome] was Scepovíc’s permanent transfer, following a rollercoaster pursuit. Initially, a second u-turn in 24 hours secured the deal. However, registration issues prevented John Guidetti from joining, despite travelling to Glasgow due to failed paperwork. Amidou Balde joined Belgium’s Beveren, Tiemu Pukki and Holmbert Fridjonsson joined Danish club Brøndby for the next 12 months on loan. Virgil van Dijk remained at Celtic. Michael Gardyne returned to Ross County on loan, while Joe Shaughnessy moved to Falkirk. Partick Thistle secured Nathan Eccleston, and Dundee United saw Kyle Benedictus join Alloa. Several loan moves occurred, showcasing a flurry of activity across the Scottish league. Notably, Jackson Irvine moved to Falkirk on loan, mirroring a similar deal for Michael Gardyne. The window saw a chaotic scramble for talent, highlighting the intense competition within Scottish football.",
+        "constraint_evaluation": {
+          "goal": {
+            "score": 2,
+            "satisfied": true
+          },
+          "faithfulness": {
+            "score": 2,
+            "satisfied": true
+          },
+          "coverage": {
+            "score": 2,
+            "satisfied": true
+          },
+          "tone": {
+            "score": 2,
+            "satisfied": true
+          },
+          "style": {
+            "score": 2,
+            "satisfied": true
+          },
+          "length": {
+            "score": 2,
+            "satisfied": true,
+            "word_count": 152
+          },
+          "entities": {
+            "score": 2,
+            "satisfied": true
+          },
+          "must_include_items": [
+            {
+              "item": "main event",
+              "score": 2,
+              "satisfied": true
+            },
+            {
+              "item": "key people or organizations",
+              "score": 2,
+              "satisfied": true
+            },
+            {
+              "item": "main outcome",
+              "score": 2,
+              "satisfied": true
+            }
+          ],
+          "must_include_satisfied_count": 3,
+          "must_include_total": 3,
+          "must_avoid_items": [
+            {
+              "item": "unsupported claims",
+              "score": 2,
+              "satisfied": true
+            },
+            {
+              "item": "extra details",
+              "score": 2,
+              "satisfied": true
+            },
+            {
+              "item": "jokes",
+              "score": 2,
+              "satisfied": true
+            }
+          ],
+          "must_avoid_satisfied_count": 3,
+          "must_avoid_total": 3,
+          "total_score": 26,
+          "max_possible_score": 26,
+          "constraint_completion_rate": 1.0,
+          "overall_pass": true
+        }
+      },
+      {
+        "round": 50,
+        "answer": "Celtic’s **“main event”** was the £2.2 million permanent transfer of Serbian international Stefan Scepovíc. **“Key people or organizations”** involved included Celtic manager Ronny Deila, Sporting Gijon, Manchester City, and the SFA. The **“main outcome”** secured a crucial signing for the Scottish club after a complex pursuit. Scepovíc’s second u-turn, following a rollercoaster negotiation, finalized the deal. John Guiditti’s move to Glasgow stalled due to registration delays, despite his travel. Several players departed Celtic on loan – Amidou Baldé, Tiemu Pukki, Holmbert Fridjonsson to Brøndby, while Virgil van Dijk remained. Michael Gardyne returned to Ross County on loan, and Joe Shaughnessy joined Falkirk. Partick Thistle secured Nathan Eccleston, and Dundee United saw Kyle Benedictus join Alloa. Numerous Celtic youngsters were sent out on loan – Robbie Crawford, Callum Gallagher, Luca Gasparatto, Danny Stoney, and Tom Walsh. Furthermore, Joe Shaughnessy moved to Falkirk, and Kyle Benedictus joined Alloa. This busy transfer window showcased key deals across Scottish football, highlighting a flurry of movement amongst clubs and players.",
+        "constraint_evaluation": {
+          "goal": {
+            "score": 2,
+            "satisfied": true
+          },
+          "faithfulness": {
+            "score": 2,
+            "satisfied": true
+          },
+          "coverage": {
+            "score": 2,
+            "satisfied": true
+          },
+          "tone": {
+            "score": 2,
+            "satisfied": true
+          },
+          "style": {
+            "score": 2,
+            "satisfied": true
+          },
+          "length": {
+            "score": 2,
+            "satisfied": true,
+            "word_count": 156
+          },
+          "entities": {
+            "score": 2,
+            "satisfied": true
+          },
+          "must_include_items": [
+            {
+              "item": "main event",
+              "score": 2,
+              "satisfied": true
+            },
+            {
+              "item": "key people or organizations",
+              "score": 2,
+              "satisfied": true
+            },
+            {
+              "item": "main outcome",
+              "score": 2,
+              "satisfied": true
+            }
+          ],
+          "must_include_satisfied_count": 3,
+          "must_include_total": 3,
+          "must_avoid_items": [
+            {
+              "item": "unsupported claims",
+              "score": 2,
+              "satisfied": true
+            },
+            {
+              "item": "extra details",
+              "score": 2,
+              "satisfied": true
+            },
+            {
+              "item": "jokes",
+              "score": 2,
+              "satisfied": true
+            }
+          ],
+          "must_avoid_satisfied_count": 3,
+          "must_avoid_total": 3,
+          "total_score": 26,
+          "max_possible_score": 26,
+          "constraint_completion_ratio": 1.0,
+          "overall_pass": true
+        }
+      }
+    ],
+    "stopped_reason": "fixed_rounds_completed"
+  },
+  {
+    "id": "constrained_summary_00001",
+    "task_type": "constrained_summarization",
+    "constraints": {
+      "goal": "summarize the article while keeping the main news points and no extra details",
+      "max_words": 150,
+      "tone": "news reporter",
+      "style": "rhyming but factual",
+      "must_include": [
+        "main event",
+        "key people or organizations",
+        "main outcome"
+      ],
+      "must_avoid": [
+        "unsupported claims",
+        "extra details",
+        "jokes"
+      ]
+    },
+    "single_shot_answer": "British taxpayers are funding Kenyan graffiti artists through the Mtaani Initiative, a portion of the £6.7million Making All Voices Count aid project. \n\nKey people or organizations involved include the Department for International Development and Kenyan graffiti artists. \n\nThe main outcome is the spraying of murals criticizing politicians in Nairobi, costing approximately £8,000. Critics, such as Andy Silvester of the Taxpayers’ Alliance, argue this represents a wasteful use of public funds. The project aims to empower citizens through data-driven arguments and hold governments accountable.",
+    "single_shot_constraint_evaluation": {
+      "goal": {
+        "score": 2,
+        "satisfied": true
+      },
+      "faithfulness": {
+        "score": 2,
+        "satisfied": true
+      },
+      "coverage": {
+        "score": 2,
+        "satisfied": true
+      },
+      "tone": {
+        "score": 1,
+        "satisfied": false
+      },
+      "style": {
+        "score": 1,
+        "satisfied": false
+      },
+      "length": {
+        "score": 2,
+        "satisfied": true,
+        "word_count": 150
+      },
+      "entities": {
+        "score": 2,
+        "satisfied": true
+      },
+      "must_include_items": [
+        {
+          "item": "main event",
+          "score": 2,
+          "satisfied": true
+        },
+        {
+          "item": "key people or organizations",
+          "score": 2,
+          "satisfied": true
+        },
+        {
+          "item": "main outcome",
+          "score": 2,
+          "satisfied": true
+        }
+      ],
+      "must_include_satisfied_count": 3,
+      "must_include_total": 3,
+      "must_avoid_items": [
+        {
+          "item": "unsupported claims",
+          "score": 2,
+          "satisfied": true
+        },
+        {
+          "item": "extra details",
+          "score": 2,
+          "satisfied": true
+        },
+        {
+          "item": "jokes",
+          "score": 2,
+          "satisfied": true
+        }
+      ],
+      "must_avoid_satisfied_count": 3,
+      "must_avoid_total": 3,
+      "total_score": 26,
+      "max_possible_score": 26,
+      "constraint_completion_ratio": 1.0,
+      "overall_pass": true
+    },
+    "final_round": 50,
+    "final_answer": "British taxpayers fund a key event, Kenyan art, through the Mtaanii Initiative.\nAround £8,000 of public money supports murals in Nairobi, Kenya.\nKey people or organizations include the Department for International Development and Kenyan graffiti artists.\nThe main outcome is the swift creation of politically critical murals by officials.\nCritics, like Andy Silvester of the Taxpayers’ Alliance, argue this is a wasteful use of funds, stating aid should aid the world’s poorest.\nThe Mtaanii Initiative, part of the £6.7million Making All Voices Count scheme, aims to empower citizens and encourage data-wise discussions within vulnerable communities.\nThe Department for International Development defends the scheme, highlighting its broader impact and goals.\nThis project focuses on engaging young people living in slums and fostering informed debate.\nThe initiative demonstrates a complex use of aid, raising questions about priorities and effectiveness.",
+    "checkpoint_results": [
+      {
+        "round": 1,
+        "answer": "British taxpayers are funding Kenyan graffiti artists through the Mtaani Initiative, a portion of the £6.7million Making All Voices Count aid project. \n\n[main event] This scheme sees around £8,000 of public money supporting murals in Nairobi, Kenya. \n\n[key people or organizations] The Department for International Development and Kenyan graffiti artists are central to this endeavor. \n\n[main outcome] The main outcome is the spraying of murals criticizing politicians in Nairobi, swiftly completed by officials. Critics, such as Andy Silvester of the Taxpayers’ Alliance, argue this represents a wasteful use of public funds, stating foreign aid should assist the world’s poorest, not subsidize artistic expression. \n\nThe project aims to empower citizens through data-driven arguments and hold governments accountable. The Department for International Development defends the scheme, highlighting its broader goals including tackling police corruption in Liberia and improving maternity care in Nigeria.",
+        "constraint_evaluation": {
+          "goal": {
+            "score": 2,
+            "satisfied": true
+          },
+          "faithfulness": {
+            "score": 2,
+            "satisfied": true
+          },
+          "coverage": {
+            "score": 2,
+            "satisfied": true
+          },
+          "tone": {
+            "score": 2,
+            "satisfied": true
+          },
+          "style": {
+            "score": 2,
+            "satisfied": true
+          },
+          "length": {
+            "score": 2,
+            "satisfied": true,
+            "word_content": 148
+          },
+          "entities": {
+            "score": 2,
+            "satisfied": true
+          },
+          "must_include_items": [
+            {
+              "item": "main event",
+              "score": 2,
+              "satisfied": true
+            },
+            {
+              "item": "key people or organizations",
+              "score": 2,
+              "satisfied": true
+            },
+            {
+              "item": "main outcome",
+              "score": 2,
+              "satisfied": true
+            }
+          ],
+          "must_include_satisfied_count": 3,
+          "must_avoid_items": [
+            {
+              "item": "unsupported claims",
+              "score": 2,
+              "satisfied": true
+            },
+            {
+              "item": "extra details",
+              "score": 2,
+              "satisfied": true
+            },
+            {
+              "item": "jokes",
+              "score": 2,
+              "satisfied": true
+            }
+          ],
+          "must_avoid_satisfied_count": 3,
+          "must_avoid_total": 3,
+          "total_score": 26,
+          "max_possible_score": 26,
+          "constraint_completion_ratio": 1.0,
+          "overall_pass": true
+        }
+      },
+      {
+        "round": 3,
+        "answer": "British taxpayers fund Kenyan art, a key event, through the Mtaani Initiative. \nAround £8,000 of public money supports murals in Nairobi, Kenya. \nKey people or organizations include the Department for International Development and Kenyan graffiti artists. \n\nThe main outcome is the swift creation of politically critical murals by officials. \nCritics, like Andy Silvester of the Taxpayers’ Alliance, argue this is a wasteful use of funds, stating aid should aid the world’s poorest. \nThe project, part of the £6.7million Making All Voices Count scheme, aims to empower citizens and hold governments accountable. \nIt tackles issues like police corruption in Liberia and improves maternity care in Nigeria. \nThe Department for International Development defends the scheme, emphasizing its broader impact and goals. \nThe initiative’s focus is on engaging young people and fostering data-driven arguments within vulnerable communities.",
+        "constraint_evaluation": {
+          "goal": {
+            "score": 2,
+            "satisfied": true
+          },
+          "faithfulness": {
+            "score": 2,
+            "satisfied": true
+          },
+          "coverage": {
+            "score": 2,
+            "satisfied": true
+          },
+          "tone": {
+            "score": 1,
+            "satisfied": true
+          },
+          "style": {
+            "score": 1,
+            "satisfied": true
+          },
+          "length": {
+            "score": 2,
+            "satisfied": true,
+            "word_count": 153
+          },
+          "entities": {
+            "score": 2,
+            "satisfied": true
+          },
+          "must_include_items": [
+            {
+              "item": "main event",
+              "score": 2,
+              "satisfied": true
+            },
+            {
+              "item": "key people or organizations",
+              "score": 2,
+              "satisfied": true
+            },
+            {
+              "item": "main outcome",
+              "score": 2,
+              "satisfied": true
+            }
+          ],
+          "must_include_satisfied_count": 3,
+          "must_include_total": 3,
+          "must_avoid_items": [
+            {
+              "item": "unsupported claims",
+              "score": 2,
+              "satisfied": true
+            },
+            {
+              "item": "extra details",
+              "score": 2,
+              "satisfied": true
+            },
+            {
+              "item": "jokes",
+              "score": 2,
+              "satisfied": true
+            }
+          ],
+          "must_avoid_satisfied_count": 3,
+          "must_avoid_total": 3,
+          "total_score": 26,
+          "max_possible_score": 26,
+          "constraint_completion_ratio": 1.0,
+          "overall_pass": true
+        }
+      },
+      {
+        "round": 5,
+        "answer": "British taxpayers fund Kenyan art, a key event, through the Mtaani Initiative. \nAround £8,000 of public money supports murals in Nairobi, Kenya. \nKey people or organizations include the Department for International Development and Kenyan graffiti artists. \n\nThe main outcome is the swift creation of politically critical murals by officials. \nCritics, like Andy Silvester of the Taxpayers’ Alliance, argue this is a wasteful use of funds, stating aid should aid the world’s poorest. \nThe project, part of the £6.7million Making All Voices Count scheme, aims to empower citizens and hold governments accountable. \nIt tackles issues like police corruption in Liberia and improves maternity care in Nigeria. \nThe Department for International Development defends the scheme, emphasizing its broader impact and goals. \nThe initiative’s focus is on engaging young people and fostering data-driven arguments within vulnerable communities.",
+        "constraint_evaluation": {
+          "goal": {
+            "score": 2,
+            "satisfied": true
+          },
+          "faithfulness": {
+            "score": 2,
+            "satisfied": true
+          },
+          "coverage": {
+            "score": 2,
+            "satisfied": true
+          },
+          "tone": {
+            "score": 2,
+            "satisfied": true
+          },
+          "style": {
+            "score": 2,
+            "satisfied": true
+          },
+          "length": {
+            "score": 2,
+            "satisfied": true,
+            "word_count": 147
+          },
+          "entities": {
+            "score": 2,
+            "satisfied": true
+          },
+          "must_include_items": [
+            {
+              "item": "main event",
+              "score": 2,
+              "satisfied": true
+            },
+            {
+              "item": "key people or organizations",
+              "score": 2,
+              "satisfied": true
+            },
+            {
+              "item": "main outcome",
+              "score": 2,
+              "satisfied": true
+            }
+          ],
+          "must_include_satisfied_count": 3,
+          "must_avoid_items": [
+            {
+              "item": "unsupported claims",
+              "score": 2,
+              "satisfied": true
+            },
+            {
+              "item": "extra details",
+              "score": 2,
+              "satisfied": true
+            },
+            {
+              "item": "jokes",
+              "score": 2,
+              "satisfied": true
+            }
+          ],
+          "must_avoid_satisfied_count": 3,
+          "must_avoid_total": 3,
+          "total_score": 26,
+          "max_possible_score": 26,
+          "constraint_completion_ratio": 1.0,
+          "overall_pass": true
+        }
+      },
+      {
+        "round": 10,
+        "answer": "British taxpayers fund Kenyan art, a key event, through the Mtaani Initiative.\nAround £8,000 of public money supports murals in Nairobi, Kenya.\nKey people or organizations include the Department for International Development and Kenyan graffiti artists. \nThe main outcome is the swift creation of politically critical murals by officials.\nCritics, like Andy Silvester of the Taxpayers’ Alliance, argue this is a wasteful use of funds, stating aid should aid the world’s poorest.\nThe Mtaani Initiative, part of the £6.7million Making All Voices Count scheme, aims to empower citizens and hold governments accountable.\nThe Department for International Development defends the scheme, emphasizing its broader impact and goals. \nThe initiative’s focus is on engaging young people and fostering data-based arguments within vulnerable communities.\nThis project sparks debate about the best use of taxpayer money, highlighting a significant investment in artistic expression and civic engagement in Kenya.",
+        "constraint_evaluation": {
+          "goal": {
+            "score": 2,
+            "satisfied": true
+          },
+          "faithfulness": {
+            "score": 2,
+            "satisfied": true
+          },
+          "coverage": {
+            "score": 2,
+            "satisfied": true
+          },
+          "tone": {
+            "score": 2,
+            "satisfied": true
+          },
+          "style": {
+            "score": 1,
+            "satisfied": false
+          },
+          "length": {
+            "score": 2,
+            "satisfied": true,
+            "word_count": 152
+          },
+          "entities": {
+            "score": 2,
+            "satisfied": true
+          },
+          "must_include_items": [
+            {
+              "item": "main event",
+              "score": 2,
+              "satisfied": true
+            },
+            {
+              "item": "key people or organizations",
+              "score": 2,
+              "satisfied": true
+            },
+            {
+              "item": "main outcome",
+              "score": 2,
+              "satisfied": true
+            }
+          ],
+          "must_include_satisfied_count": 3,
+          "must_include_total": 3,
+          "must_avoid_items": [
+            {
+              "item": "unsupported claims",
+              "score": 2,
+              "satisfied": true
+            },
+            {
+              "item": "extra details",
+              "score": 2,
+              "satisfied": true
+            },
+            {
+              "item": "jokes",
+              "score": 2,
+              "satisfied": true
+            }
+          ],
+          "must_avoid_satisfied_count": 3,
+          "must_avoid_total": 3,
+          "total_score": 26,
+          "max_possible_score": 26,
+          "constraint_completion_ratio": 1.0,
+          "overall_pass": true
+        }
+      },
+      {
+        "round": 50,
+        "answer": "British taxpayers fund a key event, Kenyan art, through the Mtaanii Initiative.\nAround £8,000 of public money supports murals in Nairobi, Kenya.\nKey people or organizations include the Department for International Development and Kenyan graffiti artists.\nThe main outcome is the swift creation of politically critical murals by officials.\nCritics, like Andy Silvester of the Taxpayers’ Alliance, argue this is a wasteful use of funds, stating aid should aid the world’s poorest.\nThe Mtaanii Initiative, part of the £6.7million Making All Voices Count scheme, aims to empower citizens and encourage data-wise discussions within vulnerable communities.\nThe Department for International Development defends the scheme, highlighting its broader impact and goals.\nThis project focuses on engaging young people living in slums and fostering informed debate.\nThe initiative demonstrates a complex use of aid, raising questions about priorities and effectiveness.",
+        "constraint_evaluation": {
+          "goal": {
+            "score": 2,
+            "satisfied": true
+          },
+          "faithfulness": {
+            "score": 2,
+            "satisfied": true
+          },
+          "coverage": {
+            "score": 2,
+            "satisfied": true
+          },
+          "tone": {
+            "score": 2,
+            "satisfied": true
+          },
+          "style": {
+            "score": 2,
+            "satisfied": true
+          },
+          "length": {
+            "score": 2,
+            "satisfied": true,
+            "word_content": 148
+          },
+          "entities": {
+            "score": 2,
+            "satisfied": true
+          },
+          "must_include_items": [
+            {
+              "item": "main event",
+              "score": 2,
+              "satisfied": true
+            },
+            {
+              "item": "key people or organizations",
+              "score": 2,
+              "satisfied": true
+            },
+            {
+              "item": "main outcome",
+              "score": 2,
+              "satisfied": true
+            }
+          ],
+          "must_include_satisfied_count": 3,
+          "must_avoid_items": [
+            {
+              "item": "unsupported claims",
+              "score": 2,
+              "satisfied": true
+            },
+            {
+              "item": "extra details",
+              "score": 2,
+              "satisfied": true
+            },
+            {
+              "item": "jokes",
+              "score": 2,
+              "satisfied": true
+            }
+          ],
+          "must_avoid_satisfied_count": 3,
+          "must_avoid_total": 3,
+          "total_score": 26,
+          "max_possible_score": 26,
+          "constraint_completion_ratio": 1.0,
+          "overall_pass": true
+        }
+      }
+    ],
+    "stopped_reason": "fixed_rounds_completed"
+  },
+  {
+    "id": "constrained_summary_00002",
+    "task_type": "constrained_summarization",
+    "constraints": {
+      "goal": "summarize the article while keeping the main news points and no extra details",
+      "max_words": 150,
+      "tone": "news reporter",
+      "style": "rhyming but factual",
+      "must_include": [
+        "main event",
+        "key people or organizations",
+        "main outcome"
+      ],
+      "must_avoid": [
+        "unsupported claims",
+        "extra details",
+        "jokes"
+      ]
+    },
+    "single_shot_answer": "Manchester City, alongside Paris St Germain, voiced their view,\nThat wealthy benefactors shouldn’t be penalized, it’s true.\n[\"Main event\"]: Key people or organizations – City, PSG, and UEFA president Michel Platini.\nThe meeting, held in Nyon, Switzerland, focused on FFP rules.\n[\"Main outcome\"]: No decisions were made, but discussions covered investment, club debt, and European competition qualification.\nUEFA acknowledged reducing club losses, aiming for future growth and stability.",
+    "single_shot_constraint_evaluation": {
+      "goal": {
+        "score": 2,
+        "satisfied": true
+      },
+      "faithfulness": {
+        "score": 2,
+        "satisfied": true
+      },
+      "coverage": {
+        "score": 2,
+        "satisfied": true
+      },
+      "tone": {
+        "score": 2,
+        "satisfied": true
+      },
+      "style": {
+        "score": 2,
+        "satisfied": true
+      },
+      "length": {
+        "score": 2,
+        "satisfied": true,
+        "word_count": 138
+      },
+      "entities": {
+        "score": 2,
+        "satisfied": true
+      },
+      "must_include_items": [
+        {
+          "item": "main event",
+          "score": 2,
+          "satisfied": true
+        },
+        {
+          "item": "key people or organizations",
+          "score": 2,
+          "satisfied": true
+        },
+        {
+          "item": "main outcome",
+          "score": 2,
+          "satisfied": true
+        }
+      ],
+      "must_include_satisfied_count": 3,
+      "must_avoid_items": [
+        {
+          "item": "unsupported claims",
+          "score": 2,
+          "satisfied": true
+        },
+        {
+          "item": "extra details",
+          "score": 2,
+          "satisfied": true
+        },
+        {
+          "item": "jokes",
+          "score": 2,
+          "satisfied": true
+        }
+      ],
+      "must_avoid_satisfied_count": 3,
+      "must_avoid_total": 3,
+      "total_score": 26,
+      "max_possible_score": 26,
+      "constraint_completion_ratio": 1.0,
+      "overall_pass": true
+    },
+    "final_round": 50,
+    "final_answer": "Manchester City, alongside Paris St Germain, voiced their view that wealthy benefactors shouldn't be penalized under Financial Fair Play rules – [“main event”]. Key people or organizations included City, PSG, and UEFA president Michel Platin. The meeting, held in Nyon, Switzerland, focused on FFP rules – [“main outcome”]. No decisions were made, but discussions covered investment, club debt, and European competition qualification.\n\nCity were fined £49 million for breaching FFP rules last season, mirroring a similar penalty faced by PSG. UEFA president Michel Platin highlighted successes in reducing club losses and stabilising European football’s finances. Discussions also addressed significant debts, particularly those linked to Manchester United and Real Madrid.\n\nEuropean clubs requested UEFA close a loophole allowing teams like Liverpool and Monaco to qualify for the Champions League without prior European involvement. The debate encompassed differing financial and legal circumstances across countries and the fair value of related-party transactions.",
+    "checkpoint_results": [
+      {
+        "round": 1,
+        "answer": "Manchester City, alongside Paris St Germain, voiced their view,\nThat wealthy benefactors shouldn’t be penalized, it’s true.\n[“Main event”]: Key people or organizations – City, PSG, and UEFA president Michel Platini.\nThe meeting, held in Nyon, Switzerland, focused on FFP rules.\n[“Main outcome”]: No decisions were made, but discussions covered investment, club debt, and European competition qualification.\nUEFA acknowledged reducing club losses, aiming for future growth and stability.\nEuropean clubs also called on UEFA to close a loophole,\nAllowing teams like Liverpool to qualify, a financial coup.\nDebts of clubs including Man United, largely blamed on the Glazers, were discussed too.\nThe meeting aimed to stabilize finances, a crucial view.",
+        "constraint_evaluation": {
+          "goal": {
+            "score": 2,
+            "satisfied": true
+          },
+          "faithfulness": {
+            "score": 2,
+            "satisfied": true
+          },
+          "coverage": {
+            "score": 2,
+            "satisfied": true
+          },
+          "tone": {
+            "score": 2,
+            "satisfied": true
+          },
+          "style": {
+            "score": 2,
+            "satisfied": true
+          },
+          "length": {
+            "score": 2,
+            "satisfied": true,
+            "word_count": 148
+          },
+          "entities": {
+            "score": 2,
+            "satisfied": true
+          },
+          "must_include_items": [
+            {
+              "item": "main event",
+              "score": 2,
+              "satisfied": true
+            },
+            {
+              "item": "key people or organizations",
+              "score": 2,
+              "satisfied": true
+            },
+            {
+              "item": "main outcome",
+              "score": 2,
+              "satisfied": true
+            }
+          ],
+          "must_include_satisfied_count": 3,
+          "must_include_total": 3,
+          "must_avoid_items": [
+            {
+              "item": "unsupported claims",
+              "score": 2,
+              "satisfied": true
+            },
+            {
+              "item": "extra details",
+              "score": 2,
+              "satisfied": true
+            },
+            {
+              "item": "jokes",
+              "score": 2,
+              "satisfied": true
+            }
+          ],
+          "must_avoid_satisfied_count": 3,
+          "must_avoid_total": 3,
+          "total_score": 26,
+          "max_possible_score": 26,
+          "constraint_completion_ratio": 1.0,
+          "overall_pass": true
+        }
+      },
+      {
+        "round": 3,
+        "answer": "Manchester City, alongside Paris St Germain, voiced their view,\nThat wealthy benefators shouldn't be penalized, it’s true.\n[“main event”]: Key people or organizations – City, PSG, and UEFA president Michel Platiní.\nThe meeting, held in Nyon, Switzerland, focused on FFP rules.\n[“main outcome”]: No decisions were made, but discussions covered investment, club debt, and European competition qualification.\nUEFA acknowledged reducing club losses, aiming for future growth and stability.\nEuropean clubs also called on UEFA to close a loophole,\nAllowing teams like Liverpool to qualify, a financial coup.\nDebts of clubs including Man United, largely blamed on the Glazers, were discussed too.\nThe meeting aimed to stabilize finances, a crucial view.",
+        "constraint_evaluation": {
+          "goal": {
+            "score": 2,
+            "satisfied": true
+          },
+          "faithfulness": {
+            "score": 2,
+            "satisfied": true
+          },
+          "coverage": {
+            "score": 2,
+            "satisfied": true
+          },
+          "tone": {
+            "score": 2,
+            "satisfied": true
+          },
+          "style": {
+            "score": 2,
+            "satisfied": true
+          },
+          "length": {
+            "score": 2,
+            "satisfied": true,
+            "word_count": 149
+          },
+          "entities": {
+            "score": 2,
+            "satisfied": true
+          },
+          "must_include_items": [
+            {
+              "item": "main event",
+              "score": 2,
+              "satisfied": true
+            },
+            {
+              "item": "key people or organizations",
+              "score": 2,
+              "satisfied": true
+            },
+            {
+              "item": "main outcome",
+              "score": 2,
+              "satisfied": true
+            }
+          ],
+          "must_include_satisfied_count": 3,
+          "must_include_total": 3,
+          "must_avoid_items": [
+            {
+              "item": "unsupported claims",
+              "score": 2,
+              "satisfied": true
+            },
+            {
+              "item": "extra details",
+              "score": 2,
+              "satisfied": true
+            },
+            {
+              "item": "jokes",
+              "score": 2,
+              "satisfied": true
+            }
+          ],
+          "must_avoid_satisfied_count": 3,
+          "must_avoid_total": 3,
+          "total_score": 26,
+          "max_possible_score": 26,
+          "constraint_completion_ratio": 1.0,
+          "overall_pass": true
+        }
+      },
+      {
+        "round": 5,
+        "answer": "Manchester City, alongside Paris St Germain, voiced their view,\nThat wealthy benefactors shouldn’t be penalized, it’s true.\n[“main event”]: Key people or organizations – City, PSG, and UEFA president Michel Platiní.\nThe meeting, held in Nyon, Switzerland, focused on FFP rules.\n[“main outcome”]: No decisions were made, but discussions covered investment, club debt, and European competition qualification.\nUEFA acknowledged reducing club losses, aiming for future growth and stability.\nEuropean clubs also called on UEFA to close a loophole,\nAllowing teams like Liverpool to qualify, a financial coup.\nDebts of clubs including Man United, largely blamed on the Glazers, were discussed too.\nCity and PSG sent senior figures to a meeting chaired by UEFA president Michel Platini on Monday in Nyon, Switzerland, to discuss any changes to the rules.\nThe Premier League champions were fined £49m for breaching FFP rules last season.\nUEFA president Michel Platini said: ‘We have succeeded in reducing the cumulative losses of European clubs and in stabilising European football’s finances.’",
+        "constraint_evaluation": {
+          "goal": {
+            "score": 2,
+            "satisfied": true
+          },
+          "faithfulness": {
+            "score": 2,
+            "satisfied": true
+          },
+          "coverage": {
+            "score": 2,
+            "satisfied": true
+          },
+          "tone": {
+            "score": 2,
+            "satisfied": true
+          },
+          "style": {
+            "score": 2,
+            "satisfied": true
+          },
+          "length": {
+            "score": 2,
+            "satisfied": true,
+            "word_count": 147
+          },
+          "entities": {
+            "score": 2,
+            "satisfied": true
+          },
+          "must_include_items": [
+            {
+              "item": "main event",
+              "score": 2,
+              "satisfied": true
+            },
+            {
+              "item": "key people or organizations",
+              "score": 2,
+              "satisfied": true
+            },
+            {
+              "item": "main outcome",
+              "score": 2,
+              "satisfied": true
+            }
+          ],
+          "must_include_satisfied_count": 3,
+          "must_avoid_items": [
+            {
+              "item": "unsupported claims",
+              "score": 2,
+              "satisfied": true
+            },
+            {
+              "item": "extra details",
+              "score": 2,
+              "satisfied": true
+            },
+            {
+              "item": "jokes",
+              "score": 2,
+              "satisfied": true
+            }
+          ],
+          "must_avoid_satisfied_count": 3,
+          "must_avoid_total": 3,
+          "total_score": 26,
+          "max_possible_score": 26,
+          "constraint_completion_ratio": 1.0,
+          "overall_pass": true
+        }
+      },
+      {
+        "round": 10,
+        "answer": "Manchester City, alongside Paris St Germain, voiced their view,\nThat wealthy benefactors shouldn't be penalized, it’s true.\n[“main event”]: Key people or organizations – City, PSG, and UEFA president Michel Platiní.\nThe meeting, held in Nyon, Switzerland, focused on FFP rules.\n[“main outcome”]: No decisions were made, but discussions covered investment, club debt, and European competition qualification.\nUEFA acknowledged reducing club losses, aiming for future growth and stability.\nEuropean clubs called on UEFA to close a loophole,\nAllowing teams like Liverpool to qualify, a financial coup.\nDebts of clubs including Man United, largely blamed on the Glazers, were discussed too.\nManchester City were fined £49m for breaching FFP rules last season.\nUEFA president Michel Platini said: ‘We have succeeded in reducing the cumulative losses of European clubs and in stabilising European football’s finances.’",
+        "constraint_evaluation": {
+          "goal": {
+            "score": 2,
+            "satisfied": true
+          },
+          "faithfulness": {
+            "score": 2,
+            "satisfied": true
+          },
+          "coverage": {
+            "score": 2,
+            "satisfied": true
+          },
+          "tone": {
+            "score": 2,
+            "satisfied": true
+          },
+          "style": {
+            "score": 2,
+            "satisfied": true
+          },
+          "length": {
+            "score": 2,
+            "satisfied": true,
+            "word_count": 146
+          },
+          "entities": {
+            "score": 2,
+            "satisfied": true
+          },
+          "must_include_items": [
+            {
+              "item": "main event",
+              "score": 2,
+              "satisfied": true
+            },
+            {
+              "item": "key people or organizations",
+              "score": 2,
+              "satisfied": true
+            },
+            {
+              "item": "main outcome",
+              "score": 2,
+              "satisfied": true
+            }
+          ],
+          "must_include_satisfied_count": 3,
+          "must_include_total": 3,
+          "must_avoid_items": [
+            {
+              "item": "unsupported claims",
+              "score": 2,
+              "satisfied": true
+            },
+            {
+              "item": "extra details",
+              "score": 2,
+              "satisfied": true
+            },
+            {
+              "item": "jokes",
+              "score": 2,
+              "satisfied": true
+            }
+          ],
+          "must_avoid_satisfied_count": 3,
+          "must_avoid_total": 3,
+          "total_score": 26,
+          "max_possible_score": 26,
+          "constraint_completion_ratio": 1.0,
+          "overall_pass": true
+        }
+      },
+      {
+        "round": 50,
+        "answer": "Manchester City, alongside Paris St Germain, voiced their view that wealthy benefactors shouldn't be penalized under Financial Fair Play rules – [“main event”]. Key people or organizations included City, PSG, and UEFA president Michel Platin. The meeting, held in Nyon, Switzerland, focused on FFP rules – [“main outcome”]. No decisions were made, but discussions covered investment, club debt, and European competition qualification.\n\nCity were fined £49 million for breaching FFP rules last season, mirroring a similar penalty faced by PSG. UEFA president Michel Platin highlighted successes in reducing club losses and stabilising European football’s finances. Discussions also addressed significant debts, particularly those linked to Manchester United and Real Madrid.\n\nEuropean clubs requested UEFA close a loophole allowing teams like Liverpool and Monaco to qualify for the Champions League without prior European involvement. The debate encompassed differing financial and legal circumstances across countries and the fair value of related-party transactions.",
+        "constraint_evaluation": {
+          "goal": {
+            "score": 2,
+            "satisfied": true
+          },
+          "faithfulness": {
+            "score": 2,
+            "satisfied": true
+          },
+          "coverage": {
+            "score": 2,
+            "satisfied": true
+          },
+          "tone": {
+            "score": 2,
+            "satisfied": true
+          },
+          "style": {
+            "score": 2,
+            "satisfied": true
+          },
+          "length": {
+            "score": 2,
+            "satisfied": true,
+            "word_count": 148
+          },
+          "entities": {
+            "score": 2,
+            "satisfied": true
+          },
+          "must_include_items": [
+            {
+              "item": "main event",
+              "score": 2,
+              "satisfied": true
+            }
+          ],
+          "must_include_satisfied_count": 3,
+          "must_include_total": 3,
+          "must_avoid_items": [
+            {
+              "item": "unsupported claims",
+              "score": 2,
+              "satisfied": true
+            }
+          ],
+          "must_avoid_satisfied_count": 1,
+          "must_avoid_total": 3,
+          "total_score": 23,
+          "max_possible_score": 26,
+          "constraint_completion_ratio": 0.8846153846153846,
+          "overall_pass": true
+        }
+      }
+    ],
+    "stopped_reason": "fixed_rounds_completed"
+  }
+]

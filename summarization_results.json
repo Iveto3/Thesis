@@ -1,0 +1,134 @@
+[
+  {
+    "id": "summary_00000",
+    "task_type": "summarization",
+    "constraints": {
+      "goal": "summarize by keeping the main points and no extra details",
+      "max_words": 150
+    },
+    "single_shot_answer": "Daniel Radcliffe turned 18 on Monday, gaining access to a reported £20 million trust fund from his *Harry Potter* movies. He stated he would not fritter the money away on extravagant purchases, preferring to spend it on items like books and CDs. At 18, he will be able to gamble and see films like \"Hostel: Part II.\" Radcliffe is preparing for increased media scrutiny as an adult and has upcoming roles in films like \"My Boy Jack\" and \"December Boys,\" as well as a stage debut.",
+    "single_shot_similarity": 0.8124406337738037,
+    "final_round": 50,
+    "final_answer": "Daniel Radcliffe turned 18 on Monday, gaining access to a reported £20 million ($41.1 million) fortune from his *Harry Potter* movies, held in a trust fund which he has not been able to touch. He insists he won’t fritter the money away on extravagant purchases, preferring to spend it on items like books and CDs. At 18, he will be able to gamble in a casino, buy a drink in a pub, or see the horror film “Hostel: Part II,” currently six places below his number one movie on the UK box office chart. Radcliffe is preparing for increased media scrutiny now that he’s legally an adult. His latest outing as the boy wizard in “Harry Potter and the Order of the Phoenix” is breaking records on both sides of the Atlantic and he will reprise the role in the last two films. Radcliffe also filmed a TV movie called “My Boy Jack,” about author Rudyard Kipling and his son, due for release later this year. Earlier this year, he made his stage debut playing a tortured teenager in Peter Shaffer’s “Equus.” Details of how he’ll mark his landmark birthday are under wraps. His agent and publicist had no comment on his plans. “I’ll definitely have some sort of party,” he said in an interview. “Hopefully none of you will be reading about it.” Copyright 2007 Reuters. All rights reserved.This material may not be published, broadcast, rewritten, or redistributed.",
+    "final_similarity": 0.7583240866661072,
+    "best_round": 0,
+    "best_answer": "Daniel Radcliffe turned 18 on Monday, gaining access to a reported £20 million trust fund from his *Harry Potter* movies. He stated he would not fritter the money away on extravagant purchases, preferring to spend it on items like books and CDs. At 18, he will be able to gamble and see films like \"Hostel: Part II.\" Radcliffe is preparing for increased media scrutiny as an adult and has upcoming roles in films like \"My Boy Jack\" and \"December Boys,\" as well as a stage debut.",
+    "best_similarity": 0.8124406337738037,
+    "checkpoint_results": [
+      {
+        "round": 1,
+        "answer": "Daniel Radcliffe turned 18 on Monday, gaining access to a reported £20 million trust fund from his *Harry Potter* movies. He stated he would not fritter the money away on extravagant purchases, preferring to spend it on items like books and CDs. At 18, he will be able to gamble in a casino, buy a drink in a pub, or see the horror film “Hostal: Part II,” currently six places below his number one movie on the UK box office chart. Radcliffe is preparing for increased media scrutiny now that he’s legally an adult. Details of how he’ll mark his landmark birthday are under wraps. His agent and publicist had no comment on his plans. “I’ll definitely have some sort of party,” he said in an interview. “Hopefully none of you will be reading about it.” Radcliffe’s earnings from the first five Potter films have been held in a trust fund which he has not been able to touch. Radcliffe is preparing for increased media scrutiny now that he’s legally an adult: “I just think I’m going to be more sort of fair game,” he told Reuters. Earlier this year, he made his stage debut playing a tortured teenager in Peter Shaffer’s “Equus.”",
+        "similarity": 0.7818270921707153
+      },
+      {
+        "round": 3,
+        "answer": "Daniel Radcliffe turned 18 on Monday, gaining access to a reported £20 million trust fund from his *Harry Potter* movies. He stated he would not fritter the money away on extravagant purchases, preferring to spend it on items like books and CDs. At 18, he will be able to gamble in a casino, buy a drink in a pub, or see the horror film “Hostal: Part II,” currently six places below his number one movie on the UK box office chart. Radcliffe is preparing for increased media scrutiny now that he’s legally an adult: “I just think I’m going to be more sort of fair game,” he told Reuters. His earnings from the first five Potter films have been held in a trust fund which he has not been able to touch. Radcliffe is preparing for increased media scrutiny now that he’s legally an adult. Earlier this year, he made his stage debut playing a tortured teenager in Peter Shaffer’s “Equus.” Details of how he’ll mark his landmark birthday are under wraps. His agent and publicist had no comment on his plans. “I’ll definitely have some sort of party,” he said in an interview. “Hopefully none of you will be reading about it.”",
+        "similarity": 0.7639206051826477
+      },
+      {
+        "round": 5,
+        "answer": "Daniel Radcliffe turned 18 on Monday, gaining access to a reported £20 million trust fund from his *Harry Potter* movies. He stated he would not fritter the money away on extravagant purchases, preferring to spend it on items like books and CDs. At 18, he will be able to gamble in a casino, buy a drink in a pub, or see the horror film “Hostal: Part II,” currently six places below his number one movie on the UK box office chart. Radcliffe is preparing for increased media scrutiny now that he’s legally an adult: “I just think I’m going to be more sort of fair game,” he told Reuters. His earnings from the first five Potter films have been held in a trust fund which he has not been able to touch. Radcliffe is preparing for increased media scrutiny now that he’s legally an adult. Earlier this year, he made his stage debut playing a tortured teenager in Peter Shaffer’s “Equus.” Details of how he’ll mark his landmark birthday are under wraps. His agent and publicist had no comment on his plans. “I’ll definitely have some sort of party,” he said in an interview. “Hopefully none of you will be reading about it.”",
+        "similarity": 0.7639206051826477
+      },
+      {
+        "round": 10,
+        "answer": "Daniel Radcliffe turned 18 on Monday, gaining access to a reported £20 million fortune from his *Harry Potter* movies, held in a trust fund which he has not been able to touch. He insists he won’t fritter the money away on extravagant purchases, preferring to spend it on items like books and CDs. At 18, he will be able to gamble in a casino, buy a drink in a pub, or see the horror film “Hostel: Part II,” currently six places below his number one movie on the UK box office chart. Radcliffe is preparing for increased media scrutiny now that he’s legally an adult. His earnings from the first five Potter films have been held in a trust fund which he has not been able to touch. Radcliffe is preparing for increased media scrutiny now that he’s legally an adult. Earlier this year, he made his stage debut playing a tortured teenager in Peter Shaffer’s “Equus.” Details of how he’ll mark his landmark birthday are under wraps. His agent and publicist had no comment on his plans. “I’ll definitely have some sort of party,” he said in an interview. “Hopefully none of you will be reading about it.”",
+        "similarity": 0.7883920073509216
+      },
+      {
+        "round": 50,
+        "answer": "Daniel Radcliffe turned 18 on Monday, gaining access to a reported £20 million ($41.1 million) fortune from his *Harry Potter* movies, held in a trust fund which he has not been able to touch. He insists he won’t fritter the money away on extravagant purchases, preferring to spend it on items like books and CDs. At 18, he will be able to gamble in a casino, buy a drink in a pub, or see the horror film “Hostel: Part II,” currently six places below his number one movie on the UK box office chart. Radcliffe is preparing for increased media scrutiny now that he’s legally an adult. His latest outing as the boy wizard in “Harry Potter and the Order of the Phoenix” is breaking records on both sides of the Atlantic and he will reprise the role in the last two films. Radcliffe also filmed a TV movie called “My Boy Jack,” about author Rudyard Kipling and his son, due for release later this year. Earlier this year, he made his stage debut playing a tortured teenager in Peter Shaffer’s “Equus.” Details of how he’ll mark his landmark birthday are under wraps. His agent and publicist had no comment on his plans. “I’ll definitely have some sort of party,” he said in an interview. “Hopefully none of you will be reading about it.” Copyright 2007 Reuters. All rights reserved.This material may not be published, broadcast, rewritten, or redistributed.",
+        "similarity": 0.7583240866661072
+      }
+    ],
+    "stopped_reason": "fixed_rounds_completed"
+  },
+  {
+    "id": "summary_00001",
+    "task_type": "summarization",
+    "constraints": {
+      "goal": "summarize by keeping the main points and no extra details",
+      "max_words": 150
+    },
+    "single_shot_answer": "In Miami, Florida, the “forgotten floor” of the Miami-Dade pretrial detention facility houses inmates with severe mental illnesses awaiting trial. Approximately one-third of Miami-Dade County Jail inmates are mentally ill. Judge Steven Leifman reported that many arrests result from confrontations with police and exacerbate mental illness. Around 40,000 to 50,000 people are currently in mental hospitals, a decrease from 500,000 in 1955. Starting in 2008, inmates will be sent to a new mental health facility for long-term treatment instead of being sent to the “forgotten floor.” Judge Leifman advocates for justice and changes within the system.",
+    "single_shot_similarity": 0.7416825890541077,
+    "final_round": 50,
+    "final_answer": "In Miami, Florida, the “forgotted floor” of the Miami-Dade pretrial detention facility houses inmates with severe mental illnesses awaiting trial. Approximately one-third of Miami-Dade County Jail inmates are mentally ill. Judge Steven Leifman reported that many arrests result from confrontations with police and exacerbate mental illness, often leading to “avoidable felonies.” Starting in 2008, many inmates will instead be sent to a new mental health facility for long-term treatment, a change from being sent to the “forgotted floor.” Judge Leifman reported that 200 years ago people were considered “lunatics” and were locked up in jails even if they had no charges against them. In 1955 there were more than half a million people in state mental hospitals, and today that number has been reduced 90 percent, and 40,000 to 50,000 people are in mental hospitals. The situation reflects a historical trend where mentally ill individuals were unjustly incarcerated. (141 words)",
+    "final_similarity": 0.7271316647529602,
+    "best_round": 0,
+    "best_answer": "In Miami, Florida, the “forgotten floor” of the Miami-Dade pretrial detention facility houses inmates with severe mental illnesses awaiting trial. Approximately one-third of Miami-Dade County Jail inmates are mentally ill. Judge Steven Leifman reported that many arrests result from confrontations with police and exacerbate mental illness. Around 40,000 to 50,000 people are currently in mental hospitals, a decrease from 500,000 in 1955. Starting in 2008, inmates will be sent to a new mental health facility for long-term treatment instead of being sent to the “forgotten floor.” Judge Leifman advocates for justice and changes within the system.",
+    "best_similarity": 0.7416825890541077,
+    "checkpoint_results": [
+      {
+        "round": 1,
+        "answer": "In Miami, Florida, the “forgotten floor” of the Miami-Dade pretrial detention facility houses inmates with severe mental illnesses awaiting trial. Approximately one-third of Miami-Dade County Jail inmates are mentally ill. Judge Steven Leifman reported that many arrests result from confrontations with police and exacerbate mental illness. Around 40,000 to 50,000 people are currently in mental hospitals, a decrease from 500,000 in 1955. Starting in 2008, inmates will be sent to a new mental health facility for long-term treatment instead of being sent to the “forgotten floor.” Judge Leifman reported that 200 years ago people were considered “lunatics” and they were locked up in jails even if they had no charges against them. He advocates for justice and changes within the system. The original intent was to provide treatment, but many mental hospitals were shut down, leaving patients without care.",
+        "similarity": 0.7349653244018555
+      },
+      {
+        "round": 3,
+        "answer": "In Miami, Florida, the “forgotten floor” of the Miami-Dade pretrial detention facility houses inmates with severe mental illnesses awaiting trial. Approximately one-third of Miami-Dade County Jail inmates are mentally ill. Judge Steven Leifman reported that many arrests result from confrontations with police and exacerbate mental illness. Around 40,000 to 50,000 people are currently in mental hospitals, a decrease from 500,000 in 1955. Starting in 2008, inmates will be sent to a new mental health facility for long-term treatment instead of being sent to the “forgotten floor.” Judge Leifman reported that 200 years ago people were considered “lunatics” and they were locked up in jails even if they had no charges against them. He advocates for justice and changes within the system. The original intent was to provide treatment, but many mental hospitals were shut down, leaving patients without care. Around 40,000 to 50,000 people are currently in mental hospitals.",
+        "similarity": 0.7116343379020691
+      },
+      {
+        "round": 5,
+        "answer": "In Miami, Florida, the “forgotten floor” of the Miami-Dade pretrial detention facility houses inmates with severe mental illnesses awaiting trial. Approximately one-third of Miami-Dade County Jail inmates are mentally ill. Judge Steven Leifman reported that many arrests result from confrontations with police and exacerbate mental illness. Starting in 2008, many inmates will instead be sent to a new mental health facility for long-term treatment, a change from being sent to the “forgotten floor.” Judge Leifman says 200 years ago people were considered “lunatics” and were locked up in jails even if they had no charges against them. He advocates for justice and changes within the system. The original intent was to provide treatment, but many mental hospitals were shut down, leaving patients without care. Approximately one-third of Miami-Dade County Jail inmates are mentally ill. In 1955 there were more than half a million people in state mental hospitals, and today that number has been reduced 90 percent, and 40,000 to 50,000 people are in mental hospitals.",
+        "similarity": 0.7002426385879517
+      },
+      {
+        "round": 10,
+        "answer": "In Miami, Florida, the “forgotten floor” of the Miami-Dade pretrial detention facility houses inmates with severe mental illnesses awaiting trial. Approximately one-third of Miami-Dade County Jail inmates are mentally ill. Judge Steven Leifman reported that many arrests result from confrontations with police and exacerbate mental illness. Starting in 2008, many inmates will instead be sent to a new mental health facility for long-term treatment, a change from being sent to the “forgotten floor.” Judge Leifman stated that 200 years ago people were considered “lunatics” and were locked up in jails even if they had no charges against them. In 1955 there were more than half a million people in state mental hospitals, and today that number has been reduced 90 percent, and 40,000 to 50,000 people are in mental hospitals. Judge Leifman notes that these prisoner-patients will often circulate through the system, occasionally stabilizing in a mental hospital, only to return to jail to face their charges.",
+        "similarity": 0.7213830351829529
+      },
+      {
+        "round": 50,
+        "answer": "In Miami, Florida, the “forgotted floor” of the Miami-Dade pretrial detention facility houses inmates with severe mental illnesses awaiting trial. Approximately one-third of Miami-Dade County Jail inmates are mentally ill. Judge Steven Leifman reported that many arrests result from confrontations with police and exacerbate mental illness, often leading to “avoidable felonies.” Starting in 2008, many inmates will instead be sent to a new mental health facility for long-term treatment, a change from being sent to the “forgotted floor.” Judge Leifman reported that 200 years ago people were considered “lunatics” and were locked up in jails even if they had no charges against them. In 1955 there were more than half a million people in state mental hospitals, and today that number has been reduced 90 percent, and 40,000 to 50,000 people are in mental hospitals. The situation reflects a historical trend where mentally ill individuals were unjustly incarcerated. (141 words)",
+        "similarity": 0.7271316647529602
+      }
+    ],
+    "stopped_reason": "fixed_rounds_completed"
+  },
+  {
+    "id": "summary_00002",
+    "task_type": "summarization",
+    "constraints": {
+      "goal": "summarize by keeping the main points and no extra details",
+      "max_words": 150
+    },
+    "single_shot_answer": "The I-35 Mississippi River bridge in Minneapolis collapsed on May 1, 2000. Gary Babineau was on the bridge when it collapsed, experiencing a 30-35 foot fall and witnessing vehicles falling into the river. Bernie Toivonen’s vehicle tipped at a 45-degree angle. Dr. John Hink arrived within 15 minutes and observed dozens of people on the deck. Fifty-five people were rescued in under two hours using pickup trucks and volunteers. Several vehicles, including Babineau's truck, were damaged.",
+    "single_shot_similarity": 0.6733432412147522,
+    "final_round": 50,
+    "final_answer": "The I-35 Mississippi River bridge in Minneapolis suffered a collapse. Gary Babineau was on the bridge when it fell, experiencing a potential free fall and witnessing vehicles entering the water. Fifty-five people were rescued in under two hours utilizing pickup trucks and volunteers to transport injured individuals. Babineau’s truck was completely face down, pointed toward the ground, and his truck was ripped in half. Dr. John Hink arrived within 15 minutes and observed dozens of people on the deck. Bernie Toivonen’s vehicle ended up tilted at a 45-degree angle, and he thought he was going to die. Melissa Hughes was driving home when the western edge of the bridge collapsed under her, experiencing a “free-falling feeling.” Several vehicles, including Hughes’ car, sustained damage. Witnesses described scenes of chaos and disbelief, with individuals experiencing moments of intense fear and uncertainty. The rescue effort was controlled and organized, the opposite of the lightning-fast collapse.",
+    "final_similarity": 0.6646866202354431,
+    "best_round": 1,
+    "best_answer": "The I-35 Mississippi River bridge in Minneapolis collapsed on May 1, 2000. Gary Babineau was on the bridge when it collapsed, experiencing a 30-35 foot fall and witnessing vehicles falling into the river. Bernie Toivonen’s vehicle tipped at a 45-degree angle. Dr. John Hink arrived within 15 minutes and observed dozens of people on the deck. Fifty-five people were rescued in under two hours using pickup trucks and volunteers. Several vehicles, including Babineau’s truck, were damaged. “I literally thought I was dead,” Toivonen said. Babineau’s truck was completely face down, pointed toward the ground, and ripped in half. “It was just like out of the movies,” Babineau added. Witnesses described a chaotic scene with dust and falling debris. The rescue effort was controlled and organized, the opposite of the lightning-quick collapse.",
+    "best_similarity": 0.7015226483345032,
+    "checkpoint_results": [
+      {
+        "round": 1,
+        "answer": "The I-35 Mississippi River bridge in Minneapolis collapsed on May 1, 2000. Gary Babineau was on the bridge when it collapsed, experiencing a 30-35 foot fall and witnessing vehicles falling into the river. Bernie Toivonen’s vehicle tipped at a 45-degree angle. Dr. John Hink arrived within 15 minutes and observed dozens of people on the deck. Fifty-five people were rescued in under two hours using pickup trucks and volunteers. Several vehicles, including Babineau’s truck, were damaged. “I literally thought I was dead,” Toivonen said. Babineau’s truck was completely face down, pointed toward the ground, and ripped in half. “It was just like out of the movies,” Babineau added. Witnesses described a chaotic scene with dust and falling debris. The rescue effort was controlled and organized, the opposite of the lightning-quick collapse.",
+        "similarity": 0.7015226483345032
+      },
+      {
+        "round": 3,
+        "answer": "The I-35 Mississippi River bridge in Minneapolis collapsed on May 1, 2000. Gary Babineau was on the bridge when it collapsed, experiencing a 30-35 foot fall and witnessing vehicles falling into the river. Bernie Toivonen’s vehicle ended up tilted at a 45-degree angle. Dr. John Hink arrived within 15 minutes and observed dozens of people on the deck. Fifty-five people were rescued in under two hours using pickup trucks and volunteers to transport injured individuals. Several vehicles, including Babineau’s truck, sustained damage. “I literally thought I was dead,” Toivonen said. Babineau’s truck was completely face down, pointed toward the ground. Melissa Hughes was driving home when the western edge of the bridge collapsed under her, experiencing a “free-fall feeling.” Several vehicles, including Hughes’ car, sustained damage. The rescue effort was controlled and organized, the opposite of the lightning-quick collapse.",
+        "similarity": 0.6971830725669861
+      },
+      {
+        "round": 5,
+        "answer": "The I-35 Mississippi River bridge in Minneapolis collapsed on May 1, 2000. Gary Babineau was on the bridge when it collapsed, experiencing a 30–35 foot fall and witnessing vehicles falling into the river. Bernie Toivonen’s vehicle ended up tilted at a 45-degree angle. Dr. John HInk arrived within 15 minutes and observed dozens of people on the deck. Fifty-five people were rescued in under two hours using pickup trucks and volunteers to transport injured individuals. Babineau’s truck was completely face down, pointed toward the ground, and his truck was ripped in half. Melissa Hughes was driving home when the western edge of the bridge collapsed under her, experiencing a “free-fall feeling.” Several vehicles, including Hughes’ car, sustained damage. The rescue effort was controlled and organized, the opposite of the lightning-fast collapse.",
+        "similarity": 0.6695280075073242
+      },
+      {
+        "round": 10,
+        "answer": "The I-35 Mississippi River bridge in Minneapolis suffered a collapse. Gary Babineau was on the bridge when it fell, experiencing a potential free fall and witnessing vehicles entering the water. Bernie Toivonen’s vehicle ended up tilted at a 45-degree angle, and he initially believed he was going to die. Dr. John HInk arrived within 15 minutes and observed dozens of people on the deck. Fifty-five people were rescued in under two hours utilizing pickup trucks and volunteers to transport injured individuals. Babineau’s truck was completely face down, pointed toward the ground, and his truck was ripped in half. Melissa Hughes was driving home when the western edge of the bridge collapsed under her, experiencing a “free-falling feeling.” Several vehicles, including Hughes’ car, sustained damage. The rescue effort was controlled and organized, the opposite of the lightning-fast collapse. Witnesses described scenes of chaos and disbelief, with individuals experiencing moments of intense fear and uncertainty. The event resulted in significant vehicle damage and injuries, highlighting the sudden and devastating nature of the bridge collapse.",
+        "similarity": 0.6524065732955933
+      },
+      {
+        "round": 50,
+        "answer": "The I-35 Mississippi River bridge in Minneapolis suffered a collapse. Gary Babineau was on the bridge when it fell, experiencing a potential free fall and witnessing vehicles entering the water. Fifty-five people were rescued in under two hours utilizing pickup trucks and volunteers to transport injured individuals. Babineau’s truck was completely face down, pointed toward the ground, and his truck was ripped in half. Dr. John Hink arrived within 15 minutes and observed dozens of people on the deck. Bernie Toivonen’s vehicle ended up tilted at a 45-degree angle, and he thought he was going to die. Melissa Hughes was driving home when the western edge of the bridge collapsed under her, experiencing a “free-falling feeling.” Several vehicles, including Hughes’ car, sustained damage. Witnesses described scenes of chaos and disbelief, with individuals experiencing moments of intense fear and uncertainty. The rescue effort was controlled and organized, the opposite of the lightning-fast collapse.",
+        "similarity": 0.6646866202354431
+      }
+    ],
+    "stopped_reason": "fixed_rounds_completed"
+  }
+]

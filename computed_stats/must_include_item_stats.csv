@@ -1,19 +1,19 @@
 item,item_type,num_examples,round,satisfaction_rate
-main event,must_include,3,0,0.0
-key people or organizations,must_include,3,0,0.0
-main outcome,must_include,3,0,0.0
-main event,must_include,3,1,0.0
-key people or organizations,must_include,3,1,0.0
-main outcome,must_include,3,1,0.0
-main event,must_include,3,3,0.0
-key people or organizations,must_include,3,3,0.0
-main outcome,must_include,3,3,0.0
-main event,must_include,3,5,0.0
-key people or organizations,must_include,3,5,0.0
-main outcome,must_include,3,5,0.0
-main event,must_include,3,10,0.0
-key people or organizations,must_include,3,10,0.0
-main outcome,must_include,3,10,0.0
-main event,must_include,3,50,0.0
-key people or organizations,must_include,3,50,0.0
-main outcome,must_include,3,50,0.0
+main event,must_include,3,0,1.0
+key people or organizations,must_include,3,0,1.0
+main outcome,must_include,3,0,1.0
+main event,must_include,3,1,1.0
+key people or organizations,must_include,3,1,1.0
+main outcome,must_include,3,1,1.0
+main event,must_include,3,3,1.0
+key people or organizations,must_include,3,3,1.0
+main outcome,must_include,3,3,1.0
+main event,must_include,3,5,1.0
+key people or organizations,must_include,3,5,1.0
+main outcome,must_include,3,5,1.0
+main event,must_include,3,10,1.0
+key people or organizations,must_include,3,10,1.0
+main outcome,must_include,3,10,1.0
+main event,must_include,3,50,1.0
+key people or organizations,must_include,2,50,1.0
+main outcome,must_include,2,50,1.0
