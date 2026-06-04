@@ -465,33 +465,47 @@ def build_constraint_evaluation_prompt(
         f"Return ONLY valid compact JSON. Do not use markdown. "
         f"Do not include explanations outside the JSON.\n\n"
 
+        f"Return ONLY valid compact JSON. Do not use markdown. "
+        f"Do not include explanations outside the JSON.\n\n"
+
+        f"Important meaning of must_avoid:\n"
+        f"- A must_avoid item is satisfied when the candidate summary does NOT contain that problem.\n"
+        f"- Example: if must_avoid contains 'jokes' and the summary has no jokes, "
+        f"then that item gets score 2 and satisfied true.\n"
+        f"- Example: if must_avoid contains 'unsupported claims' and all claims are supported, "
+        f"then that item gets score 2 and satisfied true.\n\n"
+
         f"Required JSON structure:\n"
+        f"The following is a schema, not the final answer. Replace every placeholder with your actual evaluation.\n"
+        f"Do not output the placeholder text itself.\n\n"
         f"{{\n"
-        f'  "goal": {{"score": 0, "satisfied": false}},\n'
-        f'  "faithfulness": {{"score": 0, "satisfied": false}},\n'
-        f'  "coverage": {{"score": 0, "satisfied": false}},\n'
-        f'  "tone": {{"score": 0, "satisfied": false}},\n'
-        f'  "style": {{"score": 0, "satisfied": false}},\n'
-        f'  "length": {{"score": 0, "satisfied": false, "word_count": 0}},\n'
-        f'  "entities": {{"score": 0, "satisfied": false}},\n'
+        f'  "goal": {{"score": <0 or 1 or 2>, "satisfied": <true or false>}},\n'
+        f'  "faithfulness": {{"score": <0 or 1 or 2>, "satisfied": <true or false>}},\n'
+        f'  "coverage": {{"score": <0 or 1 or 2>, "satisfied": <true or false>}},\n'
+        f'  "tone": {{"score": <0 or 1 or 2>, "satisfied": <true or false>}},\n'
+        f'  "style": {{"score": <0 or 1 or 2>, "satisfied": <true or false>}},\n'
+        f'  "length": {{"score": <0 or 1 or 2>, "satisfied": <true or false>, "word_count": <integer>}},\n'
+        f'  "entities": {{"score": <0 or 1 or 2>, "satisfied": <true or false>}},\n'
         f'  "must_include_items": [\n'
-        f'    {{"item": "main event", "score": 0, "satisfied": false}}\n'
+        f'    {{"item": "<must include item>", "score": <0 or 1 or 2>, "satisfied": <true or false>}}\n'
         f'  ],\n'
-        f'  "must_include_satisfied_count": 0,\n'
+        f'  "must_include_satisfied_count": <integer>,\n'
         f'  "must_include_total": {len(must_include)},\n'
         f'  "must_avoid_items": [\n'
-        f'    {{"item": "unsupported claims", "score": 0, "satisfied": false}}\n'
+        f'    {{"item": "<must avoid item>", "score": <0 or 1 or 2>, "satisfied": <true or false>}}\n'
         f'  ],\n'
-        f'  "must_avoid_satisfied_count": 0,\n'
+        f'  "must_avoid_satisfied_count": <integer>,\n'
         f'  "must_avoid_total": {len(must_avoid)},\n'
-        f'  "total_score": 0,\n'
+        f'  "total_score": <integer>,\n'
         f'  "max_possible_score": {max_possible_score},\n'
-        f'  "constraint_completion_ratio": 0.0,\n'
-        f'  "overall_pass": false\n'
+        f'  "constraint_completion_ratio": <number between 0 and 1>,\n'
+        f'  "overall_pass": <true or false>\n'
         f"}}\n\n"
 
-        f"Important: The JSON above is only the required structure. "
-        f"Replace all scores, satisfied values, counts, and ratios with your actual evaluation.\n\n"
+        f"Your final output must be valid JSON, so replace placeholders like "
+        f"<0 or 1 or 2>, <true or false>, <integer>, and <number between 0 and 1> "
+        f"with real JSON values. "
+        f"Use numbers without quotes and booleans as true/false without quotes.\n\n"
 
         f"The must_include_items array must use exactly these item names, in this order:\n"
         f"{json.dumps(must_include, ensure_ascii=False)}\n\n"
