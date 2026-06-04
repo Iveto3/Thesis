@@ -465,9 +465,6 @@ def build_constraint_evaluation_prompt(
         f"Return ONLY valid compact JSON. Do not use markdown. "
         f"Do not include explanations outside the JSON.\n\n"
 
-        f"Return ONLY valid compact JSON. Do not use markdown. "
-        f"Do not include explanations outside the JSON.\n\n"
-
         f"Important meaning of must_avoid:\n"
         f"- A must_avoid item is satisfied when the candidate summary does NOT contain that problem.\n"
         f"- Example: if must_avoid contains 'jokes' and the summary has no jokes, "
