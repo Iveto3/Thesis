@@ -1,4 +1,3 @@
-import csv
 import json
 from pathlib import Path
 from statistics import mean
@@ -32,19 +31,6 @@ def load_json(file_path: str) -> List[Dict[str, Any]]:
 
     with path.open("r", encoding="utf-8") as f:
         return json.load(f)
-
-
-def write_csv(path: Path, rows: List[Dict[str, Any]]) -> None:
-    if not rows:
-        print(f"No rows to save for {path}")
-        return
-
-    fieldnames = sorted({key for row in rows for key in row.keys()})
-
-    with path.open("w", encoding="utf-8", newline="") as f:
-        writer = csv.DictWriter(f, fieldnames=fieldnames)
-        writer.writeheader()
-        writer.writerows(rows)
 
 
 def write_json(path: Path, data: Any) -> None:
@@ -174,17 +160,158 @@ def get_category_satisfied(
     evaluation: Dict[str, Any],
     category: str,
 ) -> Optional[float]:
-    value = evaluation.get(category)
+    """
+    Manual success/fail rule:
+    score 2 = pass/success
+    score 0 or 1 = fail/not fully satisfied
 
-    if not isinstance(value, dict):
+    This intentionally ignores the evaluator's 'satisfied' boolean because
+    the LLM can sometimes return inconsistent values.
+    """
+    score = get_category_score(evaluation, category)
+
+    if score is None:
         return None
 
-    satisfied = value.get("satisfied")
+    return 1.0 if score == 2 else 0.0
 
-    if isinstance(satisfied, bool):
-        return 1.0 if satisfied else 0.0
 
-    return None
+def get_items(
+    evaluation: Dict[str, Any],
+    field_name: str,
+) -> List[Dict[str, Any]]:
+    items = evaluation.get(field_name, [])
+
+    if not isinstance(items, list):
+        return []
+
+    return [item for item in items if isinstance(item, dict)]
+
+
+def get_item_scores(
+    evaluation: Dict[str, Any],
+    field_name: str,
+) -> List[float]:
+    scores = []
+
+    for item in get_items(evaluation, field_name):
+        score = item.get("score")
+
+        if isinstance(score, (int, float)):
+            scores.append(float(score))
+
+    return scores
+
+
+def get_expected_total(
+    evaluation: Dict[str, Any],
+    total_field_name: str,
+    fallback: int,
+) -> int:
+    total = evaluation.get(total_field_name)
+
+    if isinstance(total, (int, float)) and total >= 0:
+        return int(total)
+
+    return fallback
+
+
+def count_successes_from_scores(scores: List[float]) -> int:
+    return sum(1 for score in scores if score == 2)
+
+
+def compute_manual_completion_ratio(evaluation: Dict[str, Any]) -> Optional[float]:
+    """
+    Computes completion from numeric scores only.
+
+    Missing category scores count as 0.
+    Missing must_include/must_avoid items count as 0 by using the expected totals
+    in the denominator.
+    """
+    category_scores = []
+
+    for category in GENERAL_EVAL_CATEGORIES:
+        score = get_category_score(evaluation, category)
+        category_scores.append(score if score is not None else 0.0)
+
+    must_include_scores = get_item_scores(evaluation, "must_include_items")
+    must_avoid_scores = get_item_scores(evaluation, "must_avoid_items")
+
+    must_include_total = get_expected_total(
+        evaluation,
+        "must_include_total",
+        fallback=len(must_include_scores),
+    )
+    must_avoid_total = get_expected_total(
+        evaluation,
+        "must_avoid_total",
+        fallback=len(must_avoid_scores),
+    )
+
+    must_include_total = max(must_include_total, len(must_include_scores))
+    must_avoid_total = max(must_avoid_total, len(must_avoid_scores))
+
+    total_score = (
+        sum(category_scores)
+        + sum(must_include_scores)
+        + sum(must_avoid_scores)
+    )
+
+    max_possible_score = 2 * (
+        len(GENERAL_EVAL_CATEGORIES)
+        + must_include_total
+        + must_avoid_total
+    )
+
+    if max_possible_score == 0:
+        return None
+
+    return total_score / max_possible_score
+
+
+def compute_manual_overall_pass(evaluation: Dict[str, Any]) -> bool:
+    """
+    Overall pass is manually derived from scores only.
+
+    It is true only if:
+    - every general category has score 2
+    - every must_include item has score 2
+    - every must_avoid item has score 2
+    - the number of returned items matches the expected totals
+    """
+    for category in GENERAL_EVAL_CATEGORIES:
+        score = get_category_score(evaluation, category)
+
+        if score != 2:
+            return False
+
+    must_include_scores = get_item_scores(evaluation, "must_include_items")
+    must_avoid_scores = get_item_scores(evaluation, "must_avoid_items")
+
+    must_include_total = get_expected_total(
+        evaluation,
+        "must_include_total",
+        fallback=len(must_include_scores),
+    )
+    must_avoid_total = get_expected_total(
+        evaluation,
+        "must_avoid_total",
+        fallback=len(must_avoid_scores),
+    )
+
+    if len(must_include_scores) != must_include_total:
+        return False
+
+    if len(must_avoid_scores) != must_avoid_total:
+        return False
+
+    if any(score != 2 for score in must_include_scores):
+        return False
+
+    if any(score != 2 for score in must_avoid_scores):
+        return False
+
+    return True
 
 
 def compute_constrained_overall_stats(
@@ -203,39 +330,37 @@ def compute_constrained_overall_stats(
         must_avoid_ratios = []
 
         for evaluation in evaluations:
-            completion = evaluation.get("constraint_completion_ratio")
-            if isinstance(completion, (int, float)):
-                completion_values.append(float(completion))
+            manual_completion = compute_manual_completion_ratio(evaluation)
 
-            overall_pass = evaluation.get("overall_pass")
-            if isinstance(overall_pass, bool):
-                overall_pass_values.append(1.0 if overall_pass else 0.0)
+            if manual_completion is not None:
+                completion_values.append(manual_completion)
 
-            mi_count = evaluation.get("must_include_satisfied_count")
-            mi_total = evaluation.get("must_include_total")
+            manual_overall_pass = compute_manual_overall_pass(evaluation)
+            overall_pass_values.append(1.0 if manual_overall_pass else 0.0)
 
-            if isinstance(mi_count, (int, float)):
-                must_include_counts.append(float(mi_count))
+            must_include_scores = get_item_scores(evaluation, "must_include_items")
+            must_avoid_scores = get_item_scores(evaluation, "must_avoid_items")
 
-            if (
-                isinstance(mi_count, (int, float))
-                and isinstance(mi_total, (int, float))
-                and mi_total > 0
-            ):
-                must_include_ratios.append(float(mi_count) / float(mi_total))
+            must_include_total = get_expected_total(
+                evaluation,
+                "must_include_total",
+                fallback=len(must_include_scores),
+            )
+            must_avoid_total = get_expected_total(
+                evaluation,
+                "must_avoid_total",
+                fallback=len(must_avoid_scores),
+            )
 
-            ma_count = evaluation.get("must_avoid_satisfied_count")
-            ma_total = evaluation.get("must_avoid_total")
+            if must_include_total > 0:
+                mi_success_count = count_successes_from_scores(must_include_scores)
+                must_include_counts.append(float(mi_success_count))
+                must_include_ratios.append(mi_success_count / must_include_total)
 
-            if isinstance(ma_count, (int, float)):
-                must_avoid_counts.append(float(ma_count))
-
-            if (
-                isinstance(ma_count, (int, float))
-                and isinstance(ma_total, (int, float))
-                and ma_total > 0
-            ):
-                must_avoid_ratios.append(float(ma_count) / float(ma_total))
+            if must_avoid_total > 0:
+                ma_success_count = count_successes_from_scores(must_avoid_scores)
+                must_avoid_counts.append(float(ma_success_count))
+                must_avoid_ratios.append(ma_success_count / must_avoid_total)
 
         rows.append(
             {
@@ -299,21 +424,13 @@ def compute_item_level_stats(
         item_values: Dict[str, List[float]] = {}
 
         for evaluation in evaluations_by_round[round_num]:
-            items = evaluation.get(field_name, [])
-
-            if not isinstance(items, list):
-                continue
-
-            for item in items:
-                if not isinstance(item, dict):
-                    continue
-
+            for item in get_items(evaluation, field_name):
                 item_name = item.get("item")
-                satisfied = item.get("satisfied")
+                score = item.get("score")
 
-                if isinstance(item_name, str) and isinstance(satisfied, bool):
+                if isinstance(item_name, str) and isinstance(score, (int, float)):
                     item_values.setdefault(item_name, []).append(
-                        1.0 if satisfied else 0.0
+                        1.0 if float(score) == 2 else 0.0
                     )
 
         for item_name, values in item_values.items():
@@ -454,36 +571,6 @@ def main() -> None:
 
     write_json(OUTPUT_DIR / "all_stats.json", all_stats)
 
-    write_csv(
-        OUTPUT_DIR / "summarization_similarity_stats.csv",
-        summarization_stats,
-    )
-
-    write_csv(
-        OUTPUT_DIR / "code_optimization_similarity_stats.csv",
-        code_stats,
-    )
-
-    write_csv(
-        OUTPUT_DIR / "constrained_summary_overall_stats.csv",
-        constrained_overall_stats,
-    )
-
-    write_csv(
-        OUTPUT_DIR / "constrained_summary_category_stats.csv",
-        constrained_category_stats,
-    )
-
-    write_csv(
-        OUTPUT_DIR / "must_include_item_stats.csv",
-        must_include_item_stats,
-    )
-
-    write_csv(
-        OUTPUT_DIR / "must_avoid_item_stats.csv",
-        must_avoid_item_stats,
-    )
-
     print_similarity_stats(
         summarization_stats,
         title="SUMMARIZATION SIMILARITY STATS",
@@ -507,7 +594,7 @@ def main() -> None:
         title="MUST AVOID",
     )
 
-    print(f"\nSaved CSV and JSON stats to: {OUTPUT_DIR}")
+    print(f"\nSaved JSON stats to: {OUTPUT_DIR / 'all_stats.json'}")
 
 
 if __name__ == "__main__":
