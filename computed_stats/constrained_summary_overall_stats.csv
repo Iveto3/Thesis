@@ -1,7 +1,0 @@
-average_constraint_completion_ratio,average_must_avoid_ratio,average_must_avoid_satisfied_count,average_must_include_ratio,average_must_include_satisfied_count,num_examples,overall_pass_rate,round
-1.0,1.0,3.0,1.0,3.0,3,1.0,0
-1.0,1.0,3.0,1.0,3.0,3,1.0,1
-1.0,1.0,3.0,1.0,3.0,3,1.0,3
-1.0,1.0,3.0,1.0,3.0,3,1.0,5
-1.0,1.0,3.0,1.0,3.0,3,1.0,10
-0.9615384615384616,0.7777777777777778,2.3333333333333335,1.0,3.0,3,1.0,50
