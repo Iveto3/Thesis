@@ -1,6 +1,6 @@
 import json
 from itertools import islice
-
+from pathlib import Path
 from datasets import load_dataset
 
 
@@ -10,7 +10,8 @@ def clean_text(text: str) -> str:
 
 def main() -> None:
     num_examples = 100
-    output_file = "constrained_summary_input.json"
+    output_file = Path("input/constrained_summary_input.json")
+    output_file.parent.mkdir(exist_ok=True)
 
     dataset = load_dataset(
         "abisee/cnn_dailymail",
@@ -51,7 +52,7 @@ def main() -> None:
 
         constrained_tasks.append(task)
 
-    with open(output_file, "w", encoding="utf-8") as f:
+    with output_file.open("w", encoding="utf-8") as f:
         json.dump(constrained_tasks, f, indent=2, ensure_ascii=False)
 
     print(f"Saved {len(constrained_tasks)} constrained summarization tasks to {output_file}.")
