@@ -1,3 +1,0 @@
-public Product getProduct(int id) {
-    return this.productRepository.findById(id).orElse(null);
-}

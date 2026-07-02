@@ -1,5 +1,0 @@
-def validate_email(self, email):
-    if email.data != current_user.email:
-        test_condition = User.query.filter_by(email=email.data).first()
-        if test_condition:
-            raise ValidationError('Email already exists in database.')
