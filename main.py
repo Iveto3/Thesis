@@ -498,18 +498,21 @@ def main() -> None:
     generation_model = "gemma3:4b"
     judge_model = "gemma3:4b"
 
+    results_dir = Path("results")
+    results_dir.mkdir(exist_ok=True)
+
     experiments = [
         {
             "input_file": "input/summarization_dataset_input.json",
-            "output_file": "summarization_results.json",
+            "output_file": results_dir / "summarization_results.json",
         },
         {
             "input_file": "input/constrained_summary_input.json",
-            "output_file": "constrained_summary_results.json",
+            "output_file": results_dir / "constrained_summary_results.json",
         },
         {
             "input_file": "input/code_optimization_input.json",
-            "output_file": "code_optimization_results.json",
+            "output_file": results_dir / "code_optimization_results.json",
         },
     ]
 

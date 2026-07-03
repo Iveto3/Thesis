@@ -4,12 +4,11 @@ from statistics import mean
 from typing import Any, Dict, List, Optional
 
 
-SUMMARY_RESULTS_FILE = "summarization_results.json"
-CODE_RESULTS_FILE = "code_optimization_results.json"
-CONSTRAINED_RESULTS_FILE = "constrained_summary_results.json"
+SUMMARY_RESULTS_FILE = "results/summarization_results.json"
+CODE_RESULTS_FILE = "results/code_optimization_results.json"
+CONSTRAINED_RESULTS_FILE = "results/constrained_summary_results.json"
 
 OUTPUT_DIR = Path("computed_stats")
-
 
 GENERAL_EVAL_CATEGORIES = [
     "goal",
@@ -20,6 +19,8 @@ GENERAL_EVAL_CATEGORIES = [
     "length",
     "entities",
 ]
+
+PARTIAL_LENGTH_LIMIT = 200
 
 
 def load_json(file_path: str) -> List[Dict[str, Any]]:
@@ -50,6 +51,60 @@ def fmt(value: Optional[float], decimals: int = 4) -> str:
     return f"{value:.{decimals}f}"
 
 
+def count_words(text: str) -> int:
+    return len(text.split())
+
+
+def compute_manual_length_evaluation(
+    answer: str,
+    max_words: int = 150,
+) -> Dict[str, Any]:
+    """
+    Manual length scoring:
+    score 2 = answer is at or below max_words
+    score 1 = answer is above max_words but at or below PARTIAL_LENGTH_LIMIT
+    score 0 = answer is above PARTIAL_LENGTH_LIMIT
+    """
+    word_count = count_words(answer)
+
+    if word_count <= max_words:
+        score = 2
+    elif word_count <= PARTIAL_LENGTH_LIMIT:
+        score = 1
+    else:
+        score = 0
+
+    return {
+        "score": score,
+        "satisfied": score == 2,
+        "word_count": word_count,
+    }
+
+
+def normalize_evaluation_with_manual_length(
+    evaluation: Dict[str, Any],
+    answer: str,
+    constraints: Dict[str, Any],
+) -> Dict[str, Any]:
+    """
+    Copies the LLM-judge evaluation but replaces the length category
+    with a deterministic/manual length score based on the stored answer.
+    """
+    normalized = dict(evaluation)
+
+    max_words = constraints.get("max_words", 150)
+
+    if not isinstance(max_words, int):
+        max_words = 150
+
+    normalized["length"] = compute_manual_length_evaluation(
+        answer=answer,
+        max_words=max_words,
+    )
+
+    return normalized
+
+
 def collect_similarity_by_round(
     results: List[Dict[str, Any]]
 ) -> Dict[int, List[float]]:
@@ -75,6 +130,10 @@ def compute_similarity_stats(
     results: List[Dict[str, Any]],
     task_name: str,
 ) -> List[Dict[str, Any]]:
+    """
+    Computes only average similarity per checkpoint.
+    Min/max similarity are intentionally removed to keep the thesis results simpler.
+    """
     values_by_round = collect_similarity_by_round(results)
     rows = []
 
@@ -87,8 +146,6 @@ def compute_similarity_stats(
                 "round": round_num,
                 "num_examples": len(values),
                 "average_similarity": safe_mean(values),
-                "min_similarity": min(values),
-                "max_similarity": max(values),
             }
         )
 
@@ -102,39 +159,60 @@ def print_similarity_stats(rows: List[Dict[str, Any]], title: str) -> None:
         print("No similarity stats found.")
         return
 
-    print(f"{'Round':<8} {'N':<6} {'Avg Sim':<10} {'Min Sim':<10} {'Max Sim':<10}")
+    print(f"{'Round':<8} {'N':<6} {'Avg Sim':<10}")
 
     for row in rows:
         print(
             f"{row['round']:<8} "
             f"{row['num_examples']:<6} "
-            f"{fmt(row.get('average_similarity')):<10} "
-            f"{fmt(row.get('min_similarity')):<10} "
-            f"{fmt(row.get('max_similarity')):<10}"
+            f"{fmt(row.get('average_similarity')):<10}"
         )
 
 
 def collect_constrained_evaluations(
     results: List[Dict[str, Any]]
 ) -> Dict[int, List[Dict[str, Any]]]:
+    """
+    Collects constrained-summary evaluations by round.
+
+    The stored LLM-judge evaluation is used for all categories except length.
+    Length is replaced with a manual score based on the stored generated summary.
+    """
     evaluations_by_round: Dict[int, List[Dict[str, Any]]] = {}
 
     for result in results:
+        constraints = result.get("constraints", {})
+
+        if not isinstance(constraints, dict):
+            constraints = {}
+
         single_eval = result.get("single_shot_constraint_evaluation")
+        single_answer = result.get("single_shot_answer", "")
 
         if isinstance(single_eval, dict) and not single_eval.get("parse_error"):
-            evaluations_by_round.setdefault(0, []).append(single_eval)
+            normalized_eval = normalize_evaluation_with_manual_length(
+                evaluation=single_eval,
+                answer=single_answer,
+                constraints=constraints,
+            )
+            evaluations_by_round.setdefault(0, []).append(normalized_eval)
 
         for checkpoint in result.get("checkpoint_results", []):
             round_num = checkpoint.get("round")
             evaluation = checkpoint.get("constraint_evaluation")
+            answer = checkpoint.get("answer", "")
 
             if (
                 isinstance(round_num, int)
                 and isinstance(evaluation, dict)
                 and not evaluation.get("parse_error")
             ):
-                evaluations_by_round.setdefault(round_num, []).append(evaluation)
+                normalized_eval = normalize_evaluation_with_manual_length(
+                    evaluation=evaluation,
+                    answer=answer,
+                    constraints=constraints,
+                )
+                evaluations_by_round.setdefault(round_num, []).append(normalized_eval)
 
     return evaluations_by_round
 
@@ -143,6 +221,10 @@ def get_category_score(
     evaluation: Dict[str, Any],
     category: str,
 ) -> Optional[float]:
+    """
+    Returns only valid scores: 0, 1, or 2.
+    Any invalid LLM-judge score is ignored.
+    """
     value = evaluation.get(category)
 
     if not isinstance(value, dict):
@@ -150,7 +232,10 @@ def get_category_score(
 
     score = value.get("score")
 
-    if isinstance(score, (int, float)):
+    if isinstance(score, bool):
+        return None
+
+    if isinstance(score, (int, float)) and score in [0, 1, 2]:
         return float(score)
 
     return None
@@ -164,9 +249,6 @@ def get_category_satisfied(
     Manual success/fail rule:
     score 2 = pass/success
     score 0 or 1 = fail/not fully satisfied
-
-    This intentionally ignores the evaluator's 'satisfied' boolean because
-    the LLM can sometimes return inconsistent values.
     """
     score = get_category_score(evaluation, category)
 
@@ -197,7 +279,10 @@ def get_item_scores(
     for item in get_items(evaluation, field_name):
         score = item.get("score")
 
-        if isinstance(score, (int, float)):
+        if isinstance(score, bool):
+            continue
+
+        if isinstance(score, (int, float)) and score in [0, 1, 2]:
             scores.append(float(score))
 
     return scores
@@ -225,7 +310,7 @@ def compute_manual_completion_ratio(evaluation: Dict[str, Any]) -> Optional[floa
     Computes completion from numeric scores only.
 
     Missing category scores count as 0.
-    Missing must_include/must_avoid items count as 0 by using the expected totals
+    Missing must_include/must_avoid items count as 0 by using expected totals
     in the denominator.
     """
     category_scores = []
@@ -271,9 +356,7 @@ def compute_manual_completion_ratio(evaluation: Dict[str, Any]) -> Optional[floa
 
 def compute_manual_overall_pass(evaluation: Dict[str, Any]) -> bool:
     """
-    Overall pass is manually derived from scores only.
-
-    It is true only if:
+    Overall pass is true only if:
     - every general category has score 2
     - every must_include item has score 2
     - every must_avoid item has score 2
@@ -317,6 +400,17 @@ def compute_manual_overall_pass(evaluation: Dict[str, Any]) -> bool:
 def compute_constrained_overall_stats(
     evaluations_by_round: Dict[int, List[Dict[str, Any]]]
 ) -> List[Dict[str, Any]]:
+    """
+    Keeps only simplified overall constrained-summary statistics:
+    - average_constraint_completion_ratio
+    - overall_pass_rate
+    - average_must_include_ratio
+    - average_must_avoid_ratio
+
+    Removed:
+    - average_must_include_satisfied_count
+    - average_must_avoid_satisfied_count
+    """
     rows = []
 
     for round_num in sorted(evaluations_by_round):
@@ -324,9 +418,7 @@ def compute_constrained_overall_stats(
 
         completion_values = []
         overall_pass_values = []
-        must_include_counts = []
         must_include_ratios = []
-        must_avoid_counts = []
         must_avoid_ratios = []
 
         for evaluation in evaluations:
@@ -354,12 +446,10 @@ def compute_constrained_overall_stats(
 
             if must_include_total > 0:
                 mi_success_count = count_successes_from_scores(must_include_scores)
-                must_include_counts.append(float(mi_success_count))
                 must_include_ratios.append(mi_success_count / must_include_total)
 
             if must_avoid_total > 0:
                 ma_success_count = count_successes_from_scores(must_avoid_scores)
-                must_avoid_counts.append(float(ma_success_count))
                 must_avoid_ratios.append(ma_success_count / must_avoid_total)
 
         rows.append(
@@ -368,9 +458,7 @@ def compute_constrained_overall_stats(
                 "num_examples": len(evaluations),
                 "average_constraint_completion_ratio": safe_mean(completion_values),
                 "overall_pass_rate": safe_mean(overall_pass_values),
-                "average_must_include_satisfied_count": safe_mean(must_include_counts),
                 "average_must_include_ratio": safe_mean(must_include_ratios),
-                "average_must_avoid_satisfied_count": safe_mean(must_avoid_counts),
                 "average_must_avoid_ratio": safe_mean(must_avoid_ratios),
             }
         )
@@ -381,6 +469,18 @@ def compute_constrained_overall_stats(
 def compute_constrained_category_stats(
     evaluations_by_round: Dict[int, List[Dict[str, Any]]]
 ) -> List[Dict[str, Any]]:
+    """
+    Keeps only category pass rates.
+
+    Removed:
+    - average_goal_score
+    - average_faithfulness_score
+    - average_coverage_score
+    - average_tone_score
+    - average_style_score
+    - average_length_score
+    - average_entities_score
+    """
     rows = []
 
     for round_num in sorted(evaluations_by_round):
@@ -392,57 +492,17 @@ def compute_constrained_category_stats(
         }
 
         for category in GENERAL_EVAL_CATEGORIES:
-            scores = []
             pass_values = []
 
             for evaluation in evaluations:
-                score = get_category_score(evaluation, category)
                 passed = get_category_satisfied(evaluation, category)
-
-                if score is not None:
-                    scores.append(score)
 
                 if passed is not None:
                     pass_values.append(passed)
 
-            row[f"average_{category}_score"] = safe_mean(scores)
             row[f"{category}_pass_rate"] = safe_mean(pass_values)
 
         rows.append(row)
-
-    return rows
-
-
-def compute_item_level_stats(
-    evaluations_by_round: Dict[int, List[Dict[str, Any]]],
-    field_name: str,
-    item_type: str,
-) -> List[Dict[str, Any]]:
-    rows = []
-
-    for round_num in sorted(evaluations_by_round):
-        item_values: Dict[str, List[float]] = {}
-
-        for evaluation in evaluations_by_round[round_num]:
-            for item in get_items(evaluation, field_name):
-                item_name = item.get("item")
-                score = item.get("score")
-
-                if isinstance(item_name, str) and isinstance(score, (int, float)):
-                    item_values.setdefault(item_name, []).append(
-                        1.0 if float(score) == 2 else 0.0
-                    )
-
-        for item_name, values in item_values.items():
-            rows.append(
-                {
-                    "round": round_num,
-                    "item_type": item_type,
-                    "item": item_name,
-                    "num_examples": len(values),
-                    "satisfaction_rate": safe_mean(values),
-                }
-            )
 
     return rows
 
@@ -459,9 +519,7 @@ def print_constrained_overall_stats(rows: List[Dict[str, Any]]) -> None:
         f"{'N':<6} "
         f"{'Completion':<12} "
         f"{'Pass Rate':<12} "
-        f"{'MustInc Avg':<12} "
         f"{'MustInc Ratio':<14} "
-        f"{'MustAvoid Avg':<14} "
         f"{'MustAvoid Ratio':<15}"
     )
 
@@ -471,15 +529,13 @@ def print_constrained_overall_stats(rows: List[Dict[str, Any]]) -> None:
             f"{row['num_examples']:<6} "
             f"{fmt(row.get('average_constraint_completion_ratio')):<12} "
             f"{fmt(row.get('overall_pass_rate')):<12} "
-            f"{fmt(row.get('average_must_include_satisfied_count')):<12} "
             f"{fmt(row.get('average_must_include_ratio')):<14} "
-            f"{fmt(row.get('average_must_avoid_satisfied_count')):<14} "
             f"{fmt(row.get('average_must_avoid_ratio')):<15}"
         )
 
 
 def print_constrained_category_stats(rows: List[Dict[str, Any]]) -> None:
-    print("\n=== CONSTRAINED SUMMARY CATEGORY STATS ===")
+    print("\n=== CONSTRAINED SUMMARY CATEGORY PASS RATES ===")
 
     if not rows:
         print("No constrained summary category stats found.")
@@ -489,36 +545,12 @@ def print_constrained_category_stats(rows: List[Dict[str, Any]]) -> None:
         print(f"\nRound {row['round']} | N={row['num_examples']}")
 
         for category in GENERAL_EVAL_CATEGORIES:
-            avg_score = row.get(f"average_{category}_score")
             pass_rate = row.get(f"{category}_pass_rate")
 
             print(
                 f"  {category:<14} "
-                f"avg_score={fmt(avg_score)} "
                 f"pass_rate={fmt(pass_rate)}"
             )
-
-
-def print_item_level_stats(rows: List[Dict[str, Any]], title: str) -> None:
-    print(f"\n=== {title} ITEM-LEVEL STATS ===")
-
-    if not rows:
-        print("No item-level stats found.")
-        return
-
-    current_round = None
-
-    for row in rows:
-        if row["round"] != current_round:
-            current_round = row["round"]
-            print(f"\nRound {current_round}")
-            print(f"{'Item':<40} {'N':<6} {'Satisfaction Rate':<18}")
-
-        print(
-            f"{row['item']:<40} "
-            f"{row['num_examples']:<6} "
-            f"{fmt(row.get('satisfaction_rate')):<18}"
-        )
 
 
 def main() -> None:
@@ -548,25 +580,11 @@ def main() -> None:
         constrained_evaluations
     )
 
-    must_include_item_stats = compute_item_level_stats(
-        constrained_evaluations,
-        field_name="must_include_items",
-        item_type="must_include",
-    )
-
-    must_avoid_item_stats = compute_item_level_stats(
-        constrained_evaluations,
-        field_name="must_avoid_items",
-        item_type="must_avoid",
-    )
-
     all_stats = {
         "summarization_similarity_stats": summarization_stats,
         "code_optimization_similarity_stats": code_stats,
         "constrained_summary_overall_stats": constrained_overall_stats,
         "constrained_summary_category_stats": constrained_category_stats,
-        "must_include_item_stats": must_include_item_stats,
-        "must_avoid_item_stats": must_avoid_item_stats,
     }
 
     write_json(OUTPUT_DIR / "all_stats.json", all_stats)
@@ -583,16 +601,6 @@ def main() -> None:
 
     print_constrained_overall_stats(constrained_overall_stats)
     print_constrained_category_stats(constrained_category_stats)
-
-    print_item_level_stats(
-        must_include_item_stats,
-        title="MUST INCLUDE",
-    )
-
-    print_item_level_stats(
-        must_avoid_item_stats,
-        title="MUST AVOID",
-    )
 
     print(f"\nSaved JSON stats to: {OUTPUT_DIR / 'all_stats.json'}")
 

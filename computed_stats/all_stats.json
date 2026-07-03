@@ -4,49 +4,37 @@
       "task_name": "summarization",
       "round": 0,
       "num_examples": 1000,
-      "average_similarity": 0.7321343807578087,
-      "min_similarity": 0.25606176257133484,
-      "max_similarity": 0.9561258554458618
+      "average_similarity": 0.7321343807578087
     },
     {
       "task_name": "summarization",
       "round": 1,
       "num_examples": 1000,
-      "average_similarity": 0.7175632962214294,
-      "min_similarity": -0.03543230891227722,
-      "max_similarity": 0.9439488649368286
+      "average_similarity": 0.7175632962214294
     },
     {
       "task_name": "summarization",
       "round": 3,
       "num_examples": 1000,
-      "average_similarity": 0.7056818768063094,
-      "min_similarity": -0.0271281898021698,
-      "max_similarity": 0.9201409816741943
+      "average_similarity": 0.7056818768063094
     },
     {
       "task_name": "summarization",
       "round": 5,
       "num_examples": 1000,
-      "average_similarity": 0.701774432657985,
-      "min_similarity": -0.07133089005947113,
-      "max_similarity": 0.9130662679672241
+      "average_similarity": 0.701774432657985
     },
     {
       "task_name": "summarization",
       "round": 10,
       "num_examples": 1000,
-      "average_similarity": 0.6968563736693468,
-      "min_similarity": -0.07953605055809021,
-      "max_similarity": 0.9103345274925232
+      "average_similarity": 0.6968563736693468
     },
     {
       "task_name": "summarization",
       "round": 50,
       "num_examples": 1000,
-      "average_similarity": 0.6904021092916374,
-      "min_similarity": -0.08352906256914139,
-      "max_similarity": 0.9098926782608032
+      "average_similarity": 0.6904021092916374
     }
   ],
   "code_optimization_similarity_stats": [
@@ -54,49 +42,37 @@
       "task_name": "code_optimization",
       "round": 0,
       "num_examples": 28,
-      "average_similarity": 0.9031663521059922,
-      "min_similarity": -0.059261664748191833,
-      "max_similarity": 0.9924712777137756
+      "average_similarity": 0.9031663521059922
     },
     {
       "task_name": "code_optimization",
       "round": 1,
       "num_examples": 28,
-      "average_similarity": 0.8989456641886916,
-      "min_similarity": -0.059261664748191833,
-      "max_similarity": 0.9924712777137756
+      "average_similarity": 0.8989456641886916
     },
     {
       "task_name": "code_optimization",
       "round": 3,
       "num_examples": 28,
-      "average_similarity": 0.8933811431218471,
-      "min_similarity": -0.05927017703652382,
-      "max_similarity": 0.9925141930580139
+      "average_similarity": 0.8933811431218471
     },
     {
       "task_name": "code_optimization",
       "round": 5,
       "num_examples": 28,
-      "average_similarity": 0.8932827410421201,
-      "min_similarity": -0.05776829272508621,
-      "max_similarity": 0.9916516542434692
+      "average_similarity": 0.8932827410421201
     },
     {
       "task_name": "code_optimization",
       "round": 10,
       "num_examples": 28,
-      "average_similarity": 0.8916574288159609,
-      "min_similarity": -0.05776829272508621,
-      "max_similarity": 0.989210844039917
+      "average_similarity": 0.8916574288159609
     },
     {
       "task_name": "code_optimization",
       "round": 50,
       "num_examples": 28,
-      "average_similarity": 0.8854488339275122,
-      "min_similarity": -0.03770669549703598,
-      "max_similarity": 0.9913768768310547
+      "average_similarity": 0.8854488339275122
     }
   ],
   "constrained_summary_overall_stats": [
