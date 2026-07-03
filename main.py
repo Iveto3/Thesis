@@ -405,8 +405,6 @@ def run_experiment(
     print(f"Rounds: {rounds}", flush=True)
     print(f"Already have {len(existing_results_by_id)} saved results\n", flush=True)
 
-    all_completed = True
-
     for index, task in enumerate(tasks, start=1):
         task_id = task.get("id", "unknown_id")
         task_type = task.get("task_type")
@@ -419,8 +417,6 @@ def run_experiment(
                 flush=True,
             )
             continue
-
-        all_completed = False
 
         def save_callback(result: Dict[str, Any]) -> None:
             results_by_id[task_id] = result
@@ -493,6 +489,57 @@ def run_experiment(
     return completed_count == len(tasks)
 
 
+# def main() -> None:
+#     rounds = 50
+#     generation_model = "gemma3:4b"
+#     judge_model = "gemma3:4b"
+
+#     results_dir = Path("results")
+#     results_dir.mkdir(exist_ok=True)
+
+#     experiments = [
+#         {
+#             "input_file": "input/summarization_dataset_input.json",
+#             "output_file": results_dir / "summarization_results.json",
+#         },
+#         {
+#             "input_file": "input/constrained_summary_input.json",
+#             "output_file": results_dir / "constrained_summary_results.json",
+#         },
+#         {
+#             "input_file": "input/code_optimization_input.json",
+#             "output_file": results_dir / "code_optimization_results.json",
+#         },
+#     ]
+
+#     all_experiments_completed = True
+
+#     for experiment in experiments:
+#         experiment_completed = run_experiment(
+#             input_file=experiment["input_file"],
+#             output_file=experiment["output_file"],
+#             rounds=rounds,
+#             generation_model=generation_model,
+#             judge_model=judge_model,
+#         )
+
+#         if not experiment_completed:
+#             all_experiments_completed = False
+
+#     if all_experiments_completed:
+#         print("\nAll experiments finished. Computing result statistics...", flush=True)
+#         compute_stats_main()
+#     else:
+#         print(
+#             "\nSome experiments are incomplete. "
+#             "Run main.py again to resume from the saved checkpoints.",
+#             flush=True,
+#         )
+
+
+# if __name__ == "__main__":
+#     main()
+
 def main() -> None:
     rounds = 50
     generation_model = "gemma3:4b"
@@ -503,16 +550,8 @@ def main() -> None:
 
     experiments = [
         {
-            "input_file": "input/summarization_dataset_input.json",
-            "output_file": results_dir / "summarization_results.json",
-        },
-        {
             "input_file": "input/constrained_summary_input.json",
             "output_file": results_dir / "constrained_summary_results.json",
-        },
-        {
-            "input_file": "input/code_optimization_input.json",
-            "output_file": results_dir / "code_optimization_results.json",
         },
     ]
 
@@ -531,11 +570,12 @@ def main() -> None:
             all_experiments_completed = False
 
     if all_experiments_completed:
-        print("\nAll experiments finished. Computing result statistics...", flush=True)
+        print("\nConstrained summarization finished.", flush=True)
+        print("Computing result statistics...", flush=True)
         compute_stats_main()
     else:
         print(
-            "\nSome experiments are incomplete. "
+            "\nConstrained summarization is incomplete. "
             "Run main.py again to resume from the saved checkpoints.",
             flush=True,
         )
