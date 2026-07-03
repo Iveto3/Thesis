@@ -79,449 +79,118 @@
     {
       "round": 0,
       "num_examples": 100,
-      "average_constraint_completion_ratio": 1.0292307692307692,
-      "overall_pass_rate": 0.55,
-      "average_must_include_satisfied_count": 3.0,
+      "average_constraint_completion_ratio": 0.9715384615384616,
+      "overall_pass_rate": 0.53,
       "average_must_include_ratio": 1.0,
-      "average_must_avoid_satisfied_count": 3.0,
       "average_must_avoid_ratio": 1.0
     },
     {
       "round": 1,
-      "num_examples": 100,
-      "average_constraint_completion_ratio": 0.9888461538461538,
-      "overall_pass_rate": 0.77,
-      "average_must_include_satisfied_count": 3.0,
+      "num_examples": 99,
+      "average_constraint_completion_ratio": 0.9708624708624709,
+      "overall_pass_rate": 0.45454545454545453,
       "average_must_include_ratio": 1.0,
-      "average_must_avoid_satisfied_count": 3.0,
       "average_must_avoid_ratio": 1.0
     },
     {
       "round": 3,
       "num_examples": 100,
-      "average_constraint_completion_ratio": 0.9865384615384616,
-      "overall_pass_rate": 0.77,
-      "average_must_include_satisfied_count": 2.98,
-      "average_must_include_ratio": 0.9933333333333333,
-      "average_must_avoid_satisfied_count": 2.98,
-      "average_must_avoid_ratio": 0.9933333333333333
+      "average_constraint_completion_ratio": 0.9661538461538461,
+      "overall_pass_rate": 0.4,
+      "average_must_include_ratio": 1.0,
+      "average_must_avoid_ratio": 1.0
     },
     {
       "round": 5,
       "num_examples": 100,
-      "average_constraint_completion_ratio": 0.9892307692307692,
-      "overall_pass_rate": 0.76,
-      "average_must_include_satisfied_count": 3.0,
+      "average_constraint_completion_ratio": 0.9676923076923077,
+      "overall_pass_rate": 0.4,
       "average_must_include_ratio": 1.0,
-      "average_must_avoid_satisfied_count": 3.0,
       "average_must_avoid_ratio": 1.0
     },
     {
       "round": 10,
-      "num_examples": 99,
-      "average_constraint_completion_ratio": 1.101010101010101,
-      "overall_pass_rate": 0.7676767676767676,
-      "average_must_include_satisfied_count": 3.0,
+      "num_examples": 100,
+      "average_constraint_completion_ratio": 0.961923076923077,
+      "overall_pass_rate": 0.25,
       "average_must_include_ratio": 1.0,
-      "average_must_avoid_satisfied_count": 3.0,
       "average_must_avoid_ratio": 1.0
     },
     {
       "round": 50,
       "num_examples": 100,
-      "average_constraint_completion_ratio": 1.0934615384615385,
-      "overall_pass_rate": 0.78,
-      "average_must_include_satisfied_count": 2.98,
-      "average_must_include_ratio": 0.9933333333333333,
-      "average_must_avoid_satisfied_count": 2.95,
-      "average_must_avoid_ratio": 0.9833333333333333
+      "average_constraint_completion_ratio": 0.9653846153846154,
+      "overall_pass_rate": 0.29,
+      "average_must_include_ratio": 1.0,
+      "average_must_avoid_ratio": 1.0
     }
   ],
   "constrained_summary_category_stats": [
     {
       "round": 0,
       "num_examples": 100,
-      "average_goal_score": 2.0,
       "goal_pass_rate": 1.0,
-      "average_faithfulness_score": 2.0,
       "faithfulness_pass_rate": 1.0,
-      "average_coverage_score": 2.0,
       "coverage_pass_rate": 1.0,
-      "average_tone_score": 1.8,
-      "tone_pass_rate": 0.8,
-      "average_style_score": 1.58,
-      "style_pass_rate": 0.58,
-      "average_length_score": 3.42,
-      "length_pass_rate": 0.99,
-      "average_entities_score": 2.0,
+      "tone_pass_rate": 0.77,
+      "style_pass_rate": 0.53,
+      "length_pass_rate": 1.0,
       "entities_pass_rate": 1.0
     },
     {
       "round": 1,
-      "num_examples": 100,
-      "average_goal_score": 2.0,
-      "goal_pass_rate": 1.0,
-      "average_faithfulness_score": 2.0,
-      "faithfulness_pass_rate": 1.0,
-      "average_coverage_score": 2.0,
-      "coverage_pass_rate": 1.0,
-      "average_tone_score": 1.96,
-      "tone_pass_rate": 0.96,
-      "average_style_score": 1.77,
-      "style_pass_rate": 0.77,
-      "average_length_score": 2.0,
-      "length_pass_rate": 1.0,
-      "average_entities_score": 2.0,
-      "entities_pass_rate": 1.0
-    },
-    {
-      "round": 3,
-      "num_examples": 100,
-      "average_goal_score": 1.99,
-      "goal_pass_rate": 0.99,
-      "average_faithfulness_score": 1.99,
-      "faithfulness_pass_rate": 0.99,
-      "average_coverage_score": 2.0,
-      "coverage_pass_rate": 1.0,
-      "average_tone_score": 1.97,
-      "tone_pass_rate": 0.97,
-      "average_style_score": 1.78,
-      "style_pass_rate": 0.78,
-      "average_length_score": 2.0,
-      "length_pass_rate": 1.0,
-      "average_entities_score": 2.0,
-      "entities_pass_rate": 1.0
-    },
-    {
-      "round": 5,
-      "num_examples": 100,
-      "average_goal_score": 2.0,
-      "goal_pass_rate": 1.0,
-      "average_faithfulness_score": 2.0,
-      "faithfulness_pass_rate": 1.0,
-      "average_coverage_score": 2.0,
-      "coverage_pass_rate": 1.0,
-      "average_tone_score": 1.96,
-      "tone_pass_rate": 0.96,
-      "average_style_score": 1.76,
-      "style_pass_rate": 0.76,
-      "average_length_score": 2.0,
-      "length_pass_rate": 1.0,
-      "average_entities_score": 2.0,
-      "entities_pass_rate": 1.0
-    },
-    {
-      "round": 10,
       "num_examples": 99,
-      "average_goal_score": 1.9898989898989898,
       "goal_pass_rate": 0.98989898989899,
-      "average_faithfulness_score": 2.0,
       "faithfulness_pass_rate": 1.0,
-      "average_coverage_score": 2.0,
       "coverage_pass_rate": 1.0,
-      "average_tone_score": 1.9898989898989898,
-      "tone_pass_rate": 0.98989898989899,
-      "average_style_score": 1.7878787878787878,
-      "style_pass_rate": 0.7878787878787878,
-      "average_length_score": 4.898989898989899,
-      "length_pass_rate": 0.9797979797979798,
-      "average_entities_score": 2.0,
+      "tone_pass_rate": 0.9393939393939394,
+      "style_pass_rate": 0.7272727272727273,
+      "length_pass_rate": 0.6565656565656566,
       "entities_pass_rate": 1.0
     },
     {
-      "round": 50,
+      "round": 3,
       "num_examples": 100,
-      "average_goal_score": 2.0,
       "goal_pass_rate": 1.0,
-      "average_faithfulness_score": 2.0,
       "faithfulness_pass_rate": 1.0,
-      "average_coverage_score": 2.0,
       "coverage_pass_rate": 1.0,
-      "average_tone_score": 1.99,
-      "tone_pass_rate": 0.99,
-      "average_style_score": 1.83,
-      "style_pass_rate": 0.83,
-      "average_length_score": 4.77,
-      "length_pass_rate": 0.98,
-      "average_entities_score": 2.0,
+      "tone_pass_rate": 0.94,
+      "style_pass_rate": 0.73,
+      "length_pass_rate": 0.54,
       "entities_pass_rate": 1.0
-    }
-  ],
-  "must_include_item_stats": [
-    {
-      "round": 0,
-      "item_type": "must_include",
-      "item": "main event",
-      "num_examples": 100,
-      "satisfaction_rate": 1.0
-    },
-    {
-      "round": 0,
-      "item_type": "must_include",
-      "item": "key people or organizations",
-      "num_examples": 100,
-      "satisfaction_rate": 1.0
-    },
-    {
-      "round": 0,
-      "item_type": "must_include",
-      "item": "main outcome",
-      "num_examples": 100,
-      "satisfaction_rate": 1.0
-    },
-    {
-      "round": 1,
-      "item_type": "must_include",
-      "item": "main event",
-      "num_examples": 100,
-      "satisfaction_rate": 1.0
-    },
-    {
-      "round": 1,
-      "item_type": "must_include",
-      "item": "key people or organizations",
-      "num_examples": 100,
-      "satisfaction_rate": 1.0
-    },
-    {
-      "round": 1,
-      "item_type": "must_include",
-      "item": "main outcome",
-      "num_examples": 100,
-      "satisfaction_rate": 1.0
-    },
-    {
-      "round": 3,
-      "item_type": "must_include",
-      "item": "main event",
-      "num_examples": 100,
-      "satisfaction_rate": 1.0
-    },
-    {
-      "round": 3,
-      "item_type": "must_include",
-      "item": "key people or organizations",
-      "num_examples": 99,
-      "satisfaction_rate": 1.0
-    },
-    {
-      "round": 3,
-      "item_type": "must_include",
-      "item": "main outcome",
-      "num_examples": 99,
-      "satisfaction_rate": 1.0
     },
     {
       "round": 5,
-      "item_type": "must_include",
-      "item": "main event",
       "num_examples": 100,
-      "satisfaction_rate": 1.0
-    },
-    {
-      "round": 5,
-      "item_type": "must_include",
-      "item": "key people or organizations",
-      "num_examples": 100,
-      "satisfaction_rate": 1.0
-    },
-    {
-      "round": 5,
-      "item_type": "must_include",
-      "item": "main outcome",
-      "num_examples": 100,
-      "satisfaction_rate": 1.0
+      "goal_pass_rate": 0.98,
+      "faithfulness_pass_rate": 1.0,
+      "coverage_pass_rate": 1.0,
+      "tone_pass_rate": 0.97,
+      "style_pass_rate": 0.74,
+      "length_pass_rate": 0.51,
+      "entities_pass_rate": 1.0
     },
     {
       "round": 10,
-      "item_type": "must_include",
-      "item": "main event",
-      "num_examples": 99,
-      "satisfaction_rate": 1.0
-    },
-    {
-      "round": 10,
-      "item_type": "must_include",
-      "item": "key people or organizations",
-      "num_examples": 99,
-      "satisfaction_rate": 1.0
-    },
-    {
-      "round": 10,
-      "item_type": "must_include",
-      "item": "main outcome",
-      "num_examples": 99,
-      "satisfaction_rate": 1.0
+      "num_examples": 100,
+      "goal_pass_rate": 1.0,
+      "faithfulness_pass_rate": 1.0,
+      "coverage_pass_rate": 1.0,
+      "tone_pass_rate": 0.95,
+      "style_pass_rate": 0.76,
+      "length_pass_rate": 0.35,
+      "entities_pass_rate": 1.0
     },
     {
       "round": 50,
-      "item_type": "must_include",
-      "item": "main event",
       "num_examples": 100,
-      "satisfaction_rate": 1.0
-    },
-    {
-      "round": 50,
-      "item_type": "must_include",
-      "item": "key people or organizations",
-      "num_examples": 99,
-      "satisfaction_rate": 1.0
-    },
-    {
-      "round": 50,
-      "item_type": "must_include",
-      "item": "main outcome",
-      "num_examples": 99,
-      "satisfaction_rate": 1.0
-    }
-  ],
-  "must_avoid_item_stats": [
-    {
-      "round": 0,
-      "item_type": "must_avoid",
-      "item": "unsupported claims",
-      "num_examples": 100,
-      "satisfaction_rate": 1.0
-    },
-    {
-      "round": 0,
-      "item_type": "must_avoid",
-      "item": "extra details",
-      "num_examples": 100,
-      "satisfaction_rate": 1.0
-    },
-    {
-      "round": 0,
-      "item_type": "must_avoid",
-      "item": "jokes",
-      "num_examples": 100,
-      "satisfaction_rate": 1.0
-    },
-    {
-      "round": 1,
-      "item_type": "must_avoid",
-      "item": "unsupported claims",
-      "num_examples": 99,
-      "satisfaction_rate": 1.0
-    },
-    {
-      "round": 1,
-      "item_type": "must_avoid",
-      "item": "extra details",
-      "num_examples": 100,
-      "satisfaction_rate": 1.0
-    },
-    {
-      "round": 1,
-      "item_type": "must_avoid",
-      "item": "jokes",
-      "num_examples": 100,
-      "satisfaction_rate": 1.0
-    },
-    {
-      "round": 1,
-      "item_type": "must_avoid",
-      "item": "unsuppported claims",
-      "num_examples": 1,
-      "satisfaction_rate": 1.0
-    },
-    {
-      "round": 3,
-      "item_type": "must_avoid",
-      "item": "unsupported claims",
-      "num_examples": 99,
-      "satisfaction_rate": 1.0
-    },
-    {
-      "round": 3,
-      "item_type": "must_avoid",
-      "item": "extra details",
-      "num_examples": 99,
-      "satisfaction_rate": 1.0
-    },
-    {
-      "round": 3,
-      "item_type": "must_avoid",
-      "item": "jokes",
-      "num_examples": 99,
-      "satisfaction_rate": 1.0
-    },
-    {
-      "round": 3,
-      "item_type": "must_avoid",
-      "item": "un supported claims",
-      "num_examples": 1,
-      "satisfaction_rate": 1.0
-    },
-    {
-      "round": 5,
-      "item_type": "must_avoid",
-      "item": "unsupported claims",
-      "num_examples": 99,
-      "satisfaction_rate": 1.0
-    },
-    {
-      "round": 5,
-      "item_type": "must_avoid",
-      "item": "extra details",
-      "num_examples": 100,
-      "satisfaction_rate": 1.0
-    },
-    {
-      "round": 5,
-      "item_type": "must_avoid",
-      "item": "jokes",
-      "num_examples": 100,
-      "satisfaction_rate": 1.0
-    },
-    {
-      "round": 5,
-      "item_type": "must_avoid",
-      "item": "unSupported claims",
-      "num_examples": 1,
-      "satisfaction_rate": 1.0
-    },
-    {
-      "round": 10,
-      "item_type": "must_avoid",
-      "item": "unsupported claims",
-      "num_examples": 99,
-      "satisfaction_rate": 1.0
-    },
-    {
-      "round": 10,
-      "item_type": "must_avoid",
-      "item": "extra details",
-      "num_examples": 99,
-      "satisfaction_rate": 1.0
-    },
-    {
-      "round": 10,
-      "item_type": "must_avoid",
-      "item": "jokes",
-      "num_examples": 99,
-      "satisfaction_rate": 1.0
-    },
-    {
-      "round": 50,
-      "item_type": "must_avoid",
-      "item": "unsupported claims",
-      "num_examples": 99,
-      "satisfaction_rate": 1.0
-    },
-    {
-      "round": 50,
-      "item_type": "must_avoid",
-      "item": "extra details",
-      "num_examples": 98,
-      "satisfaction_rate": 1.0
-    },
-    {
-      "round": 50,
-      "item_type": "must_avoid",
-      "item": "jokes",
-      "num_examples": 98,
-      "satisfaction_rate": 1.0
+      "goal_pass_rate": 1.0,
+      "faithfulness_pass_rate": 1.0,
+      "coverage_pass_rate": 1.0,
+      "tone_pass_rate": 0.96,
+      "style_pass_rate": 0.8,
+      "length_pass_rate": 0.37,
+      "entities_pass_rate": 1.0
     }
   ]
 }
