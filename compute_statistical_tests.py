@@ -30,6 +30,7 @@ ALPHA = 0.05
 
 
 def load_json(file_path: Path) -> Any:
+    """ Loads a JSON file. """
     if not file_path.exists():
         raise FileNotFoundError(
             f"Missing file: {file_path}"
@@ -46,6 +47,7 @@ def write_json_atomic(
     file_path: Path,
     data: Any,
 ) -> None:
+    """ Writes to a temporary file first, then replaces the target file. """
     file_path.parent.mkdir(
         parents=True,
         exist_ok=True,
@@ -72,6 +74,7 @@ def write_json_atomic(
 def collect_similarity_scores(
     results: list[dict[str, Any]],
 ) -> dict[int, dict[str, float]]:
+    """ Collects similarity scores by round. """
     scores_by_round = {
         round_num: {}
         for round_num in CHECKPOINT_ROUNDS
@@ -127,6 +130,7 @@ def collect_summary_metric_scores(
     rows: list[dict[str, Any]],
     metric_name: str,
 ) -> dict[int, dict[str, float]]:
+    """ Collects summary metric scores by round. """
     scores_by_round = {
         round_num: {}
         for round_num in CHECKPOINT_ROUNDS
@@ -153,7 +157,7 @@ def calculate_95_ci(
     values: list[float],
 ) -> tuple[float, float]:
     """
-    Two-sided 95% confidence interval
+    Calculate a two-sided 95% confidence interval
     for the mean using the t distribution.
     """
     number_of_values = len(values)
@@ -191,6 +195,7 @@ def calculate_descriptive_statistics(
     round_num: int,
     scores_by_id: dict[str, float],
 ) -> dict[str, Any]:
+    """ Calculate the descriptive statistics. """
     values = list(
         scores_by_id.values()
     )
@@ -233,6 +238,7 @@ def calculate_paired_wilcoxon(
     comparison_scores: dict[str, float],
     comparison_round: int,
 ) -> dict[str, Any]:
+    """ Calculate the paired Wilcoxon test. """
     baseline_ids = set(
         baseline_scores
     )
@@ -355,9 +361,8 @@ def apply_holm_correction(
     """
     Applies Holm correction separately
     for each task and metric.
-
     Each family contains the five tests:
-    0 vs 1, 0 vs 3, 0 vs 5,
+    rounds 0 vs 1, 0 vs 3, 0 vs 5,
     0 vs 10, and 0 vs 50.
     """
     families: dict[
@@ -438,6 +443,8 @@ def add_metric_statistics(
         dict[str, float],
     ],
 ) -> None:
+    """ Adds metric statistics. """
+
     for round_num in CHECKPOINT_ROUNDS:
         descriptive_rows.append(
             calculate_descriptive_statistics(
@@ -475,6 +482,7 @@ def add_metric_statistics(
 def print_descriptive_statistics(
     rows: list[dict[str, Any]],
 ) -> None:
+    """ Prints the descriptive statistics. """
     print(
         "\n=== DESCRIPTIVE STATISTICS ==="
     )
@@ -511,6 +519,7 @@ def print_descriptive_statistics(
 def print_paired_tests(
     rows: list[dict[str, Any]],
 ) -> None:
+    """ Prints the paired tests. """
     print(
         "\n=== PAIRED WILCOXON TESTS ==="
     )
@@ -554,6 +563,7 @@ def print_paired_tests(
 
 
 def main() -> None:
+    """ Main function. """
     summarization_results = load_json(
         SUMMARY_RESULTS_FILE
     )

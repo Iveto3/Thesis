@@ -28,6 +28,7 @@ BERT_BATCH_SIZE = 8
 
 
 def load_json(file_path: Path) -> Any:
+    """ Loads a JSON file. """
     if not file_path.exists():
         raise FileNotFoundError(
             f"Missing file: {file_path}"
@@ -46,7 +47,6 @@ def write_json_atomic(
 ) -> None:
     """
     Write to a temporary file first, then replace the target file.
-
     This reduces the risk of corrupting the JSON file if the process
     stops while writing.
     """
@@ -76,6 +76,8 @@ def write_json_atomic(
 def build_reference_map(
     input_tasks: list[dict[str, Any]],
 ) -> dict[str, str]:
+    """ Builds a map from task ID to reference summary. """
+
     references = {}
 
     for task in input_tasks:
@@ -110,6 +112,7 @@ def collect_examples_by_round(
     results: list[dict[str, Any]],
     references: dict[str, str],
 ) -> dict[int, list[dict[str, str]]]:
+    """ Collects examples by round. """
     examples_by_round = {
         round_num: []
         for round_num in CHECKPOINT_ROUNDS
@@ -197,6 +200,7 @@ def collect_examples_by_round(
 
 
 def main() -> None:
+    """ Main function. """
     input_tasks = load_json(
         SUMMARY_INPUT_FILE
     )
@@ -356,8 +360,6 @@ def main() -> None:
 
         summary_rows.append(round_stats)
 
-        # This adds or replaces only the ROUGE/BERT section.
-        # All other sections in all_stats remain unchanged.
         all_stats[
             "summarization_rouge_bert_stats"
         ] = summary_rows
