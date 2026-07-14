@@ -12,10 +12,12 @@ OUTPUT_JSON_PATH = Path("input/code_optimization_input.json")
 
 
 def read_code_file(path: Path) -> str:
+    """ Reads a code file path. """
     return path.read_text(encoding="utf-8").strip()
 
 
 def build_code_tasks() -> List[Dict[str, Any]]:
+    """ Builds a list of code optimization tasks. """
     if not UNOPTIMIZED_DIR.exists():
         raise FileNotFoundError(f"Missing folder: {UNOPTIMIZED_DIR}")
 
@@ -58,6 +60,7 @@ def build_code_tasks() -> List[Dict[str, Any]]:
 
 
 def main() -> None:
+    """ Main function. """
     OUTPUT_JSON_PATH.parent.mkdir(parents=True, exist_ok=True)
     code_tasks = build_code_tasks()
 

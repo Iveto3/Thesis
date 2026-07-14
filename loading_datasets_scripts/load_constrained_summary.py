@@ -5,10 +5,12 @@ from datasets import load_dataset
 
 
 def clean_text(text: str) -> str:
+    """ Removes newlines from text. """
     return " ".join(text.replace("\n", " ").split())
 
 
 def main() -> None:
+    """ Main function. """
     num_examples = 100
     output_file = Path("input/constrained_summary_input.json")
     output_file.parent.mkdir(exist_ok=True)
