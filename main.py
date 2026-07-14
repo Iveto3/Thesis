@@ -25,6 +25,7 @@ CHECKPOINT_ROUNDS = {1, 3, 5, 10, 50}
 
 
 def parse_json_from_llm(raw_text: str) -> Dict[str, Any]:
+    """ Parses JSON from LLM output. """
     cleaned = raw_text.strip()
 
     if cleaned.startswith("```"):
@@ -56,6 +57,7 @@ def evaluate_constraints(
     answer: str,
     judge_model: str,
 ) -> Dict[str, Any]:
+    """ Evaluates constraints. """
     raw_eval = call_llm(
         build_constraint_evaluation_prompt(task, answer),
         model=judge_model,
@@ -64,6 +66,7 @@ def evaluate_constraints(
 
 
 def load_existing_results(output_file: str) -> Dict[str, Dict[str, Any]]:
+    """ Loads existing results. """
     path = Path(output_file)
 
     if not path.exists():
@@ -102,6 +105,7 @@ def save_results_in_task_order(
     tasks: List[Dict[str, Any]],
     results_by_id: Dict[str, Dict[str, Any]],
 ) -> None:
+    """ Saves results in ordered list of tasks. """
     ordered_results = []
 
     for task in tasks:
@@ -124,6 +128,7 @@ def add_or_replace_checkpoint(
     checkpoint_results: List[Dict[str, Any]],
     checkpoint: Dict[str, Any],
 ) -> List[Dict[str, Any]]:
+    """ Adds or replaces checkpoints. """
     round_num = checkpoint.get("round")
     updated = [
         existing
@@ -139,6 +144,7 @@ def is_completed_result(
     result: Optional[Dict[str, Any]],
     rounds: int,
 ) -> bool:
+    """ Checks if result is already completed for given rounds. """
     if not isinstance(result, dict):
         return False
 
@@ -159,6 +165,7 @@ def run_task_iterative(
     existing_result: Optional[Dict[str, Any]] = None,
     save_callback: Optional[Callable[[Dict[str, Any]], None]] = None,
 ) -> Dict[str, Any]:
+    """ Runs a task iteratively. """
     task_id = task.get("id", "unknown_id")
     task_type = task.get("task_type")
     constraints = task.get("constraints", {})
@@ -168,6 +175,7 @@ def run_task_iterative(
     checkpoint_results = list(existing_result.get("checkpoint_results", []))
 
     def save_progress(result: Dict[str, Any]) -> None:
+        """ Saves progress of task. """
         if save_callback is not None:
             save_callback(result)
 
@@ -198,7 +206,8 @@ def run_task_iterative(
         single_shot_similarity = existing_result.get("single_shot_similarity")
 
         if not isinstance(single_shot_similarity, (int, float)):
-            single_shot_similarity = compute_similarity(single_shot_answer, reference)
+            single_shot_similarity = compute_similarity(
+                single_shot_answer, reference)
 
             print(
                 f"[{task_type} | {task_id} | single-shot] "
@@ -395,6 +404,7 @@ def run_experiment(
     generation_model: str,
     judge_model: str,
 ) -> bool:
+    """ Runs the experiment. """
     tasks = load_input_json(input_file)
     existing_results_by_id = load_existing_results(output_file)
     results_by_id = dict(existing_results_by_id)
@@ -489,58 +499,8 @@ def run_experiment(
     return completed_count == len(tasks)
 
 
-# def main() -> None:
-#     rounds = 50
-#     generation_model = "gemma3:4b"
-#     judge_model = "gemma3:4b"
-
-#     results_dir = Path("results")
-#     results_dir.mkdir(exist_ok=True)
-
-#     experiments = [
-#         {
-#             "input_file": "input/summarization_dataset_input.json",
-#             "output_file": results_dir / "summarization_results.json",
-#         },
-#         {
-#             "input_file": "input/constrained_summary_input.json",
-#             "output_file": results_dir / "constrained_summary_results.json",
-#         },
-#         {
-#             "input_file": "input/code_optimization_input.json",
-#             "output_file": results_dir / "code_optimization_results.json",
-#         },
-#     ]
-
-#     all_experiments_completed = True
-
-#     for experiment in experiments:
-#         experiment_completed = run_experiment(
-#             input_file=experiment["input_file"],
-#             output_file=experiment["output_file"],
-#             rounds=rounds,
-#             generation_model=generation_model,
-#             judge_model=judge_model,
-#         )
-
-#         if not experiment_completed:
-#             all_experiments_completed = False
-
-#     if all_experiments_completed:
-#         print("\nAll experiments finished. Computing result statistics...", flush=True)
-#         compute_stats_main()
-#     else:
-#         print(
-#             "\nSome experiments are incomplete. "
-#             "Run main.py again to resume from the saved checkpoints.",
-#             flush=True,
-#         )
-
-
-# if __name__ == "__main__":
-#     main()
-
 def main() -> None:
+    """The main function."""
     rounds = 50
     generation_model = "gemma3:4b"
     judge_model = "gemma3:4b"
@@ -550,8 +510,16 @@ def main() -> None:
 
     experiments = [
         {
+            "input_file": "input/summarization_dataset_input.json",
+            "output_file": results_dir / "summarization_results.json",
+        },
+        {
             "input_file": "input/constrained_summary_input.json",
             "output_file": results_dir / "constrained_summary_results.json",
+        },
+        {
+            "input_file": "input/code_optimization_input.json",
+            "output_file": results_dir / "code_optimization_results.json",
         },
     ]
 
@@ -570,12 +538,12 @@ def main() -> None:
             all_experiments_completed = False
 
     if all_experiments_completed:
-        print("\nConstrained summarization finished.", flush=True)
-        print("Computing result statistics...", flush=True)
+        print("\nAll experiments finished. Computing result statistics...",
+              flush=True)
         compute_stats_main()
     else:
         print(
-            "\nConstrained summarization is incomplete. "
+            "\nSome experiments are incomplete. "
             "Run main.py again to resume from the saved checkpoints.",
             flush=True,
         )
