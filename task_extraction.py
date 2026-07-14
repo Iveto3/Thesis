@@ -2,6 +2,7 @@ from typing import Any, Dict, Optional
 
 
 def get_task_input(task: Dict[str, Any]) -> str:
+    """ Returns the task input. """
     task_type = task.get("task_type")
     inp = task.get("input", {})
 
@@ -15,6 +16,7 @@ def get_task_input(task: Dict[str, Any]) -> str:
 
 
 def get_task_reference(task: Dict[str, Any]) -> Optional[str]:
+    """ Returns the task reference. """
     task_type = task.get("task_type")
     ref = task.get("reference_output")
 

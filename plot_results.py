@@ -21,6 +21,7 @@ ROUND_LABELS = {
 
 
 def load_stats(path: Path) -> dict:
+    """ Loads stats from a JSON file. """
     if not path.exists():
         raise FileNotFoundError(f"Could not find stats file: {path}")
 
@@ -29,6 +30,7 @@ def load_stats(path: Path) -> dict:
 
 
 def save_figure(filename: str) -> None:
+    """ Saves a figure. """
     OUTPUT_DIR.mkdir(exist_ok=True)
 
     png_path = OUTPUT_DIR / f"{filename}.png"
@@ -38,6 +40,7 @@ def save_figure(filename: str) -> None:
 
 
 def setup_style() -> None:
+    """ Sets up the plot design. """
     plt.rcParams.update(
         {
             "font.size": 14,
@@ -51,56 +54,116 @@ def setup_style() -> None:
     )
 
 
-def plot_similarity(stats: dict) -> None:
+def plot_summarization_and_code_metrics(stats: dict) -> None:
+    """ Plots summarization and code metrics. """
     summarization = stats["summarization_similarity_stats"]
     code = stats["code_optimization_similarity_stats"]
+    summarization_metrics = stats["summarization_rouge_bert_stats"]
 
     rounds = [0, 1, 3, 5, 10, 50]
     x = np.arange(len(rounds))
     labels = [ROUND_LABELS[r] for r in rounds]
 
-    summarization_values = [
-        next(row["average_similarity"] for row in summarization if row[
-            "round"] == r)
+    summarization_cosine = [
+        next(
+            row["average_similarity"]
+            for row in summarization
+            if row["round"] == r
+        )
         for r in rounds
     ]
 
-    code_values = [
-        next(row["average_similarity"] for row in code if row["round"] == r)
+    summarization_rouge = [
+        next(
+            row["average_rouge_lsum_f1"]
+            for row in summarization_metrics
+            if row["round"] == r
+        )
         for r in rounds
     ]
 
-    plt.figure(figsize=(10, 6))
+    summarization_bertscore = [
+        next(
+            row["average_bertscore_f1"]
+            for row in summarization_metrics
+            if row["round"] == r
+        )
+        for r in rounds
+    ]
 
+    code_cosine = [
+        next(
+            row["average_similarity"]
+            for row in code
+            if row["round"] == r
+        )
+        for r in rounds
+    ]
+
+    plt.figure(figsize=(11, 6.5))
+
+    # the summarization metrics are solid lines
     plt.plot(
         x,
-        summarization_values,
+        summarization_cosine,
         marker="o",
+        linestyle="-",
         linewidth=2.5,
-        label="Summarization",
+        label="Summarization: cosine similarity",
     )
 
     plt.plot(
         x,
-        code_values,
-        marker="o",
+        summarization_rouge,
+        marker="s",
+        linestyle="-",
         linewidth=2.5,
-        label="Code optimization",
+        label="Summarization: ROUGE-Lsum F1",
     )
 
-    plt.xticks(x, labels, rotation=25, ha="right")
-    plt.ylabel("Average cosine similarity")
-    plt.title("Average Cosine Similarity Across Refinement Rounds")
-    plt.ylim(0.65, 0.93)
+    plt.plot(
+        x,
+        summarization_bertscore,
+        marker="^",
+        linestyle="-",
+        linewidth=2.5,
+        label="Summarization: BERTScore F1",
+    )
+
+    # the code optimization metric is interrupted line
+    plt.plot(
+        x,
+        code_cosine,
+        marker="D",
+        linestyle="--",
+        linewidth=2.5,
+        label="Code optimization: cosine similarity",
+    )
+
+    plt.xticks(
+        x,
+        labels,
+        rotation=25,
+        ha="right",
+    )
+
+    plt.ylabel("Average metric score")
+
+    plt.title(
+        "Summarization and Code Optimization Across Refinement Rounds"
+    )
+
+    plt.ylim(0.20, 0.93)
     plt.grid(axis="y", alpha=0.25)
     plt.legend()
     plt.tight_layout()
 
-    save_figure("01_similarity")
+    save_figure("01_generation_metrics")
     plt.close()
 
 
 def plot_average_constraint_completion_ratio(stats: dict) -> None:
+    """ Plots average constraint completion ratio. """
     constrained = stats["constrained_summary_overall_stats"]
 
     rounds = [0, 1, 3, 5, 10, 50]
@@ -144,6 +207,7 @@ def plot_average_constraint_completion_ratio(stats: dict) -> None:
 
 
 def plot_constrained_category_heatmap(stats: dict) -> None:
+    """ Plots constrained category heatmap. """
     category_stats = stats["constrained_summary_category_stats"]
 
     rounds = [0, 1, 3, 5, 10, 50]
@@ -237,6 +301,7 @@ def plot_constrained_category_heatmap(stats: dict) -> None:
 
 
 def plot_constrained_pass_rate(stats: dict) -> None:
+    """ Plots constrained pass rate. """
     constrained = stats["constrained_summary_overall_stats"]
 
     rounds = [0, 1, 3, 5, 10, 50]
@@ -275,11 +340,12 @@ def plot_constrained_pass_rate(stats: dict) -> None:
 
 
 def main() -> None:
+    """ Main function. """
     setup_style()
 
     stats = load_stats(STATS_FILE)
 
-    plot_similarity(stats)
+    plot_summarization_and_code_metrics(stats)
     plot_average_constraint_completion_ratio(stats)
     plot_constrained_category_heatmap(stats)
     plot_constrained_pass_rate(stats)

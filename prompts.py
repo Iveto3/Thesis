@@ -5,6 +5,7 @@ SUMMARY_TASK_TYPES = ("summarization", "constrained_summarization")
 
 
 def build_initial_prompt(task: Dict[str, Any]) -> str:
+    """ Builds the initial prompt. """
     task_type = task.get("task_type")
     task_input = task.get("input", {})
     constraints = task.get("constraints", {})
@@ -37,8 +38,8 @@ def build_initial_prompt(task: Dict[str, Any]) -> str:
             f"{constraint_text}\n"
             f"Rules:\n"
             f"1. Include only information supported by the source text.\n"
-            f"2. Focus on the central facts, actors, numbers, and outcome.\n"
-            f"3. Do not add background knowledge or speculation.\n"
+            f"2. Focus on the central facts, key people and organizations involved, important numbers, and the main outcome.\n"
+            f"3. Do not add background knowledge or speculations.\n"
             f"4. Preserve names, numbers, places, and dates exactly.\n"
             f"5. Follow all additional constraints exactly.\n"
             f"6. Return only the summary, with no explanation.\n\n"
@@ -55,7 +56,7 @@ def build_initial_prompt(task: Dict[str, Any]) -> str:
             f"Original code:\n{code}\n\n"
             f"Rules:\n"
             f"1. Preserve the exact behavior of the original code.\n"
-            f"2. Improve readability and/or performance only when it is safe.\n"
+            f"2. Improve readability and performance only when this can be done without changing the original behavior.\n"
             f"3. Do not add unnecessary abstractions, imports, comments, or features.\n"
             f"4. Do not wrap the answer in markdown code fences.\n"
             f"5. Return only the improved code."
@@ -69,6 +70,7 @@ def build_feedback_prompt(
     current_answer: str,
     violations: Optional[List[str]] = None,
 ) -> str:
+    """ Builds the feedback prompt. """
     task_type = task.get("task_type")
     task_input = task.get("input", {})
     constraints = task.get("constraints", {})
@@ -98,19 +100,19 @@ def build_feedback_prompt(
 
         return (
             f"You are evaluating a summary. Your job is to give precise, "
-            f"actionable feedback — not to rewrite the summary.\n\n"
+            f"actionable feedback, not to rewrite the summary.\n\n"
             f"Source text:\n{text}\n\n"
             f"Current summary:\n{current_answer}\n"
             f"{constraint_text}\n"
             f"Evaluate the summary on these dimensions, in order:\n"
-            f"1. FAITHFULNESS — Are all claims supported by the source? "
+            f"1. FAITHFULNESS: Are all claims supported by the source? "
             f"Flag unsupported, exaggerated, or hallucinated claims.\n"
-            f"2. COVERAGE — Are the most important facts included? "
+            f"2. COVERAGE: Are the most important facts included? "
             f"Focus on who, what, where, main outcome, and key numbers.\n"
-            f"3. ENTITIES — Are names, numbers, places, and dates reproduced "
+            f"3. ENTITIES: Are names, numbers, places, and dates reproduced "
             f"exactly as in the source?\n"
-            f"4. LENGTH — Is the summary under {max_words} words?\n"
-            f"5. CONSTRAINTS — Does it follow the requested goal, tone, style, "
+            f"4. LENGTH: Is the summary under {max_words} words?\n"
+            f"5. CONSTRAINTS: Does it follow the requested goal, tone, style, "
             f"must_include, and must_avoid constraints?\n\n"
             f"Output format, using exactly these labels:\n"
             f"FAITHFULNESS: <one issue, or 'OK'>\n"
@@ -133,10 +135,10 @@ def build_feedback_prompt(
             f"Original code:\n{code}\n\n"
             f"Current optimized code:\n{current_answer}\n\n"
             f"Evaluate the current optimized code on these dimensions:\n"
-            f"1. BEHAVIOR — Does it preserve the original behavior exactly?\n"
-            f"2. SIMPLIFICATION — Does it actually simplify or improve the code?\n"
-            f"3. READABILITY — Is the result clearer without becoming more complex?\n"
-            f"4. MINIMALITY — Did it avoid unnecessary imports, comments, helpers, "
+            f"1. BEHAVIOR: Does it preserve the original behavior exactly?\n"
+            f"2. SIMPLIFICATION: Does it actually simplify or improve the code?\n"
+            f"3. READABILITY: Is the result clearer without becoming more complex?\n"
+            f"4. MINIMALITY: Did it avoid unnecessary imports, comments, helpers, "
             f"or extra logic?\n\n"
             f"Output format, using exactly these labels:\n"
             f"BEHAVIOR: <one issue, or 'OK'>\n"
@@ -156,6 +158,7 @@ def build_refine_prompt(
     current_answer: str,
     feedback: str,
 ) -> str:
+    """ Builds refinement prompt. """
     task_type = task.get("task_type")
     task_input = task.get("input", {})
     constraints = task.get("constraints", {})
@@ -224,6 +227,7 @@ def build_constraint_evaluation_prompt(
     task: Dict[str, Any],
     candidate_answer: str,
 ) -> str:
+    """ Builds constraint evaluation prompt. """
     task_input = task.get("input", {})
     constraints = task.get("constraints", {})
 
